@@ -6,6 +6,7 @@
       "config": {
         "pythonVersion": "3.9"
       }
+    }
   ],
   "routes": [
     {
