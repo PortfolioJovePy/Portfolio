@@ -1,9 +1,8 @@
-# example/urls.py
 from django.urls import path
-
-from .views import index
-
+from .views import *
 
 urlpatterns = [
-    path('', index),
+    path("", principal.as_view(),name='inicio'),
+    path('toggle-theme/', toggle_theme, name='toggle-theme'),
+
 ]

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
+<body class="text-{{request.theme}}">
+      <div class="col offset-md-3 me-3 text-start text-{{request.theme}} mt-3 p-4">        
+        <div class="container-fluid p-4">                
+          <div id="conteudo-json" data-conteudo="{{ conteudo }}"></div>      
+          <p class="fs-2 fw-semibold" id="valor-titulo"></p>
+          <p class="fs-4 fw-lighter" id="valor-subtitulo"></p>
+          <div class="fs-5 fw-normal" id="valor-texto"></div>
+        </div>                
+      </div>     
+</body>
+</html>
+
+<script>
+  var conteudoJSON = JSON.parse(document.getElementById('conteudo-json').getAttribute('data-conteudo'));
+
+  // Agora, você pode acessar e exibir as informações
+  var titulo = conteudoJSON[0].titulo;
+  var texto = conteudoJSON[0].texto;
+  var valor_subtitulo = conteudoJSON[0].subtitulo;
+
+  // Exibir as informações em elementos HTML
+  document.getElementById('valor-titulo').textContent =  titulo;
+  document.getElementById('valor-subtitulo').textContent = valor_subtitulo;
+
+  // Dividir o texto em parágrafos
+  var paragrafos = texto.split('&&');
+
+  // Criar parágrafos dinamicamente e adicioná-los ao HTML
+  var textoContainer = document.getElementById('valor-texto');
+  for (var i = 0; i < paragrafos.length; i++) {
+      var paragrafo = document.createElement('p');
+      paragrafo.textContent = paragrafos[i];
+      textoContainer.appendChild(paragrafo);
+  }
+</script>
+
+
+{% endblock %}

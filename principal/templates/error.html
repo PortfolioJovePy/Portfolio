@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <body>        
+    
+      <div class="col offset-md-3 me-3 text-start text-{{request.theme}} mt-3 p-4">        
+          <div class="container-fluid p-4">
+          <div class="row text-center">
+          <div id="texto" class="fs-1 fw-bolder position-absolute bottom-50 start-0">Parece que você esbarrou no erro...  &&{{error}}</div>
+          </div>
+          </div>          
+      </div>    
+    
+    <script>
+      const textoElement = document.getElementById("texto");
+      const texto = textoElement.textContent.split("&&");
+      let index = 0;
+      let charIndex = 0;
+      let isWriting = true;
+      let currentText = "";
+
+      function escreverLetraPorLetra() {
+          currentText = texto[index];
+
+          if (isWriting) {
+              textoElement.textContent = currentText.substring(0, charIndex) + "|";
+              charIndex++;
+
+              if (charIndex > currentText.length) {
+                  isWriting = false;
+                  charIndex = currentText.length;
+              }
+          } else {
+              textoElement.textContent = currentText.substring(0, charIndex) + "|";
+              charIndex--;
+
+              if (charIndex === 0) {
+                  isWriting = true;
+                  index++;
+
+                  if (index === texto.length) {
+                      index = 0;
+                  }
+                  setTimeout(escreverLetraPorLetra, 50);
+                  return;
+              }
+          }
+
+          setTimeout(escreverLetraPorLetra, 100);
+      }
+
+      escreverLetraPorLetra();
+
+
+
+    </script>
+    </body>
+</html>
+{% endblock %}
