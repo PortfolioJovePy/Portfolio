@@ -6,3 +6,4 @@ urlpatterns = [
     path('toggle-theme/', toggle_theme, name='toggle-theme'),
 
 ]
+

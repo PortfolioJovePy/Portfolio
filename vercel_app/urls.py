@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from principal.views import error
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('principal.urls'),),
 ]
+
+handler404 = error #redireciona todos os errors para pagina inicial
+handler403 = error #dps penso numa pagina de error personalizado
+handler400 = error
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -11,6 +11,11 @@ def toggle_theme(request):
     response.set_cookie('theme', new_theme)
     return response
 
+def error(request, exception):   
+    error_code = getattr(exception, 'status_code', 500)
+    context = {'error':f'Erro n.º {error_code}  '}
+    return render(request, 'error.html',context, status=error_code)
+
 def saudacao_com_base_no_horario():
     agora = datetime.now().time()    
     if datetime.strptime('04:30:00', '%H:%M:%S').time() <= agora < datetime.strptime('12:00:00', '%H:%M:%S').time():
