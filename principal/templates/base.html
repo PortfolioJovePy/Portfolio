@@ -21,30 +21,38 @@
       }
       /* Estilos para o banner */
       #banner {
-        width: 100%;
-        height: 100px;
-        overflow: hidden;
-        position: relative;
-      }
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
 
-      /* Estilos para as imagens */
-      #banner img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100px;
-        width: auto;
-      }
+/* Estilos para as imagens */
+#banner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: auto;
+    animation: slide 20s linear infinite;
+}
 
-      /* Efeito de transição */
-      #banner img {
-        animation: slide 240s infinite;
-      }
+/* Primeira imagem */
+#banner img:nth-child(1) {
+    animation-delay: 0s;
+}
 
-      @keyframes slide {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-100%); }
-      }
+/* Segunda imagem */
+#banner img:nth-child(2) {
+    left: 100%; /* Posiciona à direita do banner */
+    animation-delay: 10s; /* Inicia a animação após metade do tempo da primeira imagem */
+}
+
+/* Efeito de transição */
+@keyframes slide {
+    0% { left: 0; } /* Começa à esquerda do banner */
+    100% { left: -100%; } /* Move completamente para a esquerda do banner */
+}
 
       .footer {
             position: bottom;
@@ -165,13 +173,7 @@
             </div>
             <div class="offcanvas-body bg-{{request.theme}} text-{{request.font}}">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#" class="btn btn-secondary"
-                  data-bs-toggle="popover" data-bs-placement="right" data-bs-trigger="hover focus"
-                  data-bs-custom-class="custom-popover text-dark"
-                  data-bs-title="Solicite seu acesso"
-                  data-bs-content="Apenas recrutadores ou clientes tem acesso às aplicações.">Acesso às aplicações</a>
-                </li>                                
+                     
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{%url 'inicio' %}">Início</a>
                 </li>
@@ -314,20 +316,7 @@
     <!-- Scripts do Bootstrap e Script de Alteração de Tema -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-    <script>
-        document.getElementById('toggleTheme').addEventListener('click', function() {
-            fetch('{% url "toggle-theme" %}')
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload();
-                    }
-                });
-        });
 
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-    </script>
-    
     <script>
       // Função para ajustar a altura da div com base na altura da tela do usuário
       function ajustarAlturaDaDiv() {
