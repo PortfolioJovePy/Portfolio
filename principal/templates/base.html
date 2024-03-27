@@ -133,7 +133,6 @@
         height:30vh;
       }}
 
-
     </style>
 
 </head>
@@ -201,7 +200,7 @@
       <!--Content before waves-->
       <div class="inner-header flex mb-4"></div>
       <!--Just the logo.. Don't mind this-->    
-      <div class="col"  style="min-height: 70vh;">
+      <div class="col" id="altura-da-tela" >
         <div class="row justify-content-center">
       {% block content %}
     
@@ -229,7 +228,7 @@
       {%endif%}
       </g>
       </svg>
-      <div class="bg-{{request.theme}} p-4" style="height: 200px;">
+      <div class="bg-{{request.theme}} p-4" id='altura-do-footer'>
         <!--Redes sociais-->        
         <br>
         <div class="mx-auto text-light gap-sm-4">
@@ -329,6 +328,32 @@
         const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
     </script>
     
+    <script>
+      // Função para ajustar a altura da div com base na altura da tela do usuário
+      function ajustarAlturaDaDiv() {
+          var alturaDaTela = window.innerHeight;
+          var divAlturaTela = document.getElementById('altura-da-tela');
+          divAlturaTela.style.minHeight = alturaDaTela*.80 + 'px'; // Definir a altura mínima como 70% da altura da tela
+      }
+      
+      // Chamar a função quando a página for carregada e quando a janela for redimensionada
+      window.addEventListener('load', ajustarAlturaDaDiv);
+      window.addEventListener('resize', ajustarAlturaDaDiv);
+      </script>
+
+    <script>
+      // Função para ajustar a altura da div com base na altura da tela do usuário
+      function ajustarAlturaDoFooter() {
+          var alturaDoFooter = window.innerHeight;
+          var divAlturaTela = document.getElementById('altura-do-footer');
+          divAlturaTela.style.minHeight = alturaDoFooter*.2  + 'px'; // Definir a altura mínima como 70% da altura da tela
+      }
+      
+      // Chamar a função quando a página for carregada e quando a janela for redimensionada
+      window.addEventListener('load', ajustarAlturaDoFooter);
+      window.addEventListener('resize', ajustarAlturaDoFooter);
+      </script>
+
 </body>
 </html>
 
