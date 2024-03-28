@@ -30,6 +30,7 @@ def saudacao_com_base_no_horario():
 class principal(View):
     template = 'inicio.html'
     def get(self, request, *args, **kwargs):        
-        self.context = {}            
+        self.context = {}                    
         self.context['saudacao'] = saudacao_com_base_no_horario()     
+        self.context['novo_context'] = 'teste'
         return render (request, self.template ,self.context)
