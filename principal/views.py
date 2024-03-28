@@ -1,6 +1,8 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from datetime import datetime
+from openai import OpenAI
+
 import json
 
 def toggle_theme(request):
