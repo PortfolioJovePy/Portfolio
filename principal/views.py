@@ -1,7 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from datetime import datetime
-from vercel_app.settings import client
 import json
 
 def toggle_theme(request):
@@ -32,5 +31,5 @@ class principal(View):
     def get(self, request, *args, **kwargs):        
         self.context = {}                    
         self.context['saudacao'] = saudacao_com_base_no_horario()     
-        self.context['novo_context'] = 'teste'
+        
         return render (request, self.template ,self.context)

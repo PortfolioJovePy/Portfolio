@@ -16,7 +16,6 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 load_dotenv()
-
 client = OpenAI()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
