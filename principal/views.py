@@ -1,9 +1,10 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from datetime import datetime
-from openai import OpenAI
-
-import json
+import requests
+from django.conf import settings
+from vercel_app.settings import client
+from django.http import JsonResponse
 
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
@@ -35,3 +36,4 @@ class principal(View):
         self.context['saudacao'] = saudacao_com_base_no_horario()     
         
         return render (request, self.template ,self.context)
+    
