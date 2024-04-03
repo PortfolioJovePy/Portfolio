@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 from django.conf import settings
 from django.http import JsonResponse
+from django.core.mail import send_mail
 
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
@@ -35,3 +36,14 @@ class principal(View):
         self.context['saudacao'] = saudacao_com_base_no_horario()             
         return render (request, self.template ,self.context)
     
+def email_teste(request):
+    from django.core.mail import send_mail
+    send_mail(
+        'Teste de E-mail',
+        'Este é um e-mail de teste enviado do Django.',
+        settings.EMAIL_HOST_USER,  # Deve ser o mesmo que EMAIL_HOST_USER em settings.py
+        ['r.jove@outlook.com'],  # Substitua pelo e-mail que receberá o teste
+        fail_silently=False,
+    )
+    data = {'email':'enviado, verificar caixa'}
+    return JsonResponse(data)
