@@ -31,7 +31,7 @@ OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app','www.jovepy.com.br']
 
@@ -145,6 +145,7 @@ EMAIL_HOST = 'smtp.mail.me.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jove.py@icloud.com'  # Seu endereço de e-mail do iCloud
+EMAIL_MASK = 'rodrigo@jovepy.com.br'
 EMAIL_HOST_PASSWORD = 'mnhg-mfwa-vxhp-vntq'  # Sua senha específica de app para o Django
 
 

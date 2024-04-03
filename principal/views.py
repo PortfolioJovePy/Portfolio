@@ -41,7 +41,7 @@ def email_teste(request):
     send_mail(
         'Teste de E-mail',
         'Este é um e-mail de teste enviado do Django.',
-        settings.EMAIL_HOST_USER,  # Deve ser o mesmo que EMAIL_HOST_USER em settings.py
+        settings.EMAIL_MASK,  # Deve ser o mesmo que EMAIL_HOST_USER em settings.py
         ['r.jove@outlook.com'],  # Substitua pelo e-mail que receberá o teste
         fail_silently=False,
     )
