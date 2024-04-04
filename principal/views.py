@@ -19,31 +19,8 @@ def error(request, exception):
     context = {'error':f'Erro n.º {error_code}  '}
     return render(request, 'error.html',context, status=error_code)
 
-def saudacao_com_base_no_horario():
-    agora = datetime.now().time()    
-    if datetime.strptime('04:30:00', '%H:%M:%S').time() <= agora < datetime.strptime('12:00:00', '%H:%M:%S').time():
-        saudacao = "Bom dia"
-    elif datetime.strptime('12:00:00', '%H:%M:%S').time() <= agora <= datetime.strptime('18:00:00', '%H:%M:%S').time():
-        saudacao = "Boa tarde"
-    else:
-        saudacao = "Boa noite"
-    return saudacao
-
 class principal(View):
     template = 'inicio.html'
-    def get(self, request, *args, **kwargs):        
-        self.context = {}                    
-        self.context['saudacao'] = saudacao_com_base_no_horario()             
-        return render (request, self.template ,self.context)
+    def get(self, request, *args, **kwargs):                   
+        return render (request, self.template )
     
-def email_teste(request):
-    from django.core.mail import send_mail
-    send_mail(
-        'Teste de E-mail',
-        'Este é um e-mail de teste enviado do Django.',
-        settings.EMAIL_MASK,  # Deve ser o mesmo que EMAIL_HOST_USER em settings.py
-        ['r.jove@outlook.com'],  # Substitua pelo e-mail que receberá o teste
-        fail_silently=False,
-    )
-    data = {'email':'enviado, verificar caixa'}
-    return JsonResponse(data)
