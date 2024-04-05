@@ -1,14 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Contato e Agendamento de Email</title>
-    <!-- Incluir o CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+    <title>{{titulo}}</title>
+    </head>
 <body>
-    <div class="container mt-5">
-        <h2>Contato e Agendamento de Email</h2>
+    <div class="container-fluid mt-4 text-{{request.theme}} p-4">        
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
@@ -17,14 +18,9 @@
                     {{ form.as_p }}
                 </fieldset>
             </div>            
-            <button type="submit" class="btn btn-primary">{{submit}}</button>
+            <button type="submit" class="btn btn-outline-{{request.theme}}">{{submit}}</button>
         </form>
-      
-        
-    </div>
-    <!-- Incluir o JavaScript do Bootstrap e dependências -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>  
 </body>
 </html>
+{% endblock %}

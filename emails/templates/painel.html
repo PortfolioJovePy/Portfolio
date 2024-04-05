@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Painel de Controle do gerenciador de e-mails</title>
+        <meta name="description" content="Painel de controle para gerenciamento de e-mails. Registro de Contatos. Agendamento de emails. Criação de templates.">
+        <meta name="keywords" content="Python. Registro de Contatos. Agendamento de emails. Criação de templates.">
+        <link rel="canonical" href="www.jovepy.com.br">
+        <!-- Inserir aqui outros elementos do head, como CSS e scripts -->
+    </head>
+    <body>
+        <div class="container-fluid text-{{request.theme}}">
+            <div class="container text-start">
+                <div class="row row-cols-1 grid gap-3">
+                  <div class="col">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Contatos</h5>
+                        <p class="card-text">Crie e gerencie os contatos existentes.</p>
+                        <a href="{%url 'contatos'%}" class="btn btn-outline-{{request.theme}}">Adicionar contatos</a>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Agendamentos</h5>
+                        <p class="card-text">Agende os e-mails e nunca mais perca prazos</p>
+                        <a href="{%url 'agendamento' %}" class="btn btn-outline-{{request.theme}}">Realizar agendamentos</a>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Modelos</h5>
+                        <p class="card-text">Crie modelos estratégicos e se comunique melhor com seus clientes.</p>
+                        <a href="{%url 'upload_template' %}" class="btn btn-outline-{{request.theme}}">Adicionar modelos</a>
+                    </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+        </div>    
+    </body>
+</html>
+{% endblock %}

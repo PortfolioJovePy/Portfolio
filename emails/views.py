@@ -13,13 +13,23 @@ class gerenciador(View):
             form = form if form is not None else ContatosForm(prefix="contatos")
             titulo = 'Informações de contato'
             submit = 'Adicionar contato'
+            self.template = 'gerenciador.html'
+        
         elif self.template == 'agendamento.html':
             form = form if form is not None else AgendarEmailForm(prefix="agendar_email")
             titulo = 'Agendamento de e-mail'
             submit = 'Agendar e-mail'
+            self.template = 'gerenciador.html'
+        
         elif self.template == 'upload_template.html':
             form = form if form is not None else UploadTemplateForm(prefix="upload_template")
             titulo = 'Cadastro de modelos de templates de e-mail'
+            submit = 'Incluir template'
+            self.template = 'gerenciador.html'
+        
+        elif self.template == 'painel.html':
+            form = form if form is not None else UploadTemplateForm(prefix="upload_template")
+            titulo = 'Painel de controle dos e-mails'
             submit = 'Incluir template'
 
         context = {'form': form, 'titulo': titulo, 'submit': submit}
@@ -27,7 +37,7 @@ class gerenciador(View):
     
     def get(self, request, *args, **kwargs):        
         context = self.get_context(request)
-        return render(request, 'gerenciador.html', context)
+        return render(request, self.template, context)
 
     def post(self, request, *args, **kwargs):
         path_atual = request.path       
