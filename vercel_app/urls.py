@@ -22,7 +22,7 @@ from principal.views import error
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('principal.urls'),),
-    path('emails/', include('emails.urls'),)
+    path('e-mails/', include('emails.urls'),)
 ]
 
 handler404 = error #redireciona todos os errors para pagina inicial
@@ -30,3 +30,4 @@ handler403 = error #dps penso numa pagina de error personalizado
 handler400 = error
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

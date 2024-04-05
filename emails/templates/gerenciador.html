@@ -9,28 +9,17 @@
 <body>
     <div class="container mt-5">
         <h2>Contato e Agendamento de Email</h2>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <fieldset>
-                    <legend>Informações de Contato:</legend>
-                    {{ contatos_form.as_p }}
+                    <legend>{{titulo}}</legend>
+                    {{ form.as_p }}
                 </fieldset>
             </div>            
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-primary">{{submit}}</button>
         </form>
-
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <fieldset>
-                    <legend>Agendar Email:</legend>
-                    {{ agendar_email_form.as_p }}                    
-                </fieldset>
-            </div>        
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-
+      
         
     </div>
     <!-- Incluir o JavaScript do Bootstrap e dependências -->

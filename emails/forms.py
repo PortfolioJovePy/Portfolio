@@ -32,3 +32,15 @@ class AgendarEmailForm(forms.ModelForm):
             'email_template': forms.Textarea(attrs={'class': 'form-control'}),
             'enviado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+
+class UploadTemplateForm(forms.ModelForm):
+    class Meta:
+        model = UploadTemplate
+        fields = ['nome', 'arquivo']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Arquivo'}),
+            'arquivo': forms.FileInput(attrs={'class': 'form-control-file'}),
+        }
+
+
