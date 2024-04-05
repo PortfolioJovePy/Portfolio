@@ -29,7 +29,7 @@ class AgendarEmailForm(forms.ModelForm):
             'nome': forms.Select(attrs={'class': 'form-control'}),
             'send_date': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'type': 'date'}),
             'send_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-            'email_template': forms.Textarea(attrs={'class': 'form-control'}),
+            'email_template': forms.Select(attrs={'class': 'form-control'}),
             'enviado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 

@@ -11,17 +11,6 @@ class Contatos(models.Model):
     def __str__(self):
         return self.nome
 
-class AgendarEmail(models.Model):
-    nome = models.ForeignKey(Contatos, on_delete=models.CASCADE, verbose_name="Nome")
-    send_date = models.DateField(verbose_name="Data de Envio")
-    send_time = models.TimeField(verbose_name="Hora de Envio")
-    email_template = models.TextField(verbose_name="Template do E-mail")
-    enviado = models.BooleanField(default=False, verbose_name="Mensagem Enviada")
-    
-    def __str__(self):
-        status = "Enviada" if self.is_sent else "Não Enviada"
-        return f"Mensagem para {self.conato.nome} em {self.send_date} às {self.send_time} - {status}"
-    
 class UploadTemplate(models.Model):
     nome = models.CharField(max_length=255, verbose_name="Nome")
     arquivo = models.FileField(
@@ -33,3 +22,15 @@ class UploadTemplate(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class AgendarEmail(models.Model):
+    nome = models.ForeignKey(Contatos, on_delete=models.CASCADE, verbose_name="Nome")
+    send_date = models.DateField(verbose_name="Data de Envio")
+    send_time = models.TimeField(verbose_name="Hora de Envio")
+    email_template = models.ForeignKey(UploadTemplate, on_delete=models.CASCADE, verbose_name="Template do E-mail")
+    enviado = models.BooleanField(default=False, verbose_name="Mensagem Enviada")
+    
+    def __str__(self):
+        status = "Enviada" if self.is_sent else "Não Enviada"
+        return f"Mensagem para {self.conato.nome} em {self.send_date} às {self.send_time} - {status}"
+    
