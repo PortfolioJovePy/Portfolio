@@ -24,13 +24,13 @@ class ContatosForm(forms.ModelForm):
 class AgendarEmailForm(forms.ModelForm):
     class Meta:
         model = AgendarEmail
-        fields = ['nome', 'send_date', 'send_time', 'email_template', ]
-        widgets = {
-            'nome': forms.Select(attrs={'class': 'form-control'}),
-            'send_date': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'type': 'date'}),
+        fields = ['email','assunto', 'send_date', 'send_time', 'email_template', ]
+        widgets = {            
+            'assunto': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.Select(attrs={'class': 'form-control'}),  
+            'send_date': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'type': 'date'}),            
             'send_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-            'email_template': forms.Select(attrs={'class': 'form-control'}),
-            'enviado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'email_template': forms.Select(attrs={'class': 'form-control'}),            
         }
 
 

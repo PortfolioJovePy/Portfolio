@@ -4,6 +4,11 @@ from django.views import View
 from .forms import *
 from .models import *
 from django.urls import resolve
+from django.core.mail import send_mail
+from datetime import date
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+
 
 class gerenciador(View):
     template = 'gerenciador.html'
@@ -31,11 +36,25 @@ class gerenciador(View):
             form = form if form is not None else UploadTemplateForm(prefix="upload_template")
             titulo = 'Painel de controle dos e-mails'
             submit = 'Incluir template'
+            emails = AgendarEmail.objects.filter(enviado=False,send_date=date.today())
+            for obj in emails:
+                with open(f'./media/uploads_html/{obj.email_template}.html', 'r', encoding='utf-8') as f:
+                    conteudo = f.read()          
+                send_mail(
+                        subject=obj.assunto,
+                        message='Caso não visualize este email abra-o em um cliente compatível com HTML para ver a versão completa.',                        
+                        from_email=settings.EMAIL_MASK,  
+                        recipient_list=[obj.email],  
+                        fail_silently=False,
+                        html_message =conteudo,
+                        )
+                #APOS ENVIO FAZER UPDATE PARA ENVIADO = TRUE                
+
 
         context = {'form': form, 'titulo': titulo, 'submit': submit}
         return context
     
-    def get(self, request, *args, **kwargs):        
+    def get(self, request, *args, **kwargs):                
         context = self.get_context(request)
         return render(request, self.template, context)
 
@@ -60,14 +79,6 @@ class gerenciador(View):
 
     
 
-def email_teste(request):
-    from django.core.mail import send_mail
-    send_mail(
-        'Teste de E-mail',
-        'Este é um e-mail de teste enviado do Django.',
-        settings.EMAIL_MASK,  # Deve ser o mesmo que EMAIL_HOST_USER em settings.py
-        ['r.jove@outlook.com'],  # Substitua pelo e-mail que receberá o teste
-        fail_silently=False,
-    )
+def email_teste(request):    
     data = {'email':'enviado, verificar caixa'}
     return JsonResponse(data)

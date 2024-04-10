@@ -135,7 +135,8 @@ STATICFILES_DIRS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-
+PYTHONIOENCODING ='UTF-8'
+LANG = 'UTF-8'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  
 
@@ -147,8 +148,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.me.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER') # Seu endereço de e-mail do iCloud
-EMAIL_MASK = os.environ.get('EMAIL_MASK')
+EMAIL_HOST_USER = 'jove.py@icloud.com'  # Seu endereço de e-mail do iCloud
+EMAIL_MASK = 'rodrigo@jovepy.com.br'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Sua senha específica de app para o Django
 
 
