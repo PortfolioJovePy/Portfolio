@@ -30,6 +30,13 @@ class AgendarEmail(models.Model):
     send_time = models.TimeField(verbose_name="Hora de Envio")
     email_template = models.ForeignKey(UploadTemplate, on_delete=models.CASCADE, verbose_name="Template do E-mail")
     enviado = models.BooleanField(default=False, verbose_name="Mensagem Enviada")
+    periodo = models.CharField(max_length=255, choices=[('nao repete','não repete'),
+                                                        ('diario','diário'),
+                                                        ('semanal','semanal'),
+                                                        ('mensal','mensal'),
+                                                        ('enesimo dia útil','enésimo dia útil')],verbose_name='Período')
+    
+    repeticao = models.CharField(max_length=255, choices=[('Nao repete','Não repete')]+[(str(i),str(i)) for i in list(range(1,32,1))],verbose_name='A cada')
     
     def __str__(self):
         status = "Enviada" if self.enviado else "Não Enviada"

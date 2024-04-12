@@ -5,7 +5,7 @@ from .forms import *
 from .models import *
 from django.urls import resolve
 from django.core.mail import send_mail
-from datetime import date
+from datetime import date, datetime, timedelta
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 
@@ -48,6 +48,29 @@ class gerenciador(View):
                         fail_silently=False,
                         html_message =conteudo,
                         )
+                if obj.periodo != 'nao repete':
+                    print(obj.send_date)
+                    nova_data = datetime(int(obj.send_date.year), int(obj.send_date.month), int(obj.send_date.day))
+                    if obj.periodo == 'diario':
+                        nova_data += timedelta(days=int(obj.repeticao))
+                    elif obj.periodo == 'semanal':
+                        nova_data += timedelta(weeks=int(obj.repeticao))
+                    elif obj.periodo == 'mensal':                        
+                        novo_mes = (int(obj.send_date.month)+int(obj.repeticao))      
+                        if novo_mes > 12:
+                            n=0
+                            while novo_mes > 12:
+                                novo_mes-=12
+                                n+=1
+                            nova_data = datetime(int(obj.send_date.year)+n, novo_mes, int(obj.send_date.day))                                            
+                        else:
+                            nova_data = datetime(int(obj.send_date.year), novo_mes, int(obj.send_date.day))                                            
+                    obj.send_date = nova_data
+                    print(nova_data)
+                    obj.save()
+
+                
+                
                 #APOS ENVIO FAZER UPDATE PARA ENVIADO = TRUE                
 
 
@@ -66,19 +89,12 @@ class gerenciador(View):
             form = AgendarEmailForm(request.POST, prefix="agendar_email")            
         
         elif path_atual == '/e-mails/upload-template/': 
-            form = UploadTemplateForm(request.POST, request.FILES, prefix="upload_template")            
-            print(form)
+            form = UploadTemplateForm(request.POST, request.FILES, prefix="upload_template")                        
         
         if form.is_valid():
-            form.save()            
+            form.save()                 
             context = self.get_context(request, form=None)  
             return render(request, 'gerenciador.html', context)
         else:
             context = self.get_context(request, form=form)
             return render(request, 'gerenciador.html', context)
-
-    
-
-def email_teste(request):    
-    data = {'email':'enviado, verificar caixa'}
-    return JsonResponse(data)
