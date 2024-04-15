@@ -34,11 +34,10 @@ class AgendarEmail(models.Model):
                                                         ('diario','diário'),
                                                         ('semanal','semanal'),
                                                         ('mensal','mensal'),
-                                                        ('enesimo dia útil','enésimo dia útil')],verbose_name='Período')
+                                                        ('enesimo dia util','enésimo dia útil')],verbose_name='Período')
     
     repeticao = models.CharField(max_length=255, choices=[('Nao repete','Não repete')]+[(str(i),str(i)) for i in list(range(1,32,1))],verbose_name='A cada')
     
     def __str__(self):
         status = "Enviada" if self.enviado else "Não Enviada"
         return f"Mensagem para {self.email} em {self.send_date} às {self.send_time} - {status}"
-    

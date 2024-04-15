@@ -9,7 +9,6 @@ from datetime import date, datetime, timedelta
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 
-
 class gerenciador(View):
     template = 'gerenciador.html'
     
@@ -49,7 +48,6 @@ class gerenciador(View):
                         html_message =conteudo,
                         )
                 if obj.periodo != 'nao repete':
-                    print(obj.send_date)
                     nova_data = datetime(int(obj.send_date.year), int(obj.send_date.month), int(obj.send_date.day))
                     if obj.periodo == 'diario':
                         nova_data += timedelta(days=int(obj.repeticao))
@@ -64,9 +62,25 @@ class gerenciador(View):
                                 n+=1
                             nova_data = datetime(int(obj.send_date.year)+n, novo_mes, int(obj.send_date.day))                                            
                         else:
-                            nova_data = datetime(int(obj.send_date.year), novo_mes, int(obj.send_date.day))                                            
+                            nova_data = datetime(int(obj.send_date.year), novo_mes, int(obj.send_date.day))          
+                    elif obj.periodo == 'enesimo dia util':                        
+                        novo_mes = obj.send_date.month + 1
+                        if novo_mes > 12:
+                            novo_mes = 1
+                            novo_ano = obj.send_date.year + 1
+                        else:
+                            novo_ano = obj.send_date.year
+                        primeiro_dia_proximo_mes = datetime(novo_ano, novo_mes, 1)
+                        contador_dias_uteis = 0        
+                        nova_data = primeiro_dia_proximo_mes    
+                        while contador_dias_uteis != int(obj.repeticao)-1:        
+                            if nova_data.weekday() < 5:  
+                                contador_dias_uteis += 1
+                            if contador_dias_uteis != obj.repeticao:
+                                nova_data += timedelta(days=1)
+                            else:
+                                break
                     obj.send_date = nova_data
-                    print(nova_data)
                     obj.save()
 
                 
