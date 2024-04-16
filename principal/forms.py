@@ -11,7 +11,7 @@ class FormularioContato(forms.ModelForm):
             'mensagem': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
         }
         labels = {
-            'nome': 'Apresente-se com seu nome',
+            'nome': 'Apresente-se',
             'email': 'E-mail',
             'mensagem': 'Sobre o que você quer conversar?'
         }
