@@ -47,6 +47,7 @@ class gerenciador(View):
                         fail_silently=False,
                         html_message =conteudo,
                         )
+                obj.enviado = True
                 if obj.periodo != 'nao repete':
                     nova_data = datetime(int(obj.send_date.year), int(obj.send_date.month), int(obj.send_date.day))
                     if obj.periodo == 'diario':
