@@ -46,7 +46,7 @@ class principal(View):
                         #html_message =,
                         )
             form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
-            context['texto'] = f'{request.saudacao}, seu email foi enviado com sucesso. Você recebeu um e-mail de confirmação.'
+            context['texto'] = f'{request.saudacao}, seu email foi enviado com sucesso.&&Você recebeu um e-mail de confirmação.'
             return render(request, 'inicio.html', context)
         else:        
             context['form'] = form
