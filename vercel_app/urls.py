@@ -22,7 +22,8 @@ from principal.views import error
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('principal.urls'),),
-    path('e-mails/', include('emails.urls'),)
+    path('e-mails/', include('emails.urls'),),
+    path('conteudos/', include('conteudos.urls'),)
 ]
 
 handler404 = error #redireciona todos os errors para pagina inicial

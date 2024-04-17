@@ -8,11 +8,12 @@ from django.core.mail import send_mail
 from datetime import date, datetime, timedelta
 from django.conf import settings
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class gerenciador(View):
-    template = 'gerenciador.html'
-    
-    def get_context(self, request, form=None):
+
+class gerenciador(LoginRequiredMixin,View):
+    template = 'gerenciador.html'        
+    def get_context(self, request, form=None):        
         if self.template == 'contatos.html':
             form = form if form is not None else ContatosForm(prefix="contatos")
             titulo = 'Informações de contato'
@@ -83,11 +84,6 @@ class gerenciador(View):
                                 break
                     obj.send_date = nova_data
                     obj.save()
-
-                
-                
-                #APOS ENVIO FAZER UPDATE PARA ENVIADO = TRUE                
-
 
         context = {'form': form, 'titulo': titulo, 'submit': submit}
         return context

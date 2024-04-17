@@ -61,7 +61,7 @@
     <div class="container fade-in mt-4 mb-4">
       <div class="row">
         <div class="col-12 text-center">
-      <hr class="mx-auto" style="width: 90%; height: 2px; background-color: #000;">
+      <hr class="mx-auto" style="width: 100%; height: 2px; background-color: #000;">
         </div>
       </div>
     
@@ -69,12 +69,12 @@
       <div class="card border-0 bg-{{request.font}}">
         <div class="row g-0 align-items-center">
           <div class="col-md-4">
-            <img src="sua-imagem-aqui.jpg" class="img-fluid rounded-start" alt="Rodrigo Jovê">
+            <img src="{% static 'perfil2.png' %}" class="img-fluid rounded-start rounded-circle" alt="Rodrigo Jovê" style="height: 25vh;">
           </div>
           <div class="col-md-8">
-            <div class="card-body">
-              <p class="card-text text-{{request.theme}} ">Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.</p>
-              <p class="card-text text-{{request.theme}}"><small class="text-muted">Informações adicionais</small></p>
+            <div class="card-body text-justify">
+              <p class="card-text text-{{request.theme}}">Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.</p>
+              <p class="card-text text-{{request.theme}}"><small class="text-muted"><a class='no-underline text-muted' href="{%url 'sobre' %}">Informações adicionais</a></small></p>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
     <div class="container fade-in mt-4 mb-4">
       <div class="row">
         <div class="col-12 text-center">
-      <hr class="mx-auto" style="width: 90%; height: 2px; background-color: #000;">
+      <hr class="mx-auto" style="width: 100%; height: 2px; background-color: #000;">
         </div>
       </div>
     
