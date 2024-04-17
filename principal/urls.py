@@ -4,7 +4,7 @@ from .views import *
 urlpatterns = [
     path("", principal.as_view(template='inicio.html'),name='inicio'),
     path("contato/", principal.as_view(template='contato.html'),name='contato'),
-    path("contato/", principal.as_view(template='sobre.html'),name='sobre'),
+    path("sobre/", principal.as_view(template='sobre.html'),name='sobre'),
     path('toggle-theme/', toggle_theme, name='toggle-theme'),
 ]
 
