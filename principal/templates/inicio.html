@@ -46,8 +46,9 @@
       </div>
  <div class="d-flex flex-column justify-content-center align-items-center min-vh-100 text-{{request.theme}}">
     <!-- Texto centralizado vertical e horizontalmente -->
+    <div class="d-flex flex-column justify-content-center align-items-center min-vh-100 text-{{request.theme}}">
     <div class="fs-1 fw-bolder text-center mt-0" style="min-height:400px;" id="texto">{{texto}}</div>
-    
+    <\div>
     <!-- SVG abaixo do texto com espaçamento adequado -->
     <div class="mt-4 text-center scale-in-ver-top"> <!-- mt-3 para dar um espaçamento entre o texto e o SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-chevron-double-down pulsate-fwd" viewBox="0 0 16 16">
@@ -79,7 +80,7 @@
 </div>
 
     </div>
-    <h2 class="fs-2 no-underline fw-bolder">Conteto</h2>
+    <h2 class="fs-2 no-underline fw-bolder">Contato</h2>
     <div class="container-fluid p-4">
           <div class="row text-center text-{{request.theme}}">                        
                 <form method="post" novalidate>
