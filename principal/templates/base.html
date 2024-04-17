@@ -142,7 +142,13 @@
 <body class="bg-{{request.font}} text-{{request.theme}}">
     <nav class="navbar navbar-{{request.theme}} bg-{{request.theme}} text-{{request.font}} fixed-top">
         <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">                    
-            <div type="button" id="toggleTheme">
+           <div class="me-3">
+            <a href="{% url 'home' %}" class="btn btn-link text-{{request.font}}">
+                Jovê.py
+            </a>
+        </div>
+            
+             <div type="button" id="toggleTheme">
               <a href="{% url 'toggle-theme' %}">
               {% if request.font == 'dark' %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
