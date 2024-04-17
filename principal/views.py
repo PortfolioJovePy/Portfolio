@@ -26,7 +26,7 @@ class principal(View):
     def get(self, request, *args, **kwargs):                   
         context = {}
         if self.template == 'inicio.html':
-            self.texto = f'{request.saudacao}, tudo bom?&&Seja muito bem-vindo ao meu portfólio.&&É um prazer tê-lo aqui.'            
+            self.texto = f'{request.saudacao}, tudo bom?&&Seja muito bem-vindo.&&É um prazer tê-lo aqui.'            
         elif self.template == 'contato.html':
             context['form'] = FormularioContato
         context['texto'] = self.texto
