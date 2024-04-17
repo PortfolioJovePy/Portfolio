@@ -28,7 +28,8 @@ class principal(View):
         if self.template == 'inicio.html':
             self.texto = f'{request.saudacao}, tudo bom?&&Seja muito bem-vindo.&&É um prazer tê-lo aqui.'            
         elif self.template == 'contato.html':
-            context['form'] = FormularioContato
+            pass
+        context['form'] = FormularioContato
         context['texto'] = self.texto
         return render (request, self.template, context)
     
