@@ -29,26 +29,17 @@
           </div>
       </div>
     
-      <div class="col offset-md-3 me-3 text-start text-{{request.theme}} mt-3 p-4">    
-        
-          <div class="container-fluid p-4">
-          <div class="row text-center">
-            
-         <div class="position-relative">
+     <div class="position-relative vh-100"> <!-- vh-100 para fazer o contêiner ocupar toda a altura da viewport -->
     <div id="texto" class="fs-1 fw-bolder position-absolute bottom-50 start-0">{{texto}}</div>
     
-    <!-- Container para o SVG -->
-    <div class="container-fluid scale-in-ver-top mt-5 pt-5">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+    <!-- Container para o SVG com alinhamento central -->
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
           <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
         </svg>
     </div>
 </div>
-          </div>
-          </div>          
-      </div>    
-    
     <script>
       const textoElement = document.getElementById("texto");
       const texto = textoElement.textContent.split("&&");
