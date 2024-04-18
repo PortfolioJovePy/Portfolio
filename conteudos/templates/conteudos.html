@@ -1,0 +1,32 @@
+<!-- templates/conteudo_form.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid text-{{request.theme}} mt-3">
+        <h2 class="fs-2 no-underline fw-bolder mb-4 mt-4 text-start ms-4">Conteúdos</h2>
+
+        <ul>
+            {% for conteudo in conteudos %}
+            <div class="card mb-3" style="max-width: 80vw;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src={{conteudo.link_imagem}} class="img-fluid rounded-start">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body text-start">
+                      <h5 class="card-title">{{conteudo.titulo}}</h5>
+                      <p class="card-text">{{conteudo.descricao}}</p>                                            
+                    </div>                    
+                    <div class="card-footer bg-transparent border-0 text-end">
+                        <a href="{{conteudo.link}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-{{request.theme}}">Ler conteúdo</a>
+                    </div>                    
+                  </div>
+                  
+                </div>
+              </div>
+            {% empty %}
+                <li>Nenhum conteúdo disponível.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

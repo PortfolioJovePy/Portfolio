@@ -1,0 +1,13 @@
+<!-- templates/conteudo_form.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5 text-{{request.theme}} p-4">
+        <h2>Adicionar Novo Conteúdo</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-{{request.theme}}">Salvar</button>
+        </form>
+    </div>
+{% endblock %}
