@@ -5,11 +5,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ConteudoForm
 from .models import Conteudo
 
-class painel_conteudos(LoginRequiredMixin,View):
+class painel_conteudos(View):
     template='painel_conteudos.html'
     context={}
     def get(self, request):        
-        if self.template == 'painel_conteudos.html':
+        if self.template == 'painel_conteudos.html' and request.user.is_authenticated:
             self.context['form'] = ConteudoForm()
         elif self.template == 'conteudos.html':
             self.context['conteudos'] = Conteudo.objects.all()
