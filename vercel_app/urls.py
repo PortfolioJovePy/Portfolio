@@ -20,7 +20,7 @@ from django.conf import settings
 from principal.views import error
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name='admin_django'),
     path('', include('principal.urls'),),
     path('e-mails/', include('emails.urls'),),
     path('conteudos/', include('conteudos.urls'),)

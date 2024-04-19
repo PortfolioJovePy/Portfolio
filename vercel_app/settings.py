@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'principal.middleware.ThemeMiddleware',
-    'principal.middleware.SaudacaoMiddleware'
+    'principal.middleware.SaudacaoMiddleware'    
 
 ]
 

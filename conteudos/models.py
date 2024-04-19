@@ -6,4 +6,5 @@ class Conteudo(models.Model):
     descricao = models.CharField(max_length=500)
     link = models.CharField(max_length=10000)
     link_imagem = models.CharField(max_length=10000)
+    link_notbook = models.CharField(max_length=10000)
     

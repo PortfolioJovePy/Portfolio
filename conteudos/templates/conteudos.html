@@ -10,7 +10,7 @@
             <div class="card mb-3" style="max-width: 80vw;">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img src={{conteudo.link_imagem}} class="img-fluid rounded-start">
+                    <img src={{conteudo.link_imagem}} class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body text-start">
@@ -19,6 +19,7 @@
                     </div>                    
                     <div class="card-footer bg-transparent border-0 text-end">
                         <a href="{{conteudo.link}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-{{request.theme}}">Ler conteúdo</a>
+                        <a href="{{conteudo.link_notbook}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-{{request.theme}}">Ver código</a>
                     </div>                    
                   </div>
                   
