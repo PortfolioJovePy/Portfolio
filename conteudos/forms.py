@@ -4,7 +4,7 @@ from .models import *
 class ConteudoForm(forms.ModelForm):
     class Meta:
         model = Conteudo
-        fields = ['titulo', 'descricao', 'link', 'link_imagem']
+        fields = ['titulo', 'descricao', 'link', 'link_imagem','link_notbook']
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
