@@ -16,6 +16,14 @@
   <script src="{% static './particles.js-master/particles.min.js' %}" ></script>
   <script src="{% static './particles.js-master/js/libs/stats.min.js' %}"></script>
   <script  src="{% static './script.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  particlesJS.load('particles-js', "{% static './particles.js-master/particles.json' %}", function() {
+    console.log('callback - particles.js loaded.');
+  });
+});
+
+  </script>
 </body>
 </html>
 {% endblock %}
