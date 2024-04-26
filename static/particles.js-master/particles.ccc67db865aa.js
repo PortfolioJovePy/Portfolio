@@ -102,13 +102,13 @@ var pJS = function(tag_id, params){
       },
       modes: {
         grab:{
-          distance: 30,
+          distance: 100,
           line_linked:{
             opacity: 1
           }
         },
         bubble:{
-          distance: 30,
+          distance: 200,
           size: 80,
           duration: 0.4
         },
