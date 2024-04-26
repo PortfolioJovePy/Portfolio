@@ -9,21 +9,13 @@
 <body>
 <!-- partial:index.partial.html -->
 <!-- particles.js container -->
-<div class="container-fluid" style="height: 30vh;">
+<div class="container-fluid" style="height: 200px;width: 100%;">
 <div id="particles-js"></div>
 </div>
   
   <script src="{% static './particles.js-master/particles.min.js' %}" ></script>
   <script src="{% static './particles.js-master/js/libs/stats.min.js' %}"></script>
   <script  src="{% static './script.js' %}"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-  particlesJS.load('particles-js', "{% static './particles.js-master/particles.json' %}", function() {
-    console.log('callback - particles.js loaded.');
-  });
-});
-
-  </script>
 </body>
 </html>
 {% endblock %}
