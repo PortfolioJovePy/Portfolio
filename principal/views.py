@@ -23,12 +23,14 @@ def error(request, exception):
 class principal(View):
     template = 'inicio.html'
     texto = ''
+    duracao = '4s'
     def get(self, request, *args, **kwargs):                   
         context = {}
         if self.template == 'inicio.html':
             self.texto = f'{request.saudacao}, tudo bom?&&Seja muito bem-vindo.&&É um prazer tê-lo aqui.'            
         context['form'] = FormularioContato
         context['texto'] = self.texto
+        
         return render (request, self.template, context)
     
     def post(self, request, *args, **kwargs):

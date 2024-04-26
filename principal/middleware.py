@@ -1,6 +1,27 @@
 from django.shortcuts import render
 from datetime import datetime
-# meuapp/middleware/theme_middleware.py
+from django.urls import reverse
+
+
+class TempoCarregamentoMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.path == '/favicon.ico':
+            return self.get_response(request)
+        else:
+            if request.path == '/':
+                request.tempo_carregamento_texto = '5s'    
+                request.tempo_carregamento = 5500
+                request.texto = f'{request.saudacao}, seja bem-vindo.'        
+            else:                
+                request.tempo_carregamento_texto = '1.5s'    
+                request.tempo_carregamento = 1500      
+                request.texto = 'Carregando...'        
+            response = self.get_response(request)
+            return response
+
 
 class ThemeMiddleware:
     def __init__(self, get_response):
