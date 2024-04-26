@@ -71,30 +71,36 @@
 <!-- Conteúdo pós apresentação - NAVBAR devem estar abaixo daqui -->
 <!--TELA MENOR-->
 <div class="d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
-    <nav class="navbar bg-{{request.theme}} fixed-top" >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><h1>Jovê.py</h1></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <nav class="navbar bg-{{request.theme}} text-{{request.font}} fixed-top" >
+        <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">
+          <a class="navbar-brand bg-{{request.theme}} text-{{request.font}}" href="#"><h1>Jovê.py</h1></a>
+          <div data-bs-theme={{request.theme}}>
+          <button class="navbar-toggler bg-{{request.theme}} text-{{request.font}}" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-{{request.theme}} text-{{request.font}}"></span>
+        </div>
           </button>
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <div class="offcanvas offcanvas-end bg-{{request.theme}} text-{{request.font}}" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header bg-{{request.theme}} text-{{request.font}}">
+              <h5 class="offcanvas-title bg-{{request.theme}} text-{{request.font}}" id="offcanvasNavbarLabel">Menu</h5>
+
+              <div data-bs-theme={{request.theme}}>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="color:white;"></button>
+                </div>
+
             </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
+            <div class="offcanvas-body bg-{{request.theme}} text-{{request.font}}">
+                <ul class="navbar-nav bg-{{request.theme}} text-{{request.font}}">
+                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                      <a class="nav-link bg-{{request.theme}} text-{{request.font}} active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Contato</a>
+                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                      <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">Contato</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'conteudos' %}">Conteúdos</a>
+                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                      <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">Conteúdos</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">E-books</a>
+                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                      <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">E-books</a>
                     </li>              
                   </ul>              
             </div>
@@ -104,25 +110,25 @@
   </div>            
   <!--TELA MAIOR-->
   <div class="d-none d-lg-block d-print-block" >
-    <nav class="navbar navbar-expand-lg bg-{{request.theme}}" >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><h1>Jovê.py</h1></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-lg bg-{{request.theme}} text-{{request.font}}" >
+        <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">
+          <a class="navbar-brand bg-{{request.theme}} text-{{request.font}}" href="#"><h1>Jovê.py</h1></a>
+          <button class="navbar-toggler bg-{{request.theme}} text-{{request.font}}" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-{{request.theme}} text-{{request.font}}"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
+          <div class="collapse navbar-collapse bg-{{request.theme}} text-{{request.font}}" id="navbarNav">
+            <ul class="navbar-nav bg-{{request.theme}} text-{{request.font}}">
+              <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}} active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contato</a>
+              <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">Contato</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'conteudos' %}">Conteúdos</a>
+              <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">Conteúdos</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">E-books</a>
+              <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">E-books</a>
               </li>              
             </ul>
           </div>
