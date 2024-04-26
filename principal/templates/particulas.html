@@ -1,0 +1,23 @@
+
+{% load static %}
+{% block content %}
+<html lang="pt-BR" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - particles.js</title>
+  <link rel="stylesheet" href="{%static './particles.js-master/css/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- particles.js container -->
+<div class="container-fluid" style="height: 30vh;">
+<div id="particles-js"></div>
+</div>
+  
+  <script src="{% static './particles.js-master/particles.min.js' %}" ></script>
+  <script src="{% static './particles.js-master/js/libs/stats.min.js' %}"></script>
+  <script  src="{% static './script.js' %}"></script>
+</body>
+</html>
+{% endblock %}
