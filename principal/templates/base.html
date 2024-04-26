@@ -71,7 +71,7 @@
 <!-- Conteúdo pós apresentação - NAVBAR devem estar abaixo daqui -->
 <!--TELA MENOR-->
 <div class="d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
-    <nav class="navbar bg-body-tertiary fixed-top" >
+    <nav class="navbar bg-{{request.theme}} fixed-top" >
         <div class="container-fluid">
           <a class="navbar-brand" href="#"><h1>Jovê.py</h1></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -104,7 +104,7 @@
   </div>            
   <!--TELA MAIOR-->
   <div class="d-none d-lg-block d-print-block" >
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+    <nav class="navbar navbar-expand-lg bg-{{request.theme}}" >
         <div class="container-fluid">
           <a class="navbar-brand" href="#"><h1>Jovê.py</h1></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
