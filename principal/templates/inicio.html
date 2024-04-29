@@ -12,11 +12,12 @@
 </div>
   <div class="container-fluid">                
         <div class="mt-4 d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
-          menor
+          {% include 'mobile/apresentacao.html'%}          
         </div>            
         <div class="mt-4 d-none d-lg-block d-print-block" >
-          maior
+          {% include 'desktop/apresentacao.html'%}
         </div>
+        {% include 'formulario_contato.html'%}
   </div>
 </body>
 

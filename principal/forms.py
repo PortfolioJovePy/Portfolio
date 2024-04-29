@@ -6,12 +6,12 @@ class FormularioContato(forms.ModelForm):
         model = Contato
         fields = ['nome', 'email', 'mensagem']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'mensagem': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
+            'nome': forms.TextInput(attrs={'class': 'form-control mb-2','placeholder': 'Apresente-se'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control mb-2', 'placeholder': 'E-mail'}),
+            'mensagem': forms.Textarea(attrs={'class': 'form-control mb-2', 'placeholder': 'Sobre o que você quer conversar?', 'rows': 6}),
         }
         labels = {
-            'nome': 'Apresente-se',
-            'email': 'E-mail',
-            'mensagem': 'Sobre o que você quer conversar?'
+            'nome': '',
+            'email': '',
+            'mensagem': ''
         }
