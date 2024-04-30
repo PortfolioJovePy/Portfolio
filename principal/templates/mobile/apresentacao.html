@@ -18,6 +18,7 @@
                     <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'sobre' %}">Informações adicionais</a>
                   {%else%}
                   <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'conteudos' %}">Conteúdos</a>
+                  <br>
                   <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'ebooks' %}">E-books</a>
                   {%endif%}
                 </p>                             
