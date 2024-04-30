@@ -15,7 +15,7 @@ class TempoCarregamentoMiddleware:
             if '@' in request.POST['email'] and '.' in request.POST['email']:
                 request.texto = f'Seu e-mail foi enviado com sucesso.'     
             else:
-                request.texto = f'Verifique o e-mail informado'
+                request.texto = f'Verifique o e-mail informado.'
             response = self.get_response(request)
             return response
         else:            
