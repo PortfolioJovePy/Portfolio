@@ -7,18 +7,17 @@
       </div>
     </div>
     <div class="mt-4 d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
-      <h2 class="fs-2 no-underline fw-bolder text-center">Contato</h2>
-    </div>            
+      <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">Contato</h1>    </div>            
     <div class="mt-4 d-none d-lg-block d-print-block" >
-      <h2 class="fs-2 no-underline fw-bolder text-start">Contato</h2>
-    </div>
+      <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">Contato</h1>    </div>            
+       </div>
   
   <div class="container-fluid p-4">
-        <div class="row text-center text-{{request.theme}}">                        
+        <div class="row text-center text-{{request.theme}} text-{{request.font}}">                        
               <form method="post" novalidate>
                   {% csrf_token %}
                   {{ form.as_p }}
-                  <button type="submit" class="btn btn-outline-{{request.font}}">Enviar</button>
+                  <button type="submit" class="btn btn-outline-{{request.font}}" style="width:50vw;">Enviar</button>
               </form>
         </div>
         </div>   

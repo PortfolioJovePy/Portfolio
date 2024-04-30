@@ -38,6 +38,9 @@
         font-weight: 'normal'; /* Usando o estilo negrito */
         font-size:50px;
     }
+    #titulo {
+      font-size: 50px;
+    } 
 
     p {
         font-family: 'Poppins', sans-serif;
@@ -72,7 +75,7 @@
   <div id="main-content">
 <!-- Conteúdo pós apresentação - NAVBAR devem estar abaixo daqui -->
 <!--TELA MENOR-->
-<div class="d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
+<div class="d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
     <nav class="navbar bg-{{request.theme}} text-{{request.font}} fixed-top mb-4" >
         <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">
           <a class="navbar-brand bg-{{request.theme}} text-{{request.font}}" href="{% url 'inicio'%}"><h1>Jovê.py</h1></a>
@@ -210,8 +213,7 @@ function initParticles() {
 
     </script>    
     <script>
-    
-    document.getElementById('particles-js').style.backgroundColor = '#020134'; // Substitua 'red' pela cor desejada
+    document.getElementById('particles-js').style.backgroundColor = '#0B1940'; 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

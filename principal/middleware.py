@@ -2,7 +2,6 @@ from django.shortcuts import render
 from datetime import datetime
 from django.urls import reverse
 
-
 class TempoCarregamentoMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -10,7 +9,16 @@ class TempoCarregamentoMiddleware:
     def __call__(self, request):
         if request.path == '/favicon.ico':
             return self.get_response(request)
-        else:
+        elif request.method == 'POST':
+            request.tempo_carregamento_texto = '5s'    
+            request.tempo_carregamento = 8500                        
+            if '@' in request.POST['email'] and '.' in request.POST['email']:
+                request.texto = f'Seu e-mail foi enviado com sucesso.'     
+            else:
+                request.texto = f'Verifique o e-mail informado'
+            response = self.get_response(request)
+            return response
+        else:            
             if request.path == '/':
                 request.tempo_carregamento_texto = '5s'    
                 request.tempo_carregamento = 5500

@@ -22,12 +22,11 @@ def error(request, exception):
 
 class principal(View):
     template = 'inicio.html'
-    texto = ''
-    duracao = '4s'
+    texto = ''    
     def get(self, request, *args, **kwargs):                   
         context = {}
         if self.template == 'inicio.html':
-            self.texto = f'{request.saudacao}, tudo bom?&&Seja muito bem-vindo.&&É um prazer tê-lo aqui.'            
+            self.texto = f'Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
         context['form'] = FormularioContato
         context['texto'] = self.texto
         
@@ -48,8 +47,9 @@ class principal(View):
                         )
             form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
             context['form'] = FormularioContato
-            context['texto'] = f'{request.saudacao}, seu email foi enviado com sucesso.&&Você recebeu um e-mail de confirmação.'
+            context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books'    
             return render(request, 'inicio.html', context)
         else:        
             context['form'] = form
+            context['texto'] = f'Parece que o formulário foi preenchido incorretamente. Por favor, verifique os dados informados'    
             return render(request, self.template, context)
