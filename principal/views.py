@@ -29,6 +29,7 @@ class principal(View):
             self.texto = f'Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
         context['form'] = FormularioContato
         context['texto'] = self.texto
+        context['titulo'] = 'Sobre'
         
         return render (request, self.template, context)
     
@@ -48,8 +49,10 @@ class principal(View):
             form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
             context['form'] = FormularioContato
             context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books'    
+            context['titulo'] = 'Seu e-mail foi enviado!'
             return render(request, 'inicio.html', context)
         else:        
-            context['form'] = form
+            context['form'] = form            
             context['texto'] = f'Parece que o formulário foi preenchido incorretamente. Por favor, verifique os dados informados'    
+            context['titulo'] = 'Ops!'
             return render(request, self.template, context)
