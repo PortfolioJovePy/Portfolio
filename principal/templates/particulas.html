@@ -9,8 +9,16 @@
 <body>
 <!-- partial:index.partial.html -->
 <!-- particles.js container -->
-<div style="width: 100%;height: 40vh;">
-<div id="particles-js">
+<div style="width: 100%;">
+<div id="particles-js" style="height:50vh;">
+  <div class="container-fluid" style="z-index:-1;position: absolute; background-color: #0B1940;">                
+    <div class="mt-4 d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
+      {% include 'mobile/apresentacao.html'%}          
+    </div>            
+    <div class="mt-4 d-none d-lg-block d-print-block" >
+      {% include 'desktop/apresentacao.html'%}
+    </div>    
+</div>
 </div>
 </div>  
   <script src="{% static './particles.js-master/particles.min.js' %}" ></script>

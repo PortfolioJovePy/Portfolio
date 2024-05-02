@@ -2,20 +2,28 @@
 {% block content %}
 <html lang="pt-BR" >
 <body>  
-    <div class="container fade-in mt-4 mb-4">    
-      <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">{{titulo}}</h1>
-      <div class="card border-0 bg-{{request.theme}}">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4">
-              <img src="{% static 'perfil2.png' %}" class="img-fluid rounded-circle" alt="Rodrigo Jovê" style="height: 25vh; max-height: 200px;">
-            </div>
+    <div class="container fade-in mt-4 mb-4 text-start" style="min-height:50vh;background-color: #0B1940;position: relative;z-index:-1;">    
+      <div class="container-fluid">
+        <h1 class="text-{{request.font}} titulo" style="font-size: 60px;margin-top:10vh;">Rodrigo Jovê</h1>
+        <h1 class="text-{{request.font}} titulo mt-2" style="font-size: 30px;">Jove.py</h1>      
+        <div class="col-md-8">
+          <p class="text-{{request.font}} mt-4">{{texto}}</p>    
+        </div>        
+      </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}
+
+<!--
+  <div class="card border-0 bg-transparent">          
             <div class="col-md-8">
-              <div class="card-body text-justify text-{{request.font}}">     
-                <p class='mb-4' style="font-size: 20px;">Rodrigo Jovê</p>           
-                <p class="card-text mb-4">{{texto}}</p>
+              <div class="card-body text-start">                                     
                 <p class="card-text">
+                  
                   {%if 'Cientista de dados' in texto %}
-                    <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'sobre' %}">Informações adicionais</a>
+                    
                   {%else%}
                   <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'conteudos' %}">Conteúdos</a>
                   <br>
@@ -26,8 +34,4 @@
             </div>
           </div>
         </div>  
-      </div>
-</body>
-
-</html>
-{% endblock %}
+-->

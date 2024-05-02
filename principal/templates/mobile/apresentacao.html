@@ -2,31 +2,9 @@
 {% block content %}
 <html lang="pt-BR" >
 <body>  
-    <div class="container fade-in mt-4 mb-4 text-center">
-             
-        <div class="card border-0 bg-{{request.theme}}">
-          <h1 class="text-{{request.font}} bg-{{request.theme}}" style="font-size: 30px;">{{titulo}}</h1>          <div class="row g-0 align-items-center">
-            <div class="col-md-4">
-              <img src="{% static 'perfil2.png' %}" class="img-fluid rounded-circle" alt="Rodrigo Jovê" style="height: 25vh; max-height: 200px;">
-            </div>            
-            <div class="col-md-8">                                
-              <div class="card-body text-center text-{{request.font}}">     
-                <p class='mb-4' style="font-size: 20px;">Rodrigo Jovê</p>
-                <p class="card-text mb-4">{{texto}}</p>
-                <p class="card-text">
-                  {%if 'Cientista de dados' in texto %}
-                    <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'sobre' %}">Informações adicionais</a>
-                  {%else%}
-                  <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'conteudos' %}">Conteúdos</a>
-                  <br>
-                  <a class='no-underline' style="color: {% if request.font == 'dark' %}dimgray {% else %} #E6E3E3; {% endif %}" href="{% url 'ebooks' %}">E-books</a>
-                  {%endif%}
-                </p>                             
-              </div>
-            </div>
-          </div>
-        </div>  
-      </div>
+    <div>
+      {%include 'desktop/apresentacao.html'%}
+    </div>
 </body>
 
 </html>
