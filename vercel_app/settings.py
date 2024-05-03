@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) #BASE_DIR
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-DEBUG = True
+DEBUG = False
 
 
 # SECURITY WARNING: don't run with debug turned on in production!DEBUG = False
@@ -130,10 +130,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/estaticos/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'estaticos')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "estilos")
+    os.path.join(BASE_DIR, "styles")
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
