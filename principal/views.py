@@ -36,17 +36,23 @@ class principal(View):
     
     def post(self, request, *args, **kwargs):
         context = {}
-        form = FormularioContato(request.POST)
-        if form.is_valid():
-            if form.cleaned_data['email']:
-                send_mail(
-                            subject='Confirmação de envio para jove.py',
-                            message=form.cleaned_data['mensagem'],                        
-                            from_email=settings.EMAIL_MASK,  
-                            recipient_list=[form.cleaned_data['email']],  
-                            fail_silently=False,
-                            #html_message =,
-                            )
+        print(len(request.POST),(request.POST))
+        if len(request.POST) == 2:
+            form = Newsletter(request.POST)    
+            form.save()
+            return redirect('sucesso')
+        else:
+            form = FormularioContato(request.POST)
+            if form.is_valid():
+                if form.cleaned_data['email']:
+                    send_mail(
+                                subject='Confirmação de envio para jove.py',
+                                message=form.cleaned_data['mensagem'],                        
+                                from_email=settings.EMAIL_MASK,  
+                                recipient_list=[form.cleaned_data['email']],  
+                                fail_silently=False,
+                                #html_message =,
+                                )
                 form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
                 context['form'] = FormularioContato
                 context['newsletter'] = Newsletter
