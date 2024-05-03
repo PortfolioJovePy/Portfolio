@@ -7,5 +7,7 @@ urlpatterns = [
     path("sucesso/", principal.as_view(template='sucesso.html'),name='sucesso'),
     path("painel-do-administrador/", principal.as_view(template='admin.html'),name='painel-do-administrador'),
     path('toggle-theme/', toggle_theme, name='toggle-theme'),
+    path('portugues/', portugues, name='portugues'),
+    path('ingles/', ingles, name='ingles'),
 ]
 

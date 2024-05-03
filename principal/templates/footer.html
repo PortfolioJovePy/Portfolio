@@ -5,7 +5,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
+        {%if request.idioma == 'portugues'%}
         <h5 class=text-{{request.font}}>Conecte-se comigo</h5>
+        {%else%}
+        <h5 class=text-{{request.font}}>Connect with me</h5>
+        {%endif%}
         <ul class="list-inline">
           <li class="list-inline-item text-{{request.font}} no-underline"><a href="https://www.tiktok.com/@jove.py" target="_blank"><i class="bi bi-tiktok">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-tiktok text-{{request.font}}" viewBox="0 0 16 16">
@@ -37,12 +41,16 @@
       </div>
       <div class="col-md-6">
         <h5>Newsletter</h5>
+        {%if request.idioma == 'portugues'%}
         <p>Receba novos conteúdos por e-mail:</p>
+        {%else%}
+        <p>Receive new content by email:</p>
+        {%endif%}        
         <div class="input-group mb-3">
           <form class="text-{{request.font}}" method="post" novalidate> 
             {% csrf_token %}
             <div class="input-group mb-3">
-              <input type="email"  class="form-control" placeholder="Seu e-mail" aria-label="Seu e-mail" aria-describedby="button-addon2" {{ newsletter.email }}
+              <input type="email"  class="form-control" placeholder="E-mail" aria-label="Seu e-mail" aria-describedby="button-addon2" {{ newsletter.email }}
               <button class="btn btn-outline-{{request.font}}" type="submit" id="button-addon2">Assinar</button>
             </div>  
             </form>
@@ -52,7 +60,12 @@
     </div>
     <hr class="bg-{{request.font}}">
     <div class="text-center text-{{request.font}}">
+      {%if request.idioma == 'portugues'%}
       <p>&copy; 2024 Rodrigo Jovê, jovê.py. Todos os direitos reservados.</p>
+      {%else%}
+      <p>&copy; 2024 Rodrigo Jovê, jovê.py. All rights reserved.</p>
+      {%endif%}  
+      
     </div>
   </div>
 </footer>
