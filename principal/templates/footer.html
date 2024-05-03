@@ -1,3 +1,5 @@
+{% load static %}
+{% block content %}
 <footer class="bg-{{request.theme}} text-{{request.font}} py-4">
   <hr class="bg-{{request.font}}">
   <div class="container">
@@ -24,7 +26,7 @@
         <h5>Newsletter</h5>
         <p>Receba novos conteúdos por e-mail:</p>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Seu e-mail" aria-label="Seu e-mail" aria-describedby="button-addon2">
+          <input type="email" class="form-control" placeholder="Seu e-mail" aria-label="Seu e-mail" aria-describedby="button-addon2" {{ newsletter.email }}
           <button class="btn btn-outline-{{request.font}}" type="button" id="button-addon2">Assinar</button>
         </div>
       </div>
@@ -35,3 +37,4 @@
     </div>
   </div>
 </footer>
+{% endblock %}

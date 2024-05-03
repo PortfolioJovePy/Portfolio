@@ -7,3 +7,7 @@ class Contato(models.Model):
 
     def __str__(self):
         return f"{self.nome} ({self.email})"
+
+
+class Newsletter(models.Model):    
+    email = models.EmailField()    

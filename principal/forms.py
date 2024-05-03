@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contato
+from .models import *
 
 class FormularioContato(forms.ModelForm):
     def __init__(self, *args, font_class='', **kwargs):
@@ -23,3 +23,9 @@ class FormularioContato(forms.ModelForm):
             'email': '',
             'mensagem': ''
         }
+
+class Newsletter(forms.ModelForm):      
+    class Meta:
+        model = Newsletter
+        fields = ['email']
+       

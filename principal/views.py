@@ -4,7 +4,7 @@ from datetime import datetime
 import requests
 from django.http import JsonResponse
 from django.core.mail import send_mail
-from .forms import FormularioContato
+from .forms import *
 from django.conf import settings
 
 def toggle_theme(request):
@@ -28,6 +28,7 @@ class principal(View):
         if self.template == 'inicio.html':
             self.texto = f'Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
         context['form'] = FormularioContato
+        context['newsletter'] = Newsletter
         context['texto'] = self.texto
         context['titulo'] = 'Sobre'
         
@@ -37,22 +38,24 @@ class principal(View):
         context = {}
         form = FormularioContato(request.POST)
         if form.is_valid():
-            # Aqui você pode adicionar lógica para salvar o formulário ou enviar um e-mail, etc.
-            send_mail(
-                        subject='Confirmação de envio para jove.py',
-                        message=form.cleaned_data['mensagem'],                        
-                        from_email=settings.EMAIL_MASK,  
-                        recipient_list=[form.cleaned_data['email']],  
-                        fail_silently=False,
-                        #html_message =,
-                        )
-            form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
-            context['form'] = FormularioContato
-            context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books'    
-            context['titulo'] = 'Seu e-mail foi enviado!'
-            return render(request, 'inicio.html', context)
-        else:        
-            context['form'] = form            
-            context['texto'] = f'Parece que o formulário foi preenchido incorretamente. Por favor, verifique os dados informados'    
-            context['titulo'] = 'Ops!'
-            return render(request, self.template, context)
+            if form.cleaned_data['email']:
+                send_mail(
+                            subject='Confirmação de envio para jove.py',
+                            message=form.cleaned_data['mensagem'],                        
+                            from_email=settings.EMAIL_MASK,  
+                            recipient_list=[form.cleaned_data['email']],  
+                            fail_silently=False,
+                            #html_message =,
+                            )
+                form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
+                context['form'] = FormularioContato
+                context['newsletter'] = Newsletter
+                context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books'    
+                context['titulo'] = 'Seu e-mail foi enviado!'
+                return redirect('sucesso')
+                
+            else:        
+                context['form'] = form            
+                context['texto'] = f'Parece que o formulário foi preenchido incorretamente. Por favor, verifique os dados informados'    
+                context['titulo'] = 'Ops!'
+        return render(request, self.template, context)
