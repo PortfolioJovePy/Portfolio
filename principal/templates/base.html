@@ -90,18 +90,18 @@
             </div>
             <div class="offcanvas-body bg-{{request.theme}} text-{{request.font}}">
                 <ul class="navbar-nav bg-{{request.theme}} text-{{request.font}}">
-                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                      <a class="nav-link bg-{{request.theme}} text-{{request.font}} active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
-                    </li>
-                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                      <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">Contato</a>
-                    </li>
-                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                      <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">Conteúdos</a>
-                    </li>
-                    <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                      <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">E-books</a>
-                    </li> 
+                  <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                    <a class="nav-link bg-{{request.theme}} text-{{request.font}} active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
+                  </li>
+                  <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                    <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="https://api.whatsapp.com/send?phone=+5583998775808&text=Olá!!" target="_blank">Contato</a>
+                  </li>
+                  <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                    <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">Conteúdos</a>
+                  </li>
+                  <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                    <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">E-books</a>
+                  </li>    
                     <li class='border-top text-center mt-4'>                                    
                       <a href="{% url 'toggle-theme' %}" class="mt-4">
                         {% if request.font == 'dark' %}
@@ -144,7 +144,7 @@
                 <a class="nav-link bg-{{request.theme}} text-{{request.font}} active" aria-current="page" href="{% url 'sobre' %}">Sobre</a>
               </li>
               <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="#">Contato</a>
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="https://api.whatsapp.com/send?phone=+5583998775808&text=Olá!!" target="_blank">Contato</a>
               </li>
               <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
                 <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">Conteúdos</a>

@@ -24,7 +24,7 @@ class FormularioContato(forms.ModelForm):
             'mensagem': ''
         }
 
-class Newsletter(forms.ModelForm):      
+class FormularioNewsletter(forms.ModelForm):      
     class Meta:
         model = Newsletter
         fields = ['email']

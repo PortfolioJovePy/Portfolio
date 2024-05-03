@@ -10,4 +10,6 @@ class Contato(models.Model):
 
 
 class Newsletter(models.Model):    
-    email = models.EmailField()    
+    email = models.EmailField(unique=True)    
+    def __str__(self):
+        return self.email

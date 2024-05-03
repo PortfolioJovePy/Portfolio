@@ -8,8 +8,8 @@ class TempoCarregamentoMiddleware:
 
     def __call__(self, request):
         if request.path == '/favicon.ico':
-            return self.get_response(request)
-        elif request.method == 'POST':
+            return self.get_response(request)        
+        elif request.method == 'POST' and 'admin' not in request.path:
             request.tempo_carregamento_texto = '5s'    
             request.tempo_carregamento = 5500                        
             if '@' in request.POST['email'] and '.' in request.POST['email']:
@@ -25,7 +25,7 @@ class TempoCarregamentoMiddleware:
             if request.path == '/':
                 request.tempo_carregamento_texto = '5s'    
                 request.tempo_carregamento = 5500
-                request.texto = f'{request.saudacao}, seja bem-vindo.'        
+                request.texto = f'{request.saudacao}, seja bem-vindo.'                    
             else:                
                 request.tempo_carregamento_texto = '1.5s'    
                 request.tempo_carregamento = 1500      

@@ -4,10 +4,10 @@
 <html>
     <body>        
     
-      <div class="col offset-md-3 me-3 text-start text-{{request.theme}} mt-3 p-4">        
+      <div class="col offset-md-3 me-3 text-start text-{{request.font}} mt-3 p-4" style="height: 100vh;">        
           <div class="container-fluid p-4">
           <div class="row text-center">
-          <div id="texto" class="fs-1 fw-bolder position-absolute bottom-50 start-0">Parece que você esbarrou no erro...  &&</div>
+          <div id="texto" class="position-absolute bottom-50 start-0"><h1>Parece que você esbarrou no erro...  &&{{error}}</h1></div>
           </div>
           </div>          
       </div>    
