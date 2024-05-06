@@ -4,11 +4,12 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import *
-
+from principal.forms import *
 class painel_conteudos(View):
     template='painel_conteudos.html'
     context={}
-    def get(self, request):        
+    def get(self, request):  
+        self.context['newsletter'] = FormularioNewsletter      
         if self.template == 'painel_conteudos.html' and request.user.is_authenticated:
             self.context['form'] = ConteudoForm()
         elif self.template == 'conteudos.html':
@@ -18,7 +19,7 @@ class painel_conteudos(View):
         return render(request, self.template, self.context)
     
     def post(self, request):
-        print(request.path)
+        self.context['newsletter'] = FormularioNewsletter      
         if request.path == '/conteudos/e-books/':
             form = FormularioLancamentoEbook1(request.POST)
             if form.is_valid():

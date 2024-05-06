@@ -9,11 +9,13 @@ from datetime import date, datetime, timedelta
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from principal.forms import *
 
 
 class gerenciador(LoginRequiredMixin,View):
     template = 'gerenciador.html'        
-    def get_context(self, request, form=None):        
+    def get_context(self, request, form=None):   
+        context['newsletter'] = FormularioNewsletter     
         if self.template == 'contatos.html':
             form = form if form is not None else ContatosForm(prefix="contatos")
             titulo = 'Informações de contato'
@@ -94,6 +96,7 @@ class gerenciador(LoginRequiredMixin,View):
 
     def post(self, request, *args, **kwargs):
         path_atual = request.path       
+        context['newsletter'] = FormularioNewsletter
         if path_atual == '/e-mails/contatos/':
             form = ContatosForm(request.POST, prefix="contatos")
         elif path_atual == '/e-mails/agendamento/': 
