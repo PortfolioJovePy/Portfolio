@@ -5,29 +5,36 @@
     <div class="container-fluid text-{{request.theme}} mt-3">
         <h2 class="fs-2 no-underline fw-bolder mb-4 mt-4 text-start ms-4">Conteúdos</h2>
 
-        <ul>
-            {% for conteudo in conteudos %}
+        <ul>            
             <div class="card mb-3" style="max-width: 80vw;">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img src={{conteudo.link_imagem}} class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
+                    <img src="{% static 'teclado_mouse_python.jpg' %}" class="img-fluid rounded-start" style="width: 100%;object-fit: cover;">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body text-start">
-                      <h5 class="card-title">{{conteudo.titulo}}</h5>
-                      <p class="card-text">{{conteudo.descricao}}</p>                                            
+                      <h5 class="card-title">Teclado, Mouse & Python: Automatize qualquer tarefa feita no computador. Um manual prático de automação para todos.</h5>
+                      <p class="card-text">Teclado, Mouse & Python" é um guia indispensável para qualquer pessoa que deseja aumentar sua produtividade e reduzir erros no uso do computador. Este livro oferece uma abordagem prática e acessível para a automação de tarefas cotidianas, desde simples operações de digitação até processos complexos, utilizando a linguagem de programação Python.</p>   
+                      <p class="card-text">Com instruções claras e exemplos detalhados, você aprenderá a utilizar o poder do Python para automatizar qualquer coisa, desde a organização de arquivos até a manipulação de dados e interações com aplicativos. Este manual abrangente é adequado para iniciantes e profissionais, fornecendo uma base sólida para explorar todo o potencial de automação oferecido pela combinação do teclado, mouse e Python.
+                      </p>   
+                      <p class="card-text">Ao dominar as técnicas apresentadas neste livro, você estará preparado para simplificar sua vida digital, liberando tempo para atividades mais importantes e reduzindo o risco de erros tediosos. Não importa se você é um estudante, profissional ou entusiasta de tecnologia, "Teclado, Mouse & Python" irá capacitá-lo a automatizar tarefas de forma eficiente e eficaz, transformando sua experiência computacional.</p>                                            
+                      <p class="card-text fw-bolder">Inscreva-se para receber a proposta de lançamento do livro.</p>                                            
                     </div>                    
                     <div class="card-footer bg-transparent border-0 text-end">
-                        <a href="{{conteudo.link}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-{{request.theme}}">Ler conteúdo</a>
-                        <a href="{{conteudo.link_notbook}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-{{request.theme}}">Ver código</a>
+                      <div class="input-group mb-3">
+                        <form class="text-{{request.font}}" method="post" novalidate> 
+                          {% csrf_token %}
+                          <div class="input-group mb-3">
+                            <input type="email"  class="form-control" placeholder="E-mail" aria-label="Seu e-mail" aria-describedby="button-addon2" {{ form.email }}
+                            <button class="btn btn-outline-dark" type="submit" id="button-addon2">inscrever-se</button>
+                          </div>  
+                          </form>                        
+                      </div>
                     </div>                    
                   </div>
                   
                 </div>
-              </div>
-            {% empty %}
-                <li>Nenhum conteúdo disponível.</li>
-            {% endfor %}
+              </div>            
         </ul>
     </div>
 {% endblock %}

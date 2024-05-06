@@ -4,10 +4,20 @@ from .models import *
 class ConteudoForm(forms.ModelForm):
     class Meta:
         model = Conteudo
-        fields = ['titulo', 'descricao', 'link', 'link_imagem','link_notbook']
+        fields = ['titulo', 'descricao','titulo_ingles', 'descricao_ingles', 'link', 'link_imagem','link_notbook']
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'titulo_ingles': forms.TextInput(attrs={'class': 'form-control'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),            
+            'descricao_ingles': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'link': forms.URLInput(attrs={'class': 'form-control'}),
             'link_imagem': forms.URLInput(attrs={'class': 'form-control'}),
+            'link_notbook': forms.URLInput(attrs={'class': 'form-control'}),
         }
+
+
+class FormularioLancamentoEbook1(forms.ModelForm):      
+    class Meta:
+        model = LancamentoEbook1
+        fields = ['email']
+       

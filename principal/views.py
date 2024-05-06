@@ -40,12 +40,14 @@ class principal(View):
     texto = ''    
     def get(self, request, *args, **kwargs):                   
         context = {}
-        print(request.idioma)
         if self.template == 'inicio.html':
             if request.idioma == 'portugues':
                 self.texto = f'Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
             else:
                 self.texto = f'Data scientist, specialized in the real estate sector, builds insights from scratch using Python, from data extraction and structuring to robust and efficient econometric models.'
+        
+        elif self.template == 'admin.html':
+            pass
         context['form'] = FormularioContato(idioma=request.idioma)
         context['newsletter'] = FormularioNewsletter
         context['texto'] = self.texto
@@ -56,6 +58,7 @@ class principal(View):
         context = {}        
         if 'admin' not in (request.path):
             if len(request.POST) == 2:
+                print(request.POST)
                 form = FormularioNewsletter(request.POST)    
                 if form.is_valid():
                     form.save()

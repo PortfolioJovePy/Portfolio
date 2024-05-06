@@ -13,13 +13,18 @@
 <!-- partial:index.partial.html -->
 <!-- particles.js container -->
 <div style="width: 100%;">
-<div id="particles-js" style="height:70vh;">
+<div id="particles-js" style="min-height:70vh;">
   <div class="container-fluid" style="z-index:-1;position: absolute; background-color: #0B1940;">                
-    <div class="container-fluid p-4" style="height: 70vh;">
+    <div class="container-fluid p-4" style="min-height:: 70vh;">
         <div class="col-md-6" style="margin:15vh">
             <h1>{{titulo}}</h1>
             <p>{{texto}}</p>
+            {%if request.idioma == 'portugues' %}            
             <p>Em breve você será redirecionado automaticamente.</p>
+            {%else%}
+            <p>Shortly you will be redirected automatically.</p>
+            {%endif%}
+            
         </div>
     </div>
 </div>

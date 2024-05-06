@@ -9,16 +9,17 @@
     <title>{{titulo}}</title>
     </head>
 <body>
-    <div class="container-fluid mt-4 text-{{request.theme}} p-4">        
+    <div class="container-fluid mt-4 text-{{request.font}} p-4" style="margin-top: 15vh;">        
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <fieldset>
                     <legend>{{titulo}}</legend>
                     {{ form.as_p }}
                 </fieldset>
             </div>            
-            <button type="submit" class="btn btn-outline-{{request.theme}}">{{submit}}</button>
+            <button type="submit" class="btn btn-outline-{{request.font}}">{{submit}}</button>
+            <a class="btn btn-outline-{{request.font}}" href="{%url 'painel_email'%}">Voltar</a>
         </form>
     </div>  
 </body>

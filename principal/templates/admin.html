@@ -7,10 +7,10 @@
             <div class="row justify-content-center w-100">
                 <div class="col-md-4"> <!-- Coluna vazia à esquerda -->
                 </div>
-                <div class="col-md-4 mt-4 d-flex flex-column align-items-center justify-content-center d-grid gap-2"> <!-- Coluna do meio com os botões -->
-                    <a class="btn btn-outline-{{request.theme}} ms-4" style='width:100%;' href='/admin/'>Admin</a>
-                    <a class="btn btn-outline-{{request.theme}} ms-4" style='width:100%;' href="{%url 'painel_email'%}">Gerenciador de e-mail</a>
-                    <a class="btn btn-outline-{{request.theme}} ms-4" style='width:100%;' href="{%url 'painel_conteudos'%}">Gerenciador de conteúdos</a>
+                <div class="col-md-4 mt-4 d-flex flex-column align-items-center justify-content-center d-grid gap-2 text-{{request.font}}" style="min-height: 70vh;"> <!-- Coluna do meio com os botões -->
+                    <a class="btn btn-outline-{{request.font}} ms-4" style='width:100%;' href='/admin/'>Django Admin</a>
+                    <a class="btn btn-outline-{{request.font}} ms-4" style='width:100%;' href="{%url 'painel_email'%}">Gerenciador de e-mail</a>
+                    <a class="btn btn-outline-{{request.font}} ms-4" style='width:100%;' href="{%url 'painel_conteudos'%}">Gerenciador de conteúdos</a>
                 </div>
                 <div class="col-md-4"> <!-- Coluna vazia à direita -->
                 </div>
