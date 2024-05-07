@@ -48,6 +48,8 @@ class principal(View):
         
         elif self.template == 'admin.html':
             pass
+        elif self.template == 'sucesso.html':
+            print(request.path)
         context['form'] = FormularioContato(idioma=request.idioma)
         context['newsletter'] = FormularioNewsletter
         context['texto'] = self.texto
@@ -57,8 +59,8 @@ class principal(View):
     def post(self, request, *args, **kwargs):
         context = {}        
         if 'admin' not in (request.path):
+            print(request.path)
             if len(request.POST) == 2:
-                print(request.POST)
                 form = FormularioNewsletter(request.POST)    
                 if form.is_valid():
                     form.save()

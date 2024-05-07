@@ -2,11 +2,11 @@ from django.shortcuts import render
 from datetime import datetime
 from django.urls import reverse
 
-class TempoCarregamentoMiddleware:
+class TempoCarregamentoMiddleware:    
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):
+    def __call__(self, request):        
         if request.path == '/favicon.ico':
             return self.get_response(request)        
         elif request.method == 'POST' and 'admin' not in request.path:

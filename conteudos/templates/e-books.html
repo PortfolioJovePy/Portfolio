@@ -18,14 +18,14 @@
                       <p class="card-text">Com instruções claras e exemplos detalhados, você aprenderá a utilizar o poder do Python para automatizar qualquer coisa, desde a organização de arquivos até a manipulação de dados e interações com aplicativos. Este manual abrangente é adequado para iniciantes e profissionais, fornecendo uma base sólida para explorar todo o potencial de automação oferecido pela combinação do teclado, mouse e Python.
                       </p>   
                       <p class="card-text">Ao dominar as técnicas apresentadas neste livro, você estará preparado para simplificar sua vida digital, liberando tempo para atividades mais importantes e reduzindo o risco de erros tediosos. Não importa se você é um estudante, profissional ou entusiasta de tecnologia, "Teclado, Mouse & Python" irá capacitá-lo a automatizar tarefas de forma eficiente e eficaz, transformando sua experiência computacional.</p>                                            
-                      <p class="card-text fw-bolder">Inscreva-se para receber a proposta de lançamento do livro.</p>                                            
+                      <p class="card-text fw-bolder">Inscreva-se para receber a proposta de lançamento do livro. VOcê será automaticamente inscrito na minha newsletter e poderá cancelar a inscrição a qualquer momento.</p>                                                                  
                     </div>                    
                     <div class="card-footer bg-transparent border-0 text-end">
                       <div class="input-group mb-3">
-                        <form class="text-{{request.font}}" method="post" novalidate> 
+                        <form class="text-{{request.font}}" method="post" id="lancamento_livro" name='lancamento_livro' novalidate> 
                           {% csrf_token %}
-                          <div class="input-group mb-3">
-                            <input type="email"  class="form-control" placeholder="E-mail" aria-label="Seu e-mail" aria-describedby="button-addon2" {{ form.email }}
+                          <div class="input-group mb-3" >
+                            <input type="email"  class="form-control" placeholder="E-mail" aria-label="Seu e-mail" aria-describedby="button-addon2"  {{ form.email}} 
                             <button class="btn btn-outline-dark" type="submit" id="button-addon2">inscrever-se</button>
                           </div>  
                           </form>                        

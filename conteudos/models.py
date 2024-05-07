@@ -13,5 +13,6 @@ class Conteudo(models.Model):
 
 class LancamentoEbook1(models.Model):    
     email = models.EmailField(unique=True)    
+    lancamento = models.DateField(auto_now_add=True)    
     def __str__(self):
         return self.email

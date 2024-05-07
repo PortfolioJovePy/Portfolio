@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import *
 from principal.forms import *
+
 class painel_conteudos(View):
     template='painel_conteudos.html'
     context={}
@@ -19,14 +20,18 @@ class painel_conteudos(View):
         return render(request, self.template, self.context)
     
     def post(self, request):
-        self.context['newsletter'] = FormularioNewsletter      
+        self.context['newsletter'] = FormularioNewsletter              
         if request.path == '/conteudos/e-books/':
             form = FormularioLancamentoEbook1(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('sucesso')
+                self.context['titulo'] = 'Parabéns!!'
+                self.context['texto'] = 'Agora você faz parte da lista de espera do meu próximo e-book. Lembrando que você foi inscrito automaticamente na minha newsletter e pode cancelar a qualquer momento.'
+                form = FormularioNewsletter(request.POST)
+                form.save()
+                return render(request,'sucesso.html',self.context)
             else:
-                self.context['form'] = ConteudoForm()
+                self.context['form'] = FormularioLancamentoEbook1(request.POST)
                 return render(request, self.template, self.context)
         else:
             form = ConteudoForm(request.POST)
