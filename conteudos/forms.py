@@ -22,4 +22,7 @@ class FormularioLancamentoEbook1(forms.ModelForm):
         fields = ['email']
         widgets = {"email": forms.EmailInput(attrs={"class":"form-control"}),}
         
+        labels = {
+            'email': '',
+        }
        
