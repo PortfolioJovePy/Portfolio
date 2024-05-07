@@ -27,8 +27,11 @@ class painel_conteudos(View):
                 form.save()
                 self.context['titulo'] = 'Parabéns!!'
                 self.context['texto'] = 'Agora você faz parte da lista de espera do meu próximo e-book. Lembrando que você foi inscrito automaticamente na minha newsletter e pode cancelar a qualquer momento.'
-                form = FormularioNewsletter(request.POST)
-                form.save()
+                try:
+                    form = FormularioNewsletter(request.POST)
+                    form.save()
+                except:
+                    pass
                 return render(request,'sucesso.html',self.context)
             else:
                 self.context['form'] = FormularioLancamentoEbook1(request.POST)
