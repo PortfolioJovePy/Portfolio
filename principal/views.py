@@ -36,47 +36,49 @@ def error(request, exception):
     return render(request, 'error.html',context, status=error_code)
 
 class principal(View):
+    """
+    Classe principal do site. Local onde páginas básicas se encontrarão, sem dinâmica ou implementação. Informação pura.
+    """
     template = 'inicio.html'
     texto = ''    
+    context={}
     def get(self, request, *args, **kwargs):                   
-        context = {}
+        self.context = {}
+        #Trecho para formulários básicos sempre necessários ao GET
+        self.context['form'] = FormularioContato(idioma=request.idioma)
+        self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)        
+
+        #Trecho de páginas específicas
         if self.template == 'inicio.html':
+            self.titulo = 'Rodrigo Jovê'
             if request.idioma == 'portugues':
                 self.texto = f'Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
             else:
                 self.texto = f'Data scientist, specialized in the real estate sector, builds insights from scratch using Python, from data extraction and structuring to robust and efficient econometric models.'
-        
+            self.context['titulo'] = self.titulo
+            self.context['texto'] = self.texto                    
+
+
         elif self.template == 'admin.html':
             pass
+
+
         elif self.template == 'sucesso.html':
-            print(request.path)
-        context['form'] = FormularioContato(idioma=request.idioma)
-        context['newsletter'] = FormularioNewsletter
-        context['texto'] = self.texto
+            pass
+
         
-        return render (request, self.template, context)
-    
+        return render (request, self.template, self.context)
+
+
+
     def post(self, request, *args, **kwargs):
-        context = {}        
-        if 'admin' not in (request.path):
-            print(request.path)
-            if len(request.POST) == 2:
-                form = FormularioNewsletter(request.POST)    
-                if form.is_valid():
-                    form.save()
-                    if request.idioma == 'portugues':
-                        context['texto'] = 'Você acaba de se inscrever na minha newsletter. Toda vez que eu publicar um novo conteúdo você será informado.'            
-                        context['titulo'] = 'Parabéns!!'
-                    else:
-                        context['texto'] = 'You have just subscribed to my newsletter. Every time I publish new content, you will be notified.'            
-                        context['titulo'] = 'Congratulations!!'
-                    context['newsletter'] = FormularioNewsletter
-                else:                    
-                    context['texto'] = form.errors.as_text            
-                    context['titulo'] = 'Ops!!'                 
-                    context['newsletter'] = form                                       
-                return render(request,'sucesso.html',context)
-            else:
+        self.context = {}        
+        self.context['form'] = FormularioContato(idioma=request.idioma)
+        self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)                
+        if 'admin' not in (request.path): #POST de usuário público
+
+            #formulário de contato
+            if 'nome' in request.POST.keys() and 'inicio.html' in self.template:
                 form = FormularioContato(request.POST)
                 if form.is_valid():
                     if form.cleaned_data['email']:
@@ -86,26 +88,45 @@ class principal(View):
                                     from_email=settings.EMAIL_MASK,  
                                     recipient_list=[form.cleaned_data['email']],  
                                     fail_silently=False,
-                                    #html_message =,
                                     )
-                    form.save()  # Salvando os dados do formulário, assumindo que você deseja salvar
-                    context['form'] = FormularioContato(idioma=request.idioma)
-                    context['newsletter'] = FormularioNewsletter
+                    form.save() 
                     if request.idioma == 'portugues':
-                        context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books.'    
-                        context['titulo'] = 'Seu e-mail foi enviado!'
+                        self.context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books.'    
+                        self.context['titulo'] = 'Seu e-mail foi enviado!'
                     else:
-                        context['texto'] = f"How nice of you to send me a message. I'll get back to you as soon as possible, but in the meantime, why not take a look at my content and e-books."
-                        context['titulo'] = f"Your email has been sent!"
+                        self.context['texto'] = f"How nice of you to send me a message. I'll get back to you as soon as possible, but in the meantime, why not take a look at my content and e-books."
+                        self.context['titulo'] = f"Your email has been sent!"
                     
-                    return render(request,'sucesso.html',context)
+                    return render(request,'sucesso.html',self.context) #sucesso no envio do email
                     
                 else:        
-                    context['form'] = form            
-                    context['newsletter'] = FormularioNewsletter
+                    self.context['titulo'] = 'Ops!!!'
+                    self.context['form'] = form #retorna formulári com erros                                
+                    
                     if request.idioma == 'portugues':                        
-                        context['texto'] = f'Parece que o formulário foi preenchido incorretamente. Por favor, verifique os dados informados.'    
+                        self.context['texto'] = f'Parece que o formulário foi preenchido incorretamente. Por favor, verifique os dados informados.'    
                     else:
-                        context['texto'] = "It looks like the form was filled out incorrectly. Please check the information provided."
-                    context['titulo'] = 'Ops!'                    
-            return render(request, self.template, context)
+                        self.context['texto'] = "It looks like the form was filled out incorrectly. Please check the information provided."
+                    
+                    return render(request,'inicio.html',self.context)               
+                
+            #formulário newsletter     
+            else:  
+                form = FormularioNewsletter(request.POST,idioma=request.idioma)    
+                if form.is_valid():
+                    form.save()
+                    if request.idioma == 'portugues':
+                        self.context['texto'] = 'Você acaba de se inscrever na minha newsletter. Toda vez que eu publicar um novo conteúdo você será informado.'            
+                        self.context['titulo'] = 'Parabéns!!'
+                    else:
+                        self.context['texto'] = 'You have just subscribed to my newsletter. Every time I publish new content, you will be notified.'            
+                        self.context['titulo'] = 'Congratulations!!'
+                    self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)
+                    return render(request,'sucesso.html',self.context) #sucesso de cadastro de email
+                
+                else:  #fracasso no formulário. Reexibe a tela atual.
+                    self.context['texto'] = form.errors.as_text            
+                    self.context['titulo'] = 'Ops!!'                 
+                    self.context['newsletter'] = form                                               
+                    return render(request,'inicio.html',self.context)
+            

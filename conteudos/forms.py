@@ -25,4 +25,8 @@ class FormularioLancamentoEbook1(forms.ModelForm):
         labels = {
             'email': '',
         }
-       
+        error_messages = {
+            'email': {
+                'unique': "Este e-mail já está cadastrado  para receber a proposta de lançamento deste e-book."
+            }
+        }

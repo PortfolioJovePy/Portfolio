@@ -14,8 +14,9 @@ from principal.forms import *
 
 class gerenciador(LoginRequiredMixin,View):
     template = 'gerenciador.html'        
+    context = {}
     def get_context(self, request, form=None):   
-        context['newsletter'] = FormularioNewsletter     
+
         if self.template == 'contatos.html':
             form = form if form is not None else ContatosForm(prefix="contatos")
             titulo = 'Informações de contato'
@@ -39,6 +40,7 @@ class gerenciador(LoginRequiredMixin,View):
             titulo = 'Painel de controle dos e-mails'
             submit = 'Incluir template'
             emails = AgendarEmail.objects.filter(enviado=False,send_date=date.today())
+            
             for obj in emails:
                 with open(f'./media/uploads_html/{obj.email_template}.html', 'r', encoding='utf-8') as f:
                     conteudo = f.read()          
@@ -87,16 +89,18 @@ class gerenciador(LoginRequiredMixin,View):
                     obj.send_date = nova_data
                     obj.save()
 
-        context = {'form': form, 'titulo': titulo, 'submit': submit}
-        return context
+        self.context = {'form': form, 'titulo': titulo, 'submit': submit}
+        return self.context
     
+
     def get(self, request, *args, **kwargs):                
-        context = self.get_context(request)
-        return render(request, self.template, context)
+        self.context = self.get_context(request)
+        self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)
+        return render(request, self.template, self.context)
 
     def post(self, request, *args, **kwargs):
         path_atual = request.path       
-        context['newsletter'] = FormularioNewsletter
+        self.context['newsletter'] = FormularioNewsletter
         if path_atual == '/e-mails/contatos/':
             form = ContatosForm(request.POST, prefix="contatos")
         elif path_atual == '/e-mails/agendamento/': 
@@ -107,8 +111,8 @@ class gerenciador(LoginRequiredMixin,View):
         
         if form.is_valid():
             form.save()                 
-            context = self.get_context(request, form=None)  
-            return render(request, 'gerenciador.html', context)
+            self.context = self.get_context(request, form=None)  
+            return render(request, 'gerenciador.html', self.context)
         else:
-            context = self.get_context(request, form=form)
-            return render(request, 'gerenciador.html', context)
+            self.context = self.get_context(request, form=form)
+            return render(request, 'gerenciador.html', self.context)
