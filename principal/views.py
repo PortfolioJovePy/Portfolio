@@ -86,7 +86,7 @@ class principal(View):
                                     subject='Confirmação de envio para jove.py',
                                     message=form.cleaned_data['mensagem'],                        
                                     from_email=settings.EMAIL_MASK,  
-                                    recipient_list=[form.cleaned_data['email']],  
+                                    recipient_list=[form.cleaned_data['email'],settings.EMAIL_MASK],  
                                     fail_silently=False,
                                     )
                     form.save() 
