@@ -26,9 +26,11 @@ class CalculoTempoMiddleware:
             hoje = timezone.now().date()
             visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
             
-            if visitante_do_dia:
-                # Se já existe, atualiza a contagem de tempo da sessão
-                visitante_do_dia.tempo_sessao += tempo_sessao
+            if visitante_do_dia:            
+                if request.session['entrada'] != visitante_do_dia.entrada:
+                    visitante_do_dia.tempo_sessao += tempo_sessao
+                else:
+                    visitante_do_dia.tempo_sessao = tempo_sessao
                 visitante_do_dia.save()
             else:
                 # Se não existe, cria um novo objeto Visitantes para o dia atual
