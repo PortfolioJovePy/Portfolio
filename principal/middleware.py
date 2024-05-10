@@ -39,6 +39,7 @@ class CalculoTempoMiddleware:
                 visitante_do_dia.save()
                 request.session['entrada'] = str(timezone.now()) #evita caso uma nova requisicao seja feita
                 print('o novo tempo de entrada é',request.session['entrada'])
+                print('Tempo de sessão computado',tempo_sessao)
             else:
                 # Se não existe, cria um novo objeto Visitantes para o dia atual
                 try:
