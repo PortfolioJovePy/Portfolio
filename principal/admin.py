@@ -11,5 +11,11 @@ class NewsletterAdmin(admin.ModelAdmin):
     list_filter = ('email',)  # Filtros disponíveis
     search_fields = ('email',)  # Campos de pesquisa
 
+class VisitantesAdmin(admin.ModelAdmin):   
+    list_display = ('ip','data')  # Campos a serem exibidos na listagem
+    list_filter = ('data',)  # Filtros disponíveis
+    search_fields = ('ip','data')  # Campos de pesquisa 
+
 admin.site.register(Contato, ContatoAdmin)
 admin.site.register(Newsletter,NewsletterAdmin)
+admin.site.register(Visitantes,VisitantesAdmin)

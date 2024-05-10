@@ -14,3 +14,6 @@ class Newsletter(models.Model):
     def __str__(self):
         return self.email
     
+class Visitantes(models.Model):    
+    ip = models.EmailField(unique=True)
+    data = models.DateField(auto_created=True)

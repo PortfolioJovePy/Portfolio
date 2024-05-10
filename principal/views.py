@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.core.mail import send_mail
 from .forms import *
 from django.conf import settings
-
+from django.utils import timezone
 
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
@@ -35,6 +35,18 @@ def error(request, exception):
     context = {'error':f'Erro n.º {error_code}  '}
     return render(request, 'error.html',context, status=error_code)
 
+
+class estatisticas():    
+    def contagem_visitantes(ip_usuario):
+        data_atual = timezone.now().date()
+        visitante_mes_atual = Visitantes.objects.filter(ip=ip_usuario, data__month=data_atual.month, data__year=data_atual.year).first()
+        if not visitante_mes_atual:            
+            print(ip_usuario)
+            visitante = Visitantes(ip=ip_usuario,data=data_atual)
+            visitante.save()
+
+
+
 class principal(View):
     """
     Classe principal do site. Local onde páginas básicas se encontrarão, sem dinâmica ou implementação. Informação pura.
@@ -43,11 +55,14 @@ class principal(View):
     texto = ''    
     context={}
     def get(self, request, *args, **kwargs):                   
+        #Trecho estatisticas    
+        estatisticas.contagem_visitantes(ip_usuario=request.META['REMOTE_ADDR'])
+
         self.context = {}
         #Trecho para formulários básicos sempre necessários ao GET
         self.context['form'] = FormularioContato(idioma=request.idioma)
         self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)        
-
+        
         #Trecho de páginas específicas
         if self.template == 'inicio.html':
             self.titulo = 'Rodrigo Jovê'
