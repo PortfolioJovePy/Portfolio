@@ -57,9 +57,9 @@ class CalculoTempoMiddleware:
                         entrada =  timezone.now(),
                         saida = saida,
                         tempo_sessao=tempo_sessao,
-                        pais=infos_ip[1].text,
-                        regiao=infos_ip[2].text,
-                        cidade=infos_ip[3].text,
+                        pais=infos_ip[1].text.replace('\n',' '),
+                        regiao=infos_ip[2].text.replace('\n',' '),
+                        cidade=infos_ip[3].text.replace('\n',' '),
                     )
                     visitante.save()
                 except Exception as e:
