@@ -1,6 +1,45 @@
 from django.shortcuts import render
-from datetime import datetime
+from datetime import datetime, timedelta
+from django.utils import timezone
 from django.urls import reverse
+from .models import Visitantes
+
+class CalculoTempoMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if 'entrada' not in request.session:
+            # Se não houver entrada na sessão, cria uma nova entrada com o tempo atual
+            request.session['entrada'] = str(timezone.now())
+        
+        response = self.get_response(request)
+        
+        if 'entrada' in request.session:
+            entrada_str = request.session['entrada']
+            entrada = datetime.strptime(entrada_str, "%Y-%m-%d %H:%M:%S.%f%z")
+
+            saida = timezone.now()
+            tempo_sessao = saida - entrada
+            
+            # Verifica se já existe um objeto Visitantes para o dia atual
+            hoje = timezone.now().date()
+            visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
+            
+            if visitante_do_dia:
+                # Se já existe, atualiza a contagem de tempo da sessão
+                visitante_do_dia.tempo_sessao += tempo_sessao
+                visitante_do_dia.save()
+            else:
+                # Se não existe, cria um novo objeto Visitantes para o dia atual
+                visitante = Visitantes.objects.create(
+                    ip=request.META['REMOTE_ADDR'],
+                    data=hoje,
+                    tempo_sessao=tempo_sessao
+                )
+                visitante.save()
+        
+        return response
 
 class TempoCarregamentoMiddleware:    
     def __init__(self, get_response):

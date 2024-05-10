@@ -36,16 +36,6 @@ def error(request, exception):
     return render(request, 'error.html',context, status=error_code)
 
 
-class estatisticas():    
-    def contagem_visitantes(ip_usuario):
-        data_atual = timezone.now().date()
-        visitante_mes_atual = Visitantes.objects.filter(ip=ip_usuario, data__month=data_atual.month, data__year=data_atual.year).first()
-        if not visitante_mes_atual:            
-            print(ip_usuario)
-            visitante = Visitantes(ip=ip_usuario,data=data_atual)
-            visitante.save()
-
-
 
 class principal(View):
     """
@@ -54,9 +44,7 @@ class principal(View):
     template = 'inicio.html'
     texto = ''    
     context={}
-    def get(self, request, *args, **kwargs):                   
-        #Trecho estatisticas    
-        estatisticas.contagem_visitantes(ip_usuario=request.META['REMOTE_ADDR'])
+    def get(self, request, *args, **kwargs):                           
 
         self.context = {}
         #Trecho para formulários básicos sempre necessários ao GET

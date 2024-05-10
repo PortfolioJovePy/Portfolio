@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'principal.middleware.LanguageMiddleware',
     'principal.middleware.SaudacaoMiddleware',
     'principal.middleware.TempoCarregamentoMiddleware',
+    'principal.middleware.CalculoTempoMiddleware',
 
 
 ]

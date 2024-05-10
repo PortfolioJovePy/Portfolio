@@ -17,3 +17,6 @@ class Newsletter(models.Model):
 class Visitantes(models.Model):    
     ip = models.EmailField(unique=True)
     data = models.DateField(auto_created=True)
+    entrada = models.DateTimeField(auto_now_add=True)
+    saida = models.DateTimeField(blank=True, null=True)
+    tempo_sessao = models.DurationField(blank=True, null=True)
