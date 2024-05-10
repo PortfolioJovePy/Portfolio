@@ -9,7 +9,7 @@ class CalculoTempoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):     
-        if 'favicon' in request.path:
+        if 'favicon' in request.path or 'estaticos' in request.path:
             return self.get_response(request)        
         else:
             if 'entrada' not in request.session:
@@ -58,7 +58,7 @@ class TempoCarregamentoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):        
-        if 'favicon' in request.path:
+        if 'favicon' in request.path or 'estaticos' in request.path:
             return self.get_response(request)        
         elif request.method == 'POST' and 'admin' not in request.path:
             request.tempo_carregamento_texto = '5s'    
