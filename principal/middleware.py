@@ -25,8 +25,8 @@ class CalculoTempoMiddleware:
             tempo_sessao = saida - entrada
             
             if visitante_do_dia:                                            
-                if request.session['entrada'] != visitante_do_dia.entrada:
-                    visitante_do_dia.entrada = request.session['entrada']                                                            
+                if entrada != visitante_do_dia.entrada:
+                    visitante_do_dia.entrada = entrada                                                            
                     visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo                    
                     print('Tempo de sessao somado t0+t1')
                 else:
@@ -45,7 +45,7 @@ class CalculoTempoMiddleware:
                     visitante = Visitantes.objects.create(
                         ip=request.META['REMOTE_ADDR'],
                         data=hoje,
-                        entrada = request.session['entrada'],
+                        entrada =  timezone.now(),
                         saida = saida,
                         tempo_sessao=tempo_sessao
                     )
