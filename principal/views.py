@@ -37,6 +37,7 @@ def error(request, exception):
 
 
 
+
 class principal(View):
     """
     Classe principal do site. Local onde páginas básicas se encontrarão, sem dinâmica ou implementação. Informação pura.

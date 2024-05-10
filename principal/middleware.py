@@ -8,40 +8,43 @@ class CalculoTempoMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):
+    def __call__(self, request):        
         if 'entrada' not in request.session:
             # Se não houver entrada na sessão, cria uma nova entrada com o tempo atual
             request.session['entrada'] = str(timezone.now())
         
         response = self.get_response(request)
-        
-        if 'entrada' in request.session:
-            entrada_str = request.session['entrada']
-            entrada = datetime.strptime(entrada_str, "%Y-%m-%d %H:%M:%S.%f%z")
 
-            saida = timezone.now()
-            tempo_sessao = saida - entrada
+        visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
+                    
+        # Verifica se já existe um objeto Visitantes para o dia atual
+        hoje = timezone.now().date()
+        
             
-            # Verifica se já existe um objeto Visitantes para o dia atual
-            hoje = timezone.now().date()
-            visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
-            
-            if visitante_do_dia:            
-                print(request.session['entrada'],visitante_do_dia.entrada)
-                if request.session['entrada'] != visitante_do_dia.entrada:
-                    visitante_do_dia.tempo_sessao += tempo_sessao
-                    visitante_do_dia.entrada = request.session['entrada']
-                else:
-                    visitante_do_dia.tempo_sessao = tempo_sessao
-                visitante_do_dia.save()
+        entrada_str = request.session['entrada']
+        entrada = datetime.strptime(entrada_str, "%Y-%m-%d %H:%M:%S.%f%z")                            
+        saida = timezone.now()
+        tempo_sessao = saida - entrada
+        
+        if visitante_do_dia:                                            
+            if request.session['entrada'] != visitante_do_dia.entrada:
+                visitante_do_dia.entrada = request.session['entrada']                    
+                visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo
             else:
-                # Se não existe, cria um novo objeto Visitantes para o dia atual
-                visitante = Visitantes.objects.create(
-                    ip=request.META['REMOTE_ADDR'],
-                    data=hoje,
-                    tempo_sessao=tempo_sessao
-                )
-                visitante.save()
+                if visitante_do_dia.tempo_sessao <= tempo_sessao: #se no calculo a sessao for menor q o total, adiciona-se
+                    visitante_do_dia.tempo_sessao += tempo_sessao
+                else:                    
+                    visitante_do_dia.tempo_sessao = tempo_sessao #assume um erro de calculo e coloca o tempo superior no local da sessao
+            visitante_do_dia.save()
+        else:
+            # Se não existe, cria um novo objeto Visitantes para o dia atual
+            visitante = Visitantes.objects.create(
+                ip=request.META['REMOTE_ADDR'],
+                data=hoje,
+                tempo_sessao=tempo_sessao
+            )
+            visitante.save()
+            
         
         return response
 
