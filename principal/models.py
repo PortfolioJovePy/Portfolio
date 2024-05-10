@@ -20,3 +20,6 @@ class Visitantes(models.Model):
     entrada = models.DateTimeField(auto_now_add=True)
     saida = models.DateTimeField(blank=True, null=True)
     tempo_sessao = models.DurationField(blank=True, null=True)
+    pais = models.CharField(max_length=200)
+    regiao = models.CharField(max_length=200)
+    cidade = models.CharField(max_length=200)

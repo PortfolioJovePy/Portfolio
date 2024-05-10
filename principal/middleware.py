@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.urls import reverse
 from .models import Visitantes
+from bs4 import BeautifulSoup
+import requests
 
 class CalculoTempoMiddleware:
     def __init__(self, get_response):
@@ -43,16 +45,25 @@ class CalculoTempoMiddleware:
             else:
                 # Se não existe, cria um novo objeto Visitantes para o dia atual
                 try:
+                    ip = request.META['REMOTE_ADDR']
+                    url =f'https://www.geolocation.com/pt?ip={ip}#ipresult'
+                    r = requests.get(url)
+                    soup = BeautifulSoup(r.content, 'html.parser')
+                    
+                    infos_ip = soup.find('table').find_all('td')                    
                     visitante = Visitantes.objects.create(
-                        ip=request.META['REMOTE_ADDR'],
+                        ip=ip,
                         data=hoje,
                         entrada =  timezone.now(),
                         saida = saida,
-                        tempo_sessao=tempo_sessao
+                        tempo_sessao=tempo_sessao,
+                        pais=infos_ip[1].text,
+                        regiao=infos_ip[2].text,
+                        cidade=infos_ip[3].text,
                     )
                     visitante.save()
-                except:
-                    pass
+                except Exception as e:
+                    print(e)
                 
             
             return response

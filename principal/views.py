@@ -8,6 +8,7 @@ from .forms import *
 from django.conf import settings
 from django.utils import timezone
 
+
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
     new_theme = 'dark' if current_theme == 'light' else 'light'    
