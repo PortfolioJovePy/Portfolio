@@ -26,7 +26,7 @@ class CalculoTempoMiddleware:
                 visitante_do_dia.entrada = request.session['entrada']                    
                 visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo
             else:
-                if visitante_do_dia.tempo_sessao <= tempo_sessao: #se no calculo a sessao for menor q o total, adiciona-se
+                if visitante_do_dia.tempo_sessao > tempo_sessao: #se no calculo a sessao for menor q o total, adiciona-se
                     visitante_do_dia.tempo_sessao += tempo_sessao
                 else:                    
                     visitante_do_dia.tempo_sessao = tempo_sessao #assume um erro de calculo e coloca o tempo superior no local da sessao
