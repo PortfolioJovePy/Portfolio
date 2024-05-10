@@ -26,8 +26,8 @@ class CalculoTempoMiddleware:
             
             if visitante_do_dia:                                            
                 if request.session['entrada'] != visitante_do_dia.entrada:
-                    visitante_do_dia.entrada = request.session['entrada']                                        
-                    visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo
+                    visitante_do_dia.entrada = request.session['entrada']                                                            
+                    visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo                    
                     print('Tempo de sessao somado t0+t1')
                 else:
                     if visitante_do_dia.tempo_sessao > tempo_sessao: #se no calculo a sessao for menor q o total, adiciona-se
@@ -37,6 +37,8 @@ class CalculoTempoMiddleware:
                         visitante_do_dia.tempo_sessao = tempo_sessao #assume um erro de calculo e coloca o tempo superior no local da sessao
                         print('Tempo de sessao somado t0<-t1 onde t0<t1')
                 visitante_do_dia.save()
+                request.session['entrada'] = str(timezone.now()) #evita caso uma nova requisicao seja feita
+                print('o novo tempo de entrada é',request.session['entrada'])
             else:
                 # Se não existe, cria um novo objeto Visitantes para o dia atual
                 try:
