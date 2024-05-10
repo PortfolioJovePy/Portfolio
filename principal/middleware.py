@@ -14,13 +14,8 @@ class CalculoTempoMiddleware:
             request.session['entrada'] = str(timezone.now())
         
         response = self.get_response(request)
-
-        visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
-                    
-        # Verifica se já existe um objeto Visitantes para o dia atual
         hoje = timezone.now().date()
-        
-            
+        visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
         entrada_str = request.session['entrada']
         entrada = datetime.strptime(entrada_str, "%Y-%m-%d %H:%M:%S.%f%z")                            
         saida = timezone.now()
@@ -41,6 +36,7 @@ class CalculoTempoMiddleware:
             visitante = Visitantes.objects.create(
                 ip=request.META['REMOTE_ADDR'],
                 data=hoje,
+                entrada = request.session['entrada'],
                 tempo_sessao=tempo_sessao
             )
             visitante.save()
