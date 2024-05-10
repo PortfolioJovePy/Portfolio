@@ -27,8 +27,10 @@ class CalculoTempoMiddleware:
             visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
             
             if visitante_do_dia:            
+                print(request.session['entrada'],visitante_do_dia.entrada)
                 if request.session['entrada'] != visitante_do_dia.entrada:
                     visitante_do_dia.tempo_sessao += tempo_sessao
+                    visitante_do_dia.entrada = request.session['entrada']
                 else:
                     visitante_do_dia.tempo_sessao = tempo_sessao
                 visitante_do_dia.save()
