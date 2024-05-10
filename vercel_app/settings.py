@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',    
     'principal.middleware.ThemeMiddleware',
     'principal.middleware.LanguageMiddleware',
     'principal.middleware.SaudacaoMiddleware',
@@ -179,3 +179,5 @@ LOGGING = {
 }
 
 
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
