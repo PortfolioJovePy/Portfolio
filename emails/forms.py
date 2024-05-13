@@ -24,7 +24,7 @@ class ContatosForm(forms.ModelForm):
 class AgendarEmailForm(forms.ModelForm):
     class Meta:
         model = AgendarEmail
-        fields = ['email','assunto', 'send_date', 'send_time', 'email_template','periodo','repeticao']
+        fields = ['email','assunto', 'send_date', 'send_time', 'email_template','periodo','repeticao','conteudo_personalizado']
         widgets = {            
             'assunto': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.Select(attrs={'class': 'form-control'}),  
@@ -32,8 +32,10 @@ class AgendarEmailForm(forms.ModelForm):
             'send_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
             'email_template': forms.Select(attrs={'class': 'form-control'}),      
             'periodo': forms.Select(attrs={'class': 'form-control'}),        
-            'repeticao': forms.Select(attrs={'class': 'form-control'}),        
+            'repeticao': forms.Select(attrs={'class': 'form-control'}), 
+            'conteudo_personalizado': forms.Textarea(attrs={'class': 'form-control w-100', 'rows': 3}),
         }
+        labels = ['']
 
 
 class UploadTemplateForm(forms.ModelForm):

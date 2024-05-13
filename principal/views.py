@@ -69,7 +69,7 @@ class principal(View):
                 return redirect ('inicio') #não permite usuarios de modo algum o request de admin
                 
         elif self.template == 'sucesso.html':
-            return redirect ('inicio') #não permite usuarios de modo algum o request de admin
+            return redirect ('inicio') #não permite o get direto de sucesso
 
         
         return render (request, self.template, self.context)
@@ -80,7 +80,7 @@ class principal(View):
         self.context = {}        
         self.context['form'] = FormularioContato(idioma=request.idioma)
         self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)                
-        if 'admin' not in (request.path): #POST de usuário público
+        if 'admin' not in (request.path) or 'upload-template/' not in (request.path): #POST de usuário público
 
             #formulário de contato
             if 'nome' in request.POST.keys() and 'inicio.html' in self.template:
