@@ -5,6 +5,9 @@ from django.urls import reverse
 from .models import Visitantes
 from bs4 import BeautifulSoup
 import requests
+import re
+from django.http import HttpResponse
+
 
 class CalculoTempoMiddleware:
     def __init__(self, get_response):
@@ -12,7 +15,8 @@ class CalculoTempoMiddleware:
 
     def __call__(self, request):     
         if 'favicon' in request.path or 'estaticos' in request.path:
-            return self.get_response(request)        
+            return HttpResponse()
+
         else:
             if 'entrada' not in request.session:
                 # Se não houver entrada na sessão, cria uma nova entrada com o tempo atual
@@ -29,19 +33,14 @@ class CalculoTempoMiddleware:
             if visitante_do_dia:                                            
                 if entrada != visitante_do_dia.entrada:
                     visitante_do_dia.entrada = entrada                                                            
-                    visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo                    
-                    print('Tempo de sessao somado t0+t1')
+                    visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo                                        
                 else:
                     if visitante_do_dia.tempo_sessao > tempo_sessao: #se no calculo a sessao for menor q o total, adiciona-se
                         visitante_do_dia.tempo_sessao += tempo_sessao
-                        print('Tempo de sessao somado t0+t1 onde t0>t1')
                     else:                    
-                        visitante_do_dia.tempo_sessao = tempo_sessao #assume um erro de calculo e coloca o tempo superior no local da sessao
-                        print('Tempo de sessao somado t0<-t1 onde t0<t1')
+                        visitante_do_dia.tempo_sessao = tempo_sessao #assume um erro de calculo e coloca o tempo superior no local da sessao                        
                 visitante_do_dia.save()
                 request.session['entrada'] = str(timezone.now()) #evita caso uma nova requisicao seja feita
-                print('o novo tempo de entrada é',request.session['entrada'])
-                print('Tempo de sessão computado',tempo_sessao)
             else:
                 # Se não existe, cria um novo objeto Visitantes para o dia atual
                 try:
@@ -50,16 +49,21 @@ class CalculoTempoMiddleware:
                     r = requests.get(url)
                     soup = BeautifulSoup(r.content, 'html.parser')
                     
-                    infos_ip = soup.find('table').find_all('td')                    
+                    infos_ip = soup.find('table').find_all('td')                        
+                    
+                    pais= re.sub(r'\s+', ' ', infos_ip[1].text.replace('\n',' '))
+                    regiao= re.sub(r'\s+', ' ', infos_ip[2].text.replace('\n',' '))
+                    cidade= re.sub(r'\s+', ' ', infos_ip[3].text.replace('\n',' '))
+
                     visitante = Visitantes.objects.create(
                         ip=ip,
                         data=hoje,
                         entrada =  timezone.now(),
                         saida = saida,
                         tempo_sessao=tempo_sessao,
-                        pais=infos_ip[1].text.replace('\n',' '),
-                        regiao=infos_ip[2].text.replace('\n',' '),
-                        cidade=infos_ip[3].text.replace('\n',' '),
+                        pais=pais,
+                        regiao=regiao,
+                        cidade=cidade,
                     )
                     visitante.save()
                 except Exception as e:
@@ -74,7 +78,8 @@ class TempoCarregamentoMiddleware:
 
     def __call__(self, request):        
         if 'favicon' in request.path or 'estaticos' in request.path:
-            return self.get_response(request)        
+            return HttpResponse()
+
         elif request.method == 'POST' and 'admin' not in request.path:
             request.tempo_carregamento_texto = '5s'    
             request.tempo_carregamento = 5500                        

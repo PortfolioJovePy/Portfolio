@@ -65,11 +65,11 @@ class principal(View):
 
 
         elif self.template == 'admin.html':
-            pass
-
-
+            if not request.user.is_superuser:
+                return redirect ('inicio') #não permite usuarios de modo algum o request de admin
+                
         elif self.template == 'sucesso.html':
-            pass
+            return redirect ('inicio') #não permite usuarios de modo algum o request de admin
 
         
         return render (request, self.template, self.context)
