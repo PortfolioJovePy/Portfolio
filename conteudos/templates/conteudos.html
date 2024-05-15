@@ -16,7 +16,7 @@
         </div>        
         <div id="conteudos">
           <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
-            Não existe conteúdo com esse título. Todos os conteúdos também estão disponíveis no meu LinkedIn. Lá você pode verificar o título correto. Se preferir, limpe o filtro e role abaixo nesta tela.
+            Não existe conteúdo com esse título. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
           </p>
             {% for conteudo in conteudos %}
             <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" style="max-width: 80vw;">
