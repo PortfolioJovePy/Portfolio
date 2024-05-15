@@ -15,6 +15,9 @@
           {%endif%}
         </div>        
         <div id="conteudos">
+          <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
+            Não existe conteúdo com esse título. Todos os conteúdos também estão disponíveis no meu LinkedIn. Lá você pode verificar o título correto. Se preferir, limpe o filtro e role abaixo nesta tela.
+          </p>
             {% for conteudo in conteudos %}
             <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" style="max-width: 80vw;">
               <div class="row g-0">
@@ -41,6 +44,8 @@
                             <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">View code</a>
                         </div>
                         {% endif %}
+                        
+
                     </div>
                 </div>
             </div>
@@ -52,20 +57,31 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const filtroInput = document.getElementById('filtro');
-            const documentos = document.getElementsByClassName('documento');
+    const filtroInput = document.getElementById('filtro');
+    const documentos = document.getElementsByClassName('documento');
+    const nenhumResultado = document.getElementById('nenhum-resultado');
 
-            filtroInput.addEventListener('input', function() {
-                const filtro = filtroInput.value.toLowerCase();
-                for (let i = 0; i < documentos.length; i++) {
-                    const titulo = documentos[i].getAttribute('data-titulo').toLowerCase();
-                    if (titulo.includes(filtro)) {
-                        documentos[i].style.display = 'block';
-                    } else {
-                        documentos[i].style.display = 'none';
-                    }
-                }
-            });
-        });
+    filtroInput.addEventListener('input', function() {
+        const filtro = filtroInput.value.toLowerCase();
+        let encontrouResultado = false;
+
+        for (let i = 0; i < documentos.length; i++) {
+            const titulo = documentos[i].getAttribute('data-titulo').toLowerCase();
+            if (titulo.includes(filtro)) {
+                documentos[i].style.display = 'block';
+                encontrouResultado = true;
+            } else {
+                documentos[i].style.display = 'none';
+            }
+        }
+
+        if (!encontrouResultado) {
+            nenhumResultado.style.display = 'block';
+        } else {
+            nenhumResultado.style.display = 'none';
+        }
+    });
+});
+
     </script>
     {% endblock %}
