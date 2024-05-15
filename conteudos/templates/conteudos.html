@@ -4,40 +4,68 @@
 {% block content %}
     <div class="container-fluid text-{{request.theme}} mt-3">
         <h2 class="fs-2 no-underline fw-bolder mb-4 mt-4 text-start ms-4">Conteúdos</h2>
+        <div class="input-group mb-3" style="max-width: 80vw;">
+          {%if request.idioma == 'portugues' %}
+          <span class="input-group-text" id="basic-addon1">Filtre o conteúdo aqui: </span>
+          <input type="text" class="form-control" id="filtro" placeholder="Insira o título ou parte dele" aria-describedby="basic-addon1">
+          {%else%}          
+          <span class="input-group-text" id="basic-addon1">Filter content here: </span>
+        <input type="text" class="form-control" id="filtro" placeholder="Enter the title or part of it" aria-describedby="basic-addon1">
 
-        <ul>
+          {%endif%}
+        </div>        
+        <div id="conteudos">
             {% for conteudo in conteudos %}
-            <div class="card mb-3" style="max-width: 80vw;">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img src={{conteudo.link_imagem}} class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
-                  </div>
-                  <div class="col-md-8">
-                    {%if request.idioma == 'portugues'%}
-                    <div class="card-body text-start">                      
-                      <h5 class="card-title">{{conteudo.titulo}}</h5>
-                      <p class="card-text">{{conteudo.descricao}}</p>                                            
-                    </div>                    
-                    <div class="card-footer bg-transparent border-0 text-end">
-                        <a href="{{conteudo.link}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-dark">Ler conteúdo</a>
-                        <a href="{{conteudo.link_notbook}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-dark">Ver código</a>
-                    </div>                    
-                    {%else%}
-                    <div class="card-body text-start">                      
-                      <h5 class="card-title">{{conteudo.titulo_ingles}}</h5>
-                      <p class="card-text">{{conteudo.descricao_ingles}}</p>                                            
-                    </div>                    
-                    <div class="card-footer bg-transparent border-0 text-end">
-                        <a href="{{conteudo.link}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-dark">Read content</a>
-                        <a href="{{conteudo.link_notbook}}" target="_blank" rel="noopener noreferrer"  class="btn btn-outline-dark">View code</a>
-                    </div>                                      
-                  {%endif%} 
-                </div>                 
+            <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" style="max-width: 80vw;">
+              <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ conteudo.link_imagem }}" class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
+                    </div>
+                    <div class="col-md-8">
+                        {% if request.idioma == 'portugues' %}
+                        <div class="card-body text-start">
+                            <h5 class="card-title">{{ conteudo.titulo }}</h5>
+                            <p class="card-text">{{ conteudo.descricao }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-end">
+                            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Ler conteúdo</a>
+                            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Ver código</a>
+                        </div>
+                        {% else %}
+                        <div class="card-body text-start">
+                            <h5 class="card-title">{{ conteudo.titulo_ingles }}</h5>
+                            <p class="card-text">{{ conteudo.descricao_ingles }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-end">
+                            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Read content</a>
+                            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">View code</a>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-              </div>
+            </div>
             {% empty %}
-                <li>Nenhum conteúdo disponível.</li>
+            <li>Nenhum conteúdo disponível.</li>
             {% endfor %}
-        </ul>
+        </div>
     </div>
-{% endblock %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const filtroInput = document.getElementById('filtro');
+            const documentos = document.getElementsByClassName('documento');
+
+            filtroInput.addEventListener('input', function() {
+                const filtro = filtroInput.value.toLowerCase();
+                for (let i = 0; i < documentos.length; i++) {
+                    const titulo = documentos[i].getAttribute('data-titulo').toLowerCase();
+                    if (titulo.includes(filtro)) {
+                        documentos[i].style.display = 'block';
+                    } else {
+                        documentos[i].style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+    {% endblock %}
