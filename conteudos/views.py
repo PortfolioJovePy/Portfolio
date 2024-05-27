@@ -16,8 +16,8 @@ class painel_conteudos(View):
             self.context['form'] = ConteudoForm()
         
         
-        elif self.template == 'conteudos.html':
-            self.context['conteudos'] = reversed(list(Conteudo.objects.all()))
+        elif self.template == 'conteudos.html':                    
+            self.context['conteudos'] = reversed(list(Conteudo.objects.all().order_by('id')))
         
         elif self.template == 'e-books.html':
             self.context['form'] = FormularioLancamentoEbook1()        
