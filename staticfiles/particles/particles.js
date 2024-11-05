@@ -20,7 +20,7 @@ var pJS = function(tag_id, params){
     },
     particles: {
       number: {
-        value: 100,
+        value: 50,
         density: {
           enable: true,
           value_area: 800
@@ -244,7 +244,7 @@ var pJS = function(tag_id, params){
     this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
     if(pJS.particles.size.anim.enable){
       this.size_status = false;
-      this.vs = pJS.particles.size.anim.speed / 100;
+      this.vs = pJS.particles.size.anim.speed / 10;
       if(!pJS.particles.size.anim.sync){
         this.vs = this.vs * Math.random();
       }
@@ -306,7 +306,7 @@ var pJS = function(tag_id, params){
     this.opacity = (pJS.particles.opacity.random ? Math.random() : 1) * pJS.particles.opacity.value;
     if(pJS.particles.opacity.anim.enable){
       this.opacity_status = false;
-      this.vo = pJS.particles.opacity.anim.speed / 100;
+      this.vo = pJS.particles.opacity.anim.speed / 10;
       if(!pJS.particles.opacity.anim.sync){
         this.vo = this.vo * Math.random();
       }

@@ -114,9 +114,9 @@ var Stats = function () {
 
 			frames ++;
 
-			if ( time > prevTime + 1000 ) {
+			if ( time > prevTime + 100 ) {
 
-				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
+				fps = Math.round( ( frames * 100 ) / ( time - prevTime ) );
 				fpsMin = Math.min( fpsMin, fps );
 				fpsMax = Math.max( fpsMax, fps );
 
