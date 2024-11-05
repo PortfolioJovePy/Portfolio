@@ -24,6 +24,13 @@
   <script src="{% static 'particles/particles.min.js' %}" ></script>
   <script  src="{% static 'script.js' %}"></script>
 
+  <script>
+    window.addEventListener('resize', function() {
+      // Recrie as partículas ou ajuste a configuração conforme o tamanho da tela
+      pJS.fn.vendors.destroy();
+      pJS.fn.particlesCreate();
+    });
+  </script>
 
 </body>
 </html>
