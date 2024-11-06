@@ -3,15 +3,15 @@
 {% block content %}
 <html>
     <body>  
-        <!--tela maior-->      
-        <div class="container-fluid">
-            <div class="d-none d-lg-block d-print-block" >
-                teste2
+        <!-- tela maior -->      
+        <div class="container-fluid" >  
+            <div class="d-none d-lg-block d-print-block">
+                {% include 'desktop/sobre.html' %}
             </div>
             
-            <!--tela menor-->
-            <div class="d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
-                teste1
+            <!-- tela menor -->
+            <div class="d-block d-lg-none" > 
+                {% include 'mobile/sobre.html' %}
             </div>
         </div>
     </body>

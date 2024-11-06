@@ -71,7 +71,7 @@
   <div id="main-content">
 <!-- Conteúdo pós apresentação - NAVBAR devem estar abaixo daqui -->
 <!--TELA MENOR-->
-<div class="d-xl-block d-xl-none d-xxl-block d-xxl-none" > 
+<div class="d-block d-lg-none"> 
     <nav class="navbar bg-{{request.theme}} text-{{request.font}} fixed-top mb-4" >
         <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">
           <div class="container-fluid text-start" style="width:70vw;margin-left: 0;">
@@ -150,8 +150,8 @@
       </nav>
   </div>            
   <!--TELA MAIOR-->
-  <div class="d-none d-lg-block d-print-block" >
-    <nav class="navbar navbar-expand-lg bg-{{request.theme}} text-{{request.font}}" >
+  <div class="d-none d-lg-block d-print-block">
+    <nav class="navbar navbar-expand-lg bg-{{request.theme}} text-{{request.font}}">
         <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">          
           <a class="navbar-brand bg-{{request.theme}} text-{{request.font}}" href="{% url 'inicio'%}">Jovê.py</a>          
           <button class="navbar-toggler bg-{{request.theme}} text-{{request.font}}" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -244,28 +244,10 @@ window.addEventListener('load', function () {
 });
 
 function initParticles() {
-  if (window.particlesLoaded) {
-    // Caso as partículas já estejam carregadas, destrua-as antes de recarregar
-    pJS.fn.vendors.destroy();
-  }
-
-  // Carrega as partículas e marca que foram carregadas
-  particlesJS.load('particles-js', "{% static 'particles/particles.json' %}", function() {
-    console.log('callback - particles.js loaded.');
-    window.particlesLoaded = true; // Sinaliza que as partículas foram carregadas
-  });
+    particlesJS.load('particles-js', "{% static 'particles/particles.json' %}", function() {
+        console.log('callback - particles.js loaded.');
+    });
 }
-
-// Adiciona um ouvinte para redimensionamento que recria as partículas somente após o carregamento inicial
-document.addEventListener('DOMContentLoaded', function() {
-  initParticles(); // Carrega as partículas inicialmente
-
-  window.addEventListener('resize', function() {
-    clearTimeout(window.resizeTimeout);
-    window.resizeTimeout = setTimeout(initParticles, 300); // Redimensiona com atraso para evitar sobrecarga
-  });
-});
-
 
     </script>    
     <script>
