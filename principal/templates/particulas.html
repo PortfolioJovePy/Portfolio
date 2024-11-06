@@ -25,10 +25,16 @@
   <script  src="{% static 'script.js' %}"></script>
 
   <script>
-    window.addEventListener('resize', function() {
-      // Recrie as partículas ou ajuste a configuração conforme o tamanho da tela
-      pJS.fn.vendors.destroy();
-      pJS.fn.particlesCreate();
+    document.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener('resize', function() {
+        // Aguarde um tempo para evitar execução repetida durante o redimensionamento
+        clearTimeout(window.resizeTimeout);
+        window.resizeTimeout = setTimeout(function() {
+          // Recrie as partículas ou ajuste a configuração conforme o tamanho da tela
+          pJS.fn.vendors.destroy();
+          pJS.fn.particlesCreate();
+        }, 300); // Ajuste o tempo (em ms) conforme necessário
+      });
     });
   </script>
 
