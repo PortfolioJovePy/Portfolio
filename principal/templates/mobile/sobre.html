@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <body>        
+          <div class="container-fluid" style="margin-top: 12vh;">
+        <div class="row p-4">            
+            <div class="col text-start">
+            {%if request.idioma == 'portugues'%}
+            <h2 class="fs-2 no-underline fw-bolder mb-0">Sobre</h2>
+            <p class="mt-0"><small>Rodrigo Jovê, Bacharel em Economia (UFPB - 2019-2024)</small></p>
+            <p class="fs-6 text-justify">
+                Meu nome é Rodrigo Jovê, nasci em Campo Grande, MS, e atualmente resido em João Pessoa, PB, onde trabalho no Cartório Eunápio Torres. Em 2019, iniciei meus estudos em Economia na Universidade Federal da Paraíba e, mais tarde, integrei o Laboratório de Inteligência Artificial e Macroeconomia Computacional (LABIMEC). Essa trajetória acadêmica forneceu a base sólida necessária para desenvolver minhas habilidades como cientista de dados. A combinação dos conhecimentos econômicos, estatísticos e técnicos adquiridos durante a graduação, juntamente com a experiência prática obtida no laboratório, possibilitou a aplicação efetiva de conceitos teóricos em situações reais.
+            </p>
+            <p class="fs-6 text-justify">
+                Os desafios que superei me proporcionaram uma valiosa experiência na criação e manutenção de modelos estatísticos. Minha jornada incluiu desde a coleta de dados não estruturados, obtidos tanto da internet quanto de documentos físicos digitalizados, até a realização de testes de hipóteses, desenvolvimento de dashboards e geração de insights. A limpeza e estruturação desses dados coletados foram realizadas utilizando Python, juntamente com frameworks relevantes como Django e Selenium, aprimorando significativamente a eficácia dos processos envolvidos.
+            </p>
+            <p class="fs-6 text-justify">
+                Além disso, minha proficiência avançada em Python tem sido fundamental para automatizar e otimizar uma variedade de processos no registro de imóveis. Através da estruturação e manipulação eficiente de dados, bem como do tratamento de imagens, consegui tornar esses procedimentos não apenas mais eficientes, mas também mais econômicos.
+            </p>
+            {%else%}
+            <h2 class="fs-2 no-underline fw-bolder mb-0">About</h2>
+            <p class="mt-0"><small>Rodrigo Jovê, Bachelor of Economics (UFPB - 2019-2024)</small></p>
+            <p class="fs-6 text-justify">
+                My name is Rodrigo Jovê, I was born in Campo Grande, MS, and currently live in João Pessoa, PB, where I work at the Eunápio Torres Registry Office. In 2019, I began my studies in Economics at the Federal University of Paraíba and later joined the Laboratory of Artificial Intelligence and Computational Macroeconomics (LABIMEC). This academic journey provided the solid foundation necessary to develop my skills as a data scientist. The combination of economic, statistical, and technical knowledge acquired during my undergraduate studies, along with the practical experience gained in the laboratory, enabled the effective application of theoretical concepts in real-life situations.
+            </p>
+            <p class="fs-6 text-justify">
+                The challenges I have overcome have provided me with valuable experience in creating and maintaining statistical models. My journey has included collecting unstructured data, obtained from both the internet and digitized physical documents, as well as conducting hypothesis tests, developing dashboards, and generating insights. The cleaning and structuring of this collected data were done using Python, along with relevant frameworks such as Django and Selenium, significantly enhancing the effectiveness of the processes involved.
+            </p>
+            <p class="fs-6 text-justify">
+                Furthermore, my advanced proficiency in Python has been crucial for automating and optimizing a variety of processes in real estate registration. Through the efficient structuring and manipulation of data, as well as image processing, I have been able to make these procedures not only more efficient but also more cost-effective.
+            </p>
+            {%endif%}
+            </div>            
+        </div>
+    </div>         
+      
+    </body>
+</html>
+{% endblock %}

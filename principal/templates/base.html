@@ -244,10 +244,28 @@ window.addEventListener('load', function () {
 });
 
 function initParticles() {
-    particlesJS.load('particles-js', "{% static 'particles/particles.json' %}", function() {
-        console.log('callback - particles.js loaded.');
-    });
+  if (window.particlesLoaded) {
+    // Caso as partículas já estejam carregadas, destrua-as antes de recarregar
+    pJS.fn.vendors.destroy();
+  }
+
+  // Carrega as partículas e marca que foram carregadas
+  particlesJS.load('particles-js', "{% static 'particles/particles.json' %}", function() {
+    console.log('callback - particles.js loaded.');
+    window.particlesLoaded = true; // Sinaliza que as partículas foram carregadas
+  });
 }
+
+// Adiciona um ouvinte para redimensionamento que recria as partículas somente após o carregamento inicial
+document.addEventListener('DOMContentLoaded', function() {
+  initParticles(); // Carrega as partículas inicialmente
+
+  window.addEventListener('resize', function() {
+    clearTimeout(window.resizeTimeout);
+    window.resizeTimeout = setTimeout(initParticles, 300); // Redimensiona com atraso para evitar sobrecarga
+  });
+});
+
 
     </script>    
     <script>
