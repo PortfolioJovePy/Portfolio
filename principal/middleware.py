@@ -76,13 +76,13 @@ class TempoCarregamentoMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):        
-        if 'favicon' in request.path or 'estaticos' in request.path:
+    def __call__(self, request):      
+        if 'favicon' in request.path or 'estaticos' in request.path  or 'particles' in request.path:
             return HttpResponse()
 
         elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path:
-            request.tempo_carregamento_texto = '5s'    
-            request.tempo_carregamento = 5500                        
+            request.tempo_carregamento_texto = '2.5s'    
+            request.tempo_carregamento = 2500                        
             if '@' in request.POST['email'] and '.' in request.POST['email']:
                 if len(request.POST) == 2:
                     if request.idioma == 'portugues':
@@ -103,15 +103,15 @@ class TempoCarregamentoMiddleware:
             return response
         else:            
             if request.path == '/':
-                request.tempo_carregamento_texto = '5s'    
-                request.tempo_carregamento = 5500
+                request.tempo_carregamento_texto = '2.5s'    
+                request.tempo_carregamento = 2500
                 if request.idioma == 'portugues':
                     request.texto = f'{request.saudacao}, seja bem-vindo.'                    
                 else:
                     request.texto = f'{request.saudacao}, welcome.'                    
             else:                
-                request.tempo_carregamento_texto = '1.5s'    
-                request.tempo_carregamento = 1500    
+                request.tempo_carregamento_texto = '1.2s'    
+                request.tempo_carregamento = 1200    
                 if request.idioma == 'portugues':                    
                     request.texto = 'Carregando...'        
                 else:

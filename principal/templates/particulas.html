@@ -24,6 +24,19 @@
   <script src="{% static 'particles/particles.min.js' %}" ></script>
   <script  src="{% static 'script.js' %}"></script>
 
+  
+  <script>
+    function initParticles() {
+    particlesJS.load('particles-js', "{% static 'particles/particles.json' %}", function() {
+        console.log('callback - particles.js loaded.');
+    });
+}
+
+    </script>    
+    <script>
+    document.getElementById('particles-js').style.backgroundColor = 'transparent'; 
+  </script>
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       window.addEventListener('resize', function() {
@@ -37,6 +50,7 @@
       });
     });
   </script>
+
 
 </body>
 </html>
