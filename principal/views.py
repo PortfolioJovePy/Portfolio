@@ -1,3 +1,7 @@
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+
+
 from django.views import View
 from django.shortcuts import render, redirect
 from datetime import datetime
@@ -38,7 +42,6 @@ def error(request, exception):
 
 
 
-
 class principal(View):
     """
     Classe principal do site. Local onde páginas básicas se encontrarão, sem dinâmica ou implementação. Informação pura.
@@ -46,6 +49,7 @@ class principal(View):
     template = 'inicio.html'
     texto = ''    
     context={}
+    @method_decorator(cache_page(60 * 60))
     def get(self, request, *args, **kwargs):                           
 
         self.context = {}

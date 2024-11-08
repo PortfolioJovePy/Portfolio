@@ -181,5 +181,13 @@ LOGGING = {
 }
 
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',  # Para ambiente de teste/local
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 3600,  # 1 hora
+    }
+}
+
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

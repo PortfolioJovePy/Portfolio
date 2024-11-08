@@ -1,3 +1,6 @@
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
@@ -9,6 +12,7 @@ from principal.forms import *
 class painel_conteudos(View):
     template='painel_conteudos.html'
     context={}
+    @method_decorator(cache_page(60 * 60))
     def get(self, request):  
         self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)
         
