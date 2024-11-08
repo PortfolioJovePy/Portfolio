@@ -14,6 +14,7 @@ class CalculoTempoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):     
+        print(request.headers.get('X-Serverless-Source'))
         if 'favicon' in request.path or 'static' in request.path or 'robots' in request.path:
             return HttpResponse()
 
