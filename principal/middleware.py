@@ -17,7 +17,7 @@ class CalculoTempoMiddleware:
         print(request.headers.get('X-Serverless-Source'))
         print(request.headers)
         if 'favicon' in request.path or 'static' in request.path or 'robots' in request.path:
-            return HttpResponse()
+            pass
 
         else:
             if 'entrada' not in request.session:
