@@ -14,7 +14,7 @@ class CalculoTempoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):     
-        if 'favicon' in request.path or 'estaticos' in request.path or 'robots' in request.path:
+        if 'favicon' in request.path or 'static' in request.path or 'robots' in request.path:
             return HttpResponse()
 
         else:
