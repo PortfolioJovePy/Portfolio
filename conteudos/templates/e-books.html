@@ -2,11 +2,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container-fluid text-{{request.theme}} mt-3">
-        <h2 class="fs-2 no-underline fw-bolder mb-4 mt-4 text-start ms-4">Conteúdos</h2>
+    <div class="container-fluid text-{{request.font}} mt-3">
+        <h2 class="fs-2 no-underline fw-bolder mb-4 mt-4 text-start ms-4">E-books</h2>
 
         <ul>            
-            <div class="card mb-3" style="max-width: 80vw;">
+            <div class="card p-4 me-4">
                 <div class="row g-0">
                   <div class="col-md-4">
                     <img src="{% static 'teclado_mouse_python.jpg' %}" class="img-fluid rounded-start" style="width: 100%;object-fit: cover;">
@@ -19,7 +19,7 @@
                       <p class="card-text">Com instruções claras e exemplos detalhados, você aprenderá a utilizar o poder do Python para automatizar qualquer coisa, desde a organização de arquivos até a manipulação de dados e interações com aplicativos. Este manual abrangente é adequado para iniciantes e profissionais, fornecendo uma base sólida para explorar todo o potencial de automação oferecido pela combinação do teclado, mouse e Python.
                       </p>   
                       <p class="card-text">Ao dominar as técnicas apresentadas neste livro, você estará preparado para simplificar sua vida digital, liberando tempo para atividades mais importantes e reduzindo o risco de erros tediosos. Não importa se você é um estudante, profissional ou entusiasta de tecnologia, "Teclado, Mouse & Python" irá capacitá-lo a automatizar tarefas de forma eficiente e eficaz, transformando sua experiência computacional.</p>                                            
-                      <p class="card-text fw-bolder">Inscreva-se para receber a proposta de lançamento do livro. VOcê será automaticamente inscrito na minha newsletter e poderá cancelar a inscrição a qualquer momento.</p>                                                                  
+                      <p class="card-text fw-bolder">Inscreva-se para receber a proposta de lançamento do livro. Você será automaticamente inscrito na minha newsletter e poderá cancelar a inscrição a qualquer momento.</p>                                                                  
                       {%else%}
                       <h5 class="card-title">Keyboard, Mouse & Python: Automate Any Computer Task. A Practical Automation Guide for Everyone.</h5>
                       <p class="card-text">"Keyboard, Mouse & Python" is an indispensable guide for anyone looking to increase their productivity and reduce errors in computer usage. This book offers a practical and accessible approach to automating everyday tasks, from simple typing operations to complex processes, using the Python programming language.</p>

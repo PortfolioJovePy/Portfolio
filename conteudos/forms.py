@@ -16,6 +16,7 @@ class ConteudoForm(forms.ModelForm):
         }
 
 
+
 class FormularioLancamentoEbook1(forms.ModelForm):      
     class Meta:
         model = LancamentoEbook1
