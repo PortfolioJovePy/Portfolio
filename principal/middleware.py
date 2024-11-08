@@ -13,10 +13,9 @@ class CalculoTempoMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):     
-        print(request.headers.get('X-Serverless-Source'))
-        print(request.headers)
+    def __call__(self, request):             
         if 'favicon' in request.path or 'static' in request.path or 'robots' in request.path:
+            print("Se carregar duas vezes, investigar bug aqui")
             pass
 
         else:
