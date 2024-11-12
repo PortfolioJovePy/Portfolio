@@ -49,7 +49,7 @@ class principal(View):
     template = 'inicio.html'
     texto = ''    
     context={}
-    @method_decorator(cache_page(60 * 60))
+    #@method_decorator(cache_page(60 * 60))
     def get(self, request, *args, **kwargs):                           
 
         self.context = {}
@@ -61,9 +61,9 @@ class principal(View):
         if self.template == 'inicio.html':
             self.titulo = 'Rodrigo Jovê'
             if request.idioma == 'portugues':
-                self.texto = f'Cientista de dados, especialista no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
+                self.texto = f'Economista, com 5 anos de experiência no setor imobiliário, constrói informações do zero com Python, desde a extração e estruturação de dados à insights e modelos econométricos robustos e eficientes.'            
             else:
-                self.texto = f'Data scientist, specialized in the real estate sector, builds insights from scratch using Python, from data extraction and structuring to robust and efficient econometric models.'
+                self.texto = f'Economist with 5 years of experience in the real estate sector, skilled in building information from scratch with Python, from data extraction and structuring to generating insights and developing robust and efficient econometric models.'
             self.context['titulo'] = self.titulo
             self.context['texto'] = self.texto                    
 
