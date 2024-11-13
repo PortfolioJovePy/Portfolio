@@ -75,8 +75,11 @@ ROOT_URLCONF = 'vercel_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'conteudos/templates'),
+                    os.path.join(BASE_DIR, 'principal/templates'),
+                    os.path.join(BASE_DIR, 'emails/templates'),
+                ],
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

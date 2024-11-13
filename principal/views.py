@@ -1,5 +1,7 @@
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from conteudos.views import *
+from django.template.loader import render_to_string
 
 
 from django.views import View
@@ -65,7 +67,12 @@ class principal(View):
             else:
                 self.texto = f'Economist with 5 years of experience in the real estate sector, skilled in building information from scratch with Python, from data extraction and structuring to generating insights and developing robust and efficient econometric models.'
             self.context['titulo'] = self.titulo
-            self.context['texto'] = self.texto                    
+            self.context['texto'] = self.texto    
+            painel_view = painel_conteudos()
+            template_conteudos = painel_view.get(request)
+            
+            self.context['conteudos'] = template_conteudos.content.decode('utf-8')
+            #self.context['conteudos'] = render(request, '/conteudos/templates/conteudos.html')
 
 
         elif self.template == 'admin.html':

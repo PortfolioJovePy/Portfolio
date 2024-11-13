@@ -10,7 +10,7 @@ from .models import *
 from principal.forms import *
 
 class painel_conteudos(View):
-    template='painel_conteudos.html'
+    template='conteudos.html'
     context={}
     @method_decorator(cache_page(60 * 60))
     def get(self, request):  
