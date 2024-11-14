@@ -1,32 +1,32 @@
 {% load static %}
 {% block content %}
  
-  <div class="container-fluid p-4 bg-{{request.theme}}">
+  <div class="container-fluid p-4 bg-{{request.font}}">
     {%if request.idioma == 'portugues'%}
     <div class="mt-4 d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" >      
-      <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">Contato</h1>    
+      <h1 class="text-{{request.theme}} bg-{{request.font}} titulo" style="font-size: 30px;">Contato</h1>    
     </div>            
     <div class="mt-4 d-none d-lg-block d-print-block" >
-      <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">Contato</h1>    
+      <h1 class="text-{{request.theme}} bg-{{request.font}} titulo" style="font-size: 30px;">Contato</h1>    
     </div>            
       {%else%}
       <div class="mt-4 d-lg-none d-xl-block d-xl-none d-xxl-block d-xxl-none" >      
-        <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">Contact</h1>    
+        <h1 class="text-{{request.theme}} bg-{{request.font}} titulo" style="font-size: 30px;">Contact</h1>    
       </div>            
       <div class="mt-4 d-none d-lg-block d-print-block" >
-        <h1 class="text-{{request.font}} bg-{{request.theme}} titulo" style="font-size: 30px;">Contact</h1>    
+        <h1 class="text-{{request.theme}} bg-{{request.font}} titulo" style="font-size: 30px;">Contact</h1>    
       </div>            
       {%endif%}
     
     
-        <div class="row text-center text-{{request.theme}} text-{{request.font}}">                        
-              <form class="text-{{request.font}}" method="post" novalidate>
+        <div class="row text-center text-{{request.theme}} text-{{request.theme}}">                        
+              <form class="text-{{request.theme}}" method="post" novalidate>
                   {% csrf_token %}
                   {{ form.as_p }}
                   {%if request.idioma == 'portugues'%}
-                  <button type="submit" class="btn btn-outline-{{request.font}}" style="width:50vw;">Enviar</button>
+                  <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:50vw;">Enviar</button>
                   {%else%}
-                  <button type="submit" class="btn btn-outline-{{request.font}}" style="width:50vw;">Send</button>
+                  <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:50vw;">Send</button>
                   {%endif%}
               </form>
         </div>

@@ -1,0 +1,62 @@
+<head>
+<style>
+    .animacaocard {
+  transition: transform 0.3s ease; /* Suaviza a transição */
+}
+
+.animacaocard:hover {
+    animation: pulsate-bck 0.5s ease-in-out both; /* Aplica a animação ao passar o mouse */
+}
+
+@keyframes pulsate-bck {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
+
+</head>
+
+<div class="container-fluid p-4 bg-{{request.theme}}">
+    <div class="d-flex justify-content-center mb-4">
+        {%if request.idioma == 'portugues' %}
+            <button  class="btn btn-outline-{{request.font}}" style="width:50vw;">Ver todos os conteúdos</button>
+        {%else%}
+            <button  class="btn btn-outline-{{request.font}}" style="width:50vw;">Send</button>
+        {%endif%}
+        </div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {%for conteudo in conteudos%}
+    <div class="col">
+      <div class="card animacaocard h-100 bg-{{request.theme}} border border-1 border-{{request.theme}}-subtle border-opacity-10">
+        <img src="{{ conteudo.link_imagem }}" class="card-img-top " style="height: 250px;object-fit: cover;">        
+        <div class="card-body">
+        {% if request.idioma == 'portugues' %}
+          <h5 class="card-title text-{{request.font}}">{{ conteudo.titulo }}</h5>
+          <p class="card-text text-{{request.font}}">{{ conteudo.descricao }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-0 text-end">
+            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ler conteúdo</a>
+            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ver código</a>
+        </div>
+        {% else %}
+        <h5 class="card-title text-{{request.font}}">{{ conteudo.titulo_ingles }}</h5>
+          <p class="card-text text-{{request.font}}">{{ conteudo.descricao_ingles }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-0 text-end">
+            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Read content</a>
+            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">View code</a>
+        </div>
+        {%endif%}
+      </div>
+    </div>    
+    {%endfor%}
+  </div>
+  
+</div>
