@@ -6,13 +6,10 @@
     <div class="container-fluid text-{{request.font}} mt-3">
         <h2 class="fs-2 no-underline fw-bolder mb-4 mt-4 text-start ms-4">Conteúdos</h2>
         <div class="input-group mb-3 ms-4 me-4">
-          {%if request.idioma == 'portugues' %}
-          <span class="input-group-text" id="basic-addon1">Filtre o conteúdo aqui: </span>
-          <input type="text" class="form-control" id="filtro" placeholder="Insira o título ou parte dele" aria-describedby="basic-addon1">
-          {%else%}          
-          <span class="input-group-text" id="basic-addon1">Filter content here: </span>
-        <input type="text" class="form-control" id="filtro" placeholder="Enter the title or part of it" aria-describedby="basic-addon1">
-
+          {%if request.idioma == 'portugues' %}                    
+          <input type="text" class="form-control" id="filtro" placeholder="O que você está procurando?" aria-describedby="basic-addon1">
+          {%else%}                    
+        <input type="text" class="form-control" id="filtro" placeholder="What are you looking for?" aria-describedby="basic-addon1">
           {%endif%}
         </div>        
         <div id="conteudos">
