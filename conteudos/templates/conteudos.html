@@ -4,14 +4,12 @@
 {% block content %}
 
     <div class="container-fluid text-{{request.font}} mt-3">
-        <div class="row me-4 ms-4">
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 p-3">
           {%if request.idioma == 'portugues' %}                    
           <input type="text" class="form-control" id="filtro" placeholder="O que você está procurando?" aria-describedby="basic-addon1">
           {%else%}              
         <input type="text" class="form-control" id="filtro" placeholder="What are you looking for?" aria-describedby="basic-addon1">
           {%endif%}
-        </div> 
         </div>        
         <div id="conteudos">
           <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
