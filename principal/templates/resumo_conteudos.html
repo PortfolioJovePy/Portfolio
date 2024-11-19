@@ -1,34 +1,9 @@
-<head>
-<style>
-    .animacaocard {
-  transition: transform 0.3s ease; /* Suaviza a transição */
-}
-
-.animacaocard:hover {
-    animation: pulsate-bck 0.5s ease-in-out both; /* Aplica a animação ao passar o mouse */
-}
-
-@keyframes pulsate-bck {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-</style>
-
-</head>
-
 <div class="container-fluid p-4 bg-{{request.theme}}">
     <div class="d-flex justify-content-center mb-4">
         {%if request.idioma == 'portugues' %}
             <button  class="btn btn-outline-{{request.font}}" style="width:50vw;">Ver todos os conteúdos</button>
         {%else%}
-            <button  class="btn btn-outline-{{request.font}}" style="width:50vw;">Send</button>
+            <button  class="btn btn-outline-{{request.font}}" style="width:50vw;">View all content</button>
         {%endif%}
         </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">

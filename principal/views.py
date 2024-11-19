@@ -1,7 +1,6 @@
 
 from conteudos.models import *
-
-
+from django.http import FileResponse
 from django.views import View
 from django.shortcuts import render, redirect
 from datetime import datetime
@@ -11,8 +10,7 @@ from django.core.mail import send_mail
 from .forms import *
 from django.conf import settings
 from django.utils import timezone
-
-
+import os
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
     new_theme = 'dark' if current_theme == 'light' else 'light'    
@@ -75,6 +73,10 @@ class principal(View):
                 
         elif self.template == 'sucesso.html':
             return redirect ('inicio') #não permite o get direto de sucesso
+
+        elif self.template =='CV.html':
+            pdf_path = os.path.join(settings.MEDIA_ROOT, 'CV.pdf')  # Caminho completo do PDF
+            return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
 
         
         return render (request, self.template, self.context)

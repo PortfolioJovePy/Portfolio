@@ -9,5 +9,6 @@ urlpatterns = [
     path('toggle-theme/', toggle_theme, name='toggle-theme'),
     path('portugues/', portugues, name='portugues'),
     path('ingles/', ingles, name='ingles'),
+    path('CV/', principal.as_view(template='CV.html'), name='CV'),
 ]
 
