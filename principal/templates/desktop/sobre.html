@@ -29,11 +29,19 @@
                 Furthermore, my advanced proficiency in Python has been crucial for automating and optimizing a variety of processes in real estate registration. Through the efficient structuring and manipulation of data, as well as image processing, I have been able to make these procedures not only more efficient but also more cost-effective.
             </p>
             {%endif%}
+            {%if request.idioma == 'portugues'%}
             <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-{{request.font}}" type="button" style="min-width:150px">Currículo</button>
-                <button class="btn btn-{{request.font}}" type="button" style="min-width:150px">Publicações</button>
+                <a href="{% url 'CV' %}" target="_blank" class="btn btn-{{ request.font }}" role="button">Currículo</a>
+                <a href="{% url 'conteudos' %}" class="btn btn-{{ request.font }}" role="button">Publicações</a>
+              </div>         
+            {%else%}
+            <div class="d-grid gap-2 d-md-block">
+                <a href="{% url 'CV' %}" target="_blank" class="btn btn-{{ request.font }}" role="button">Resume</a>
+                <a href="{% url 'conteudos' %}" class="btn btn-{{ request.font }}" role="button">Publications</a>
               </div>
-            </div>
+              {%endif%}
+
+            
             <div class="col-3"></div>
         </div>
     </div>         

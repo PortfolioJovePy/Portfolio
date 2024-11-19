@@ -24,9 +24,9 @@
                   {% csrf_token %}
                   {{ form.as_p }}
                   {%if request.idioma == 'portugues'%}
-                  <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:50vw;">Enviar</button>
+                  <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:70vw;">Enviar</button>
                   {%else%}
-                  <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:50vw;">Send</button>
+                  <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:70vw;">Send</button>
                   {%endif%}
               </form>
         </div>
