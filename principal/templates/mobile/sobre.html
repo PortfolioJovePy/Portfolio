@@ -29,17 +29,10 @@
             </p>
             {%endif%}
             </div>   
-            {%if request.idioma == 'portugues'%}
             <div class="d-grid gap-2">
-                <a href="{% url 'CV' %}" target="_blank" class="btn btn-{{ request.font }}" role="button">Currículo</a>
-                <a href="{% url 'conteudos' %}" class="btn btn-{{ request.font }}" role="button">Publicações</a>
+                <button class="btn btn-{{request.font}}" type="button" >Currículo</button>
+                <button class="btn btn-{{request.font}}" type="button">Publicações</button>
               </div>         
-            {%else%}
-            <div class="d-grid gap-2">
-                <a href="{% url 'CV' %}" target="_blank" class="btn btn-{{ request.font }}" role="button">Resume</a>
-                <a href="{% url 'conteudos' %}" class="btn btn-{{ request.font }}" role="button">Publications</a>
-              </div>
-              {%endif%}
         </div>
     </div>         
       
