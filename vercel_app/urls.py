@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls,name='admin_django'),
     path('', include('principal.urls'),),
     path('e-mails/', include('emails.urls'),),
-    path('publicações/', include('conteudos.urls'),)
+    path('publicacoes/', include('conteudos.urls'),)
 ]
 
 handler404 = error #redireciona todos os errors para pagina inicial

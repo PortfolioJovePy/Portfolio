@@ -3,8 +3,13 @@
 {% load static %}
 {% block content %}
 
-    <div class="container-fluid text-{{request.font}} mt-3">
-        <div class="input-group mb-3 p-4">
+    <div class="container-fluid text-{{request.font}} mt-3 p-4">   
+        {%if request.idioma == 'portugues' %}     
+        <h2 class="fs-2 no-underline fw-bolder mb-3 ">Publicações</h2>   
+        {%else%}
+        <h2 class="fs-2 no-underline fw-bolder mb-3 ">Publications</h2>   
+        {%endif%}
+        <div class="input-group mb-3">
           {%if request.idioma == 'portugues' %}                    
           <input type="text" class="form-control" id="filtro" placeholder="O que você está procurando?" aria-describedby="basic-addon1">
           {%else%}              
@@ -16,7 +21,7 @@
             Não existe publicação com esse título. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
           </p>
             {% for conteudo in conteudos %}
-            <div class="documento card mb-3 ms-4 me-4" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" >
+            <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" >
               <div class="row g-0">
                     <div class="col-md-4">
                         <img src="{{ conteudo.link_imagem }}" class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
