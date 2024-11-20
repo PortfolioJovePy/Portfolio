@@ -16,6 +16,17 @@ class ConteudoForm(forms.ModelForm):
         }
 
 
+class LeiturasForm(forms.ModelForm):
+    class Meta:
+        model = Leituras
+        fields = ['titulo', 'resumo','titulo_ingles', 'resumo_ingles', 'link']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
+            'titulo_ingles': forms.TextInput(attrs={'class': 'form-control'}),
+            'resumo': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),            
+            'resumo_ingles': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'link': forms.URLInput(attrs={'class': 'form-control'}),            
+        }
 
 class FormularioLancamentoEbook1(forms.ModelForm):      
     class Meta:

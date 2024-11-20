@@ -1,9 +1,9 @@
 <div class="container-fluid p-4 bg-{{request.theme}}">
     <div class="d-flex justify-content-center mb-4">
         {%if request.idioma == 'portugues' %}
-            <a href="{% url 'conteudos' %}" class="btn btn-outline-{{request.font}}" role="button" style="width:70vw;">Ver todos os conteúdos</a>            
+            <a href="{% url 'publicações' %}" class="btn btn-outline-{{request.font}}" role="button" style="width:70vw;">Ver todas as publicações</a>            
         {%else%}
-            <a href="{% url 'conteudos' %}" class="btn btn-outline-{{request.font}}" role="button" style="width:70vw;">View all content</a>
+            <a href="{% url 'publicações' %}" class="btn btn-outline-{{request.font}}" role="button" style="width:70vw;">View all publications</a>
         {%endif%}
         </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -17,7 +17,7 @@
           <p class="card-text text-{{request.font}}">{{ conteudo.descricao }}</p>
         </div>
         <div class="card-footer bg-transparent border-0 text-end">
-            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ler conteúdo</a>
+            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ler publicação</a>
             <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ver código</a>
         </div>
         {% else %}
@@ -25,7 +25,7 @@
           <p class="card-text text-{{request.font}}">{{ conteudo.descricao_ingles }}</p>
         </div>
         <div class="card-footer bg-transparent border-0 text-end">
-            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Read content</a>
+            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Read publication</a>
             <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">View code</a>
         </div>
         {%endif%}

@@ -16,3 +16,10 @@ class LancamentoEbook1(models.Model):
     lancamento = models.DateField(auto_now_add=True)    
     def __str__(self):
         return self.email
+    
+class Leituras(models.Model):
+    titulo = models.CharField(max_length=100)
+    resumo = models.CharField(max_length=500)
+    titulo_ingles = models.CharField(max_length=100)
+    resumo_ingles = models.CharField(max_length=500)
+    link = models.CharField(max_length=10000)

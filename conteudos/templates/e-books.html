@@ -35,7 +35,11 @@
                           {% csrf_token %}
                           <div class="input-group text-dark mb-3" >
                           {{ form}} 
+                          {%if request.idioma == 'portugues' %}
                             <button class="btn btn-outline-dark" type="submit" id="button-addon2">inscrever-se</button>
+                            {%else%}
+                            <button class="btn btn-outline-dark" type="submit" id="button-addon2">subscribe</button>
+                            {%endif%}
                           </div>  
                           </form>                        
                       </div>

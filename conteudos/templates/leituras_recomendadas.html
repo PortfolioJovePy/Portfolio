@@ -13,7 +13,7 @@
         </div>        
         <div id="conteudos">
           <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
-            Não existe publicação com esse título. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
+            Não existe publicação com esse título.
           </p>
             {% for conteudo in conteudos %}
             <div class="documento card mb-3 ms-4 me-4" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" >
@@ -47,7 +47,7 @@
                 </div>
             </div>
             {% empty %}
-            <li>Nenhuma publicação disponível.</li>
+            <li>Nenhum conteúdo disponível.</li>
             {% endfor %}
         </div>
     </div>

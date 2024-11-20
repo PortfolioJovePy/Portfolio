@@ -128,8 +128,12 @@
                       {%if request.idioma == 'portugues'%}Contato{%else%}Contact{%endif%}</a>
                   </li>
                   <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                    <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">
-                      {%if request.idioma == 'portugues'%}Conteúdos{%else%}Contents{%endif%}</a>
+                    <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'publicações' %}">
+                      {%if request.idioma == 'portugues'%}Publicações{%else%}Publications{%endif%}</a>
+                  </li>
+                  <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                    <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'leituras_recomendadas' %}">
+                      {%if request.idioma == 'portugues'%}Leituras recomendadas{%else%}Recommended Readings{%endif%}</a>
                   </li>
                   <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
                     <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'ebooks' %}">E-books</a>
@@ -176,8 +180,12 @@
                   {%if request.idioma == 'portugues'%}Contato{%else%}Contact{%endif%}</a>
               </li>
               <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'conteudos' %}">
-                  {%if request.idioma == 'portugues'%}Conteúdos{%else%}Contents{%endif%}</a>
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'publicações' %}">
+                  {%if request.idioma == 'portugues'%}Publicações{%else%}Publications{%endif%}</a>
+              </li>
+              <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+                <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'leituras_recomendadas' %}">
+                  {%if request.idioma == 'portugues'%}Leituras recomendadas{%else%}Recommended Readings{%endif%}</a>
               </li>
               <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
                 <a class="nav-link bg-{{request.theme}} text-{{request.font}}" href="{% url 'ebooks' %}">E-books</a>

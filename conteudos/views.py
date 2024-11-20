@@ -17,7 +17,10 @@ class painel_conteudos(View):
         self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)
         
         if self.template == 'painel_conteudos.html' and request.user.is_authenticated:
-            self.context['form'] = ConteudoForm()
+            if 'conteudos' in request.path:
+                self.context['form'] = ConteudoForm()
+            else:
+                self.context['form'] = LeiturasForm()
         
         
         elif self.template == 'conteudos.html':                    
@@ -25,6 +28,9 @@ class painel_conteudos(View):
         
         elif self.template == 'e-books.html':
             self.context['form'] = FormularioLancamentoEbook1()        
+
+        elif self.template == 'leituras_recomendadas.html':                    
+            self.context['conteudos'] = reversed(list(Leituras.objects.all().order_by('id')))
         
         
         return render(request, self.template, self.context)
@@ -48,7 +54,10 @@ class painel_conteudos(View):
                 return render(request, 'e-books.html', self.context)
         
         elif self.template == 'painel_conteudos.html':
-            form = ConteudoForm(request.POST)
+            if 'conteudos' in request.path:
+                form = ConteudoForm(request.POST)
+            else:
+                form = LeiturasForm(request.POST)
             if form.is_valid():            
                 form.save()            
                 return redirect('painel_conteudos') 
