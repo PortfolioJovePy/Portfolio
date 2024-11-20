@@ -12,7 +12,7 @@ from principal.forms import *
 class painel_conteudos(View):
     template='conteudos.html'
     context={}
-    #@method_decorator(cache_page(60 * 60))
+    @method_decorator(cache_page(60 * 60))
     def get(self, request):  
         self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)
         

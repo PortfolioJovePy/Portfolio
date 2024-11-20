@@ -11,6 +11,9 @@ from .forms import *
 from django.conf import settings
 from django.utils import timezone
 import os
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
     new_theme = 'dark' if current_theme == 'light' else 'light'    
@@ -47,7 +50,7 @@ class principal(View):
     template = 'inicio.html'
     texto = ''    
     context={}
-    #@method_decorator(cache_page(60 * 60))
+    @method_decorator(cache_page(60 * 60))
     def get(self, request, *args, **kwargs):                           
 
         self.context = {}
