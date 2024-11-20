@@ -27,7 +27,7 @@
                     <div class="col">
                         {% if request.idioma == 'portugues' %}
                         <div class="card-body text-start">
-                            <h5 class="card-title">{{ conteudo.titulo }}</h5>
+                            <h5 class="card-title fw-bold">{{ conteudo.titulo }}</h5>
                             <p class="card-text">{{ conteudo.resumo }}</p>
                         </div>
                         <div class="card-footer bg-transparent border-0 text-end">
@@ -35,7 +35,7 @@
                         </div>
                         {% else %}
                         <div class="card-body text-start">
-                            <h5 class="card-title">{{ conteudo.titulo_ingles }}</h5>
+                            <h5 class="card-title fw-bold">{{ conteudo.titulo_ingles }}</h5>
                             <p class="card-text">{{ conteudo.resumo_ingles }}</p>
                         </div>
                         <div class="card-footer bg-transparent border-0 text-end">
