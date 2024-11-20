@@ -3,8 +3,14 @@
 {% load static %}
 {% block content %}
 
-    <div class="container-fluid text-{{request.font}} mt-3">
-        <div class="input-group mb-3 p-4">
+    <div class="container-fluid text-{{request.font}} mt-3 p-4">   
+        {%if request.idioma == 'portugues' %}     
+        <h2 class="fs-2 no-underline fw-bolder mb-3 ">Leituras recomendadas</h2>   
+        {%else%}
+        <h2 class="fs-2 no-underline fw-bolder mb-3 ">Recommended Readings</h2>   
+        {%endif%}
+        
+        <div class="input-group mb-3">
           {%if request.idioma == 'portugues' %}                    
           <input type="text" class="form-control" id="filtro" placeholder="O que você está procurando?" aria-describedby="basic-addon1">
           {%else%}              
@@ -16,29 +22,24 @@
             Não existe publicação com esse título.
           </p>
             {% for conteudo in conteudos %}
-            <div class="documento card mb-3 ms-4 me-4" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" >
-              <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ conteudo.link_imagem }}" class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
-                    </div>
-                    <div class="col-md-8">
+            <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{{ conteudo.resumo }}{% else %}{{ conteudo.titulo_ingles }}{{ conteudo.resumo_ingles }}{% endif %}" >
+              <div class="row g-0">                    
+                    <div class="col">
                         {% if request.idioma == 'portugues' %}
                         <div class="card-body text-start">
                             <h5 class="card-title">{{ conteudo.titulo }}</h5>
-                            <p class="card-text">{{ conteudo.descricao }}</p>
+                            <p class="card-text">{{ conteudo.resumo }}</p>
                         </div>
                         <div class="card-footer bg-transparent border-0 text-end">
-                            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Ler publicação</a>
-                            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Ver código</a>
+                            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark" style="width:100px;">Ler</a>
                         </div>
                         {% else %}
                         <div class="card-body text-start">
                             <h5 class="card-title">{{ conteudo.titulo_ingles }}</h5>
-                            <p class="card-text">{{ conteudo.descricao_ingles }}</p>
+                            <p class="card-text">{{ conteudo.resumo_ingles }}</p>
                         </div>
                         <div class="card-footer bg-transparent border-0 text-end">
-                            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Read publication</a>
-                            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">View code</a>
+                            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark" style="width:100px;">Read</a>                        
                         </div>
                         {% endif %}
                         

@@ -21,7 +21,7 @@
             Não existe publicação com esse título. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
           </p>
             {% for conteudo in conteudos %}
-            <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{% else %}{{ conteudo.titulo_ingles }}{% endif %}" >
+            <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{{ conteudo.descricao }}{% else %}{{ conteudo.titulo_ingles }}{{ conteudo.descricao_ingles }}{% endif %}" >
               <div class="row g-0">
                     <div class="col-md-4">
                         <img src="{{ conteudo.link_imagem }}" class="img-fluid rounded-start" style="height: 250px;object-fit: cover;">
