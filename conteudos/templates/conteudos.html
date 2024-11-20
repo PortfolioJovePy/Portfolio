@@ -18,7 +18,7 @@
         </div>        
         <div id="conteudos">
           <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
-            Não existe publicação com esse título. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
+            Não existe publicação com esse texto. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
           </p>
             {% for conteudo in conteudos %}
             <div class="documento card mb-3" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{{ conteudo.descricao }}{% else %}{{ conteudo.titulo_ingles }}{{ conteudo.descricao_ingles }}{% endif %}" >
