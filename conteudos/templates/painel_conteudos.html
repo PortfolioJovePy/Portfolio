@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
     <div class="container mt-5 text-{{request.font}} p-4">
-        <h2>Adicionar Novo Conteúdo</h2>
+        <h2>Painel de inserção</h2>
         <form method="post" action="">
             {% csrf_token %}
             {{ form.as_p }}
