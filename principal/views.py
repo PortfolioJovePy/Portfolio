@@ -50,7 +50,7 @@ class principal(View):
     template = 'inicio.html'
     texto = ''    
     context={}
-    @method_decorator(cache_page(60 * 60))
+    #@method_decorator(cache_page(60 * 60))
     def get(self, request, *args, **kwargs):                           
 
         self.context = {}

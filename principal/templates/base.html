@@ -236,7 +236,11 @@
 
 {%if request.path == '/'%}
 <script>
+let loadCount = 0; // Contador para rastrear quantas vezes a função foi executada
+
 window.addEventListener('load', function () {
+    if (loadCount >= 2) return; // Impede execução após duas execuções
+    loadCount++; // Incrementa o contador
     // Aplica a classe de animação antes de mostrar o conteúdo
     document.getElementById('pre-content').classList.add('tracking-in-expand');
 
@@ -257,9 +261,11 @@ window.addEventListener('load', function () {
 </script>
 {%else%}
 <script>
+  let loadCount = 0; // Contador para rastrear quantas vezes a função foi executada
+
   window.addEventListener('load', function () {
-      // Aplica a classe de animação antes de mostrar o conteúdo
-      document.getElementById('pre-content').classList.add('tracking-in-expand');
+    if (loadCount >= 2) return; // Impede execução após duas execuções
+    loadCount++; // Incrementa o contador
   
       // Mostra o pre-content após um curto atraso
       setTimeout(function () {
