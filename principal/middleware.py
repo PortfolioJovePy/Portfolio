@@ -82,8 +82,8 @@ class TempoCarregamentoMiddleware:
             return HttpResponse()
 
         elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path:
-            request.tempo_carregamento_texto = '2.5s'    
-            request.tempo_carregamento = 2500                        
+            request.tempo_carregamento_texto = '.4s'    
+            request.tempo_carregamento = 400                        
             if '@' in request.POST['email'] and '.' in request.POST['email']:
                 if len(request.POST) == 2:
                     if request.idioma == 'portugues':
@@ -104,15 +104,15 @@ class TempoCarregamentoMiddleware:
             return response
         else:            
             if request.path == '/':
-                request.tempo_carregamento_texto = '2.5s'    
-                request.tempo_carregamento = 2500
+                request.tempo_carregamento_texto = '.8s'    
+                request.tempo_carregamento = 800
                 if request.idioma == 'portugues':
                     request.texto = f'{request.saudacao}, seja bem-vindo.'                    
                 else:
                     request.texto = f'{request.saudacao}, welcome.'                    
             else:                
-                request.tempo_carregamento_texto = '1.2s'    
-                request.tempo_carregamento = 1200    
+                request.tempo_carregamento_texto = '.4s'    
+                request.tempo_carregamento = 400    
                 if request.idioma == 'portugues':                    
                     request.texto = 'Carregando...'        
                 else:
