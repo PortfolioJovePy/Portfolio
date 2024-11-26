@@ -78,7 +78,7 @@ class TempoCarregamentoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):      
-        if 'favicon' in request.path or 'estaticos' in request.path  or 'particles' in request.path:
+        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path:
             return HttpResponse()
 
         elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path:
