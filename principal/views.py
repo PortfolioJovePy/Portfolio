@@ -150,14 +150,3 @@ class principal(View):
 
 
 
-class StaticViewSitemap(Sitemap):
-    changefreq = "daily"  # Frequência de alterações (opcional)
-    priority = 0.8        # Prioridade das páginas (opcional)
-
-    def items(self):
-        # Liste os nomes das views que você quer incluir no sitemap
-        return ['sobre', 'sucesso', 'publicacoes']
-
-    def location(self, item):
-        # Retorne o caminho completo da URL
-        return reverse(item)
