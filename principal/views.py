@@ -13,6 +13,8 @@ from django.utils import timezone
 import os
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from django.contrib.sitemaps import Sitemap
+from django.urls import reverse
 
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')
@@ -145,3 +147,17 @@ class principal(View):
                     self.context['newsletter'] = form                                               
                     return render(request,'inicio.html',self.context)
             
+
+
+
+class StaticViewSitemap(Sitemap):
+    changefreq = "daily"  # Frequência de alterações (opcional)
+    priority = 0.8        # Prioridade das páginas (opcional)
+
+    def items(self):
+        # Liste os nomes das views que você quer incluir no sitemap
+        return ['sobre', 'sucesso', 'publicacoes']
+
+    def location(self, item):
+        # Retorne o caminho completo da URL
+        return reverse(item)
