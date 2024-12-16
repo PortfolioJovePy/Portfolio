@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('principal.urls'),),
     path('e-mails/', include('emails.urls'),),
     path('publicacoes/', include('conteudos.urls'),),
+    path('metas/',include('metricas.urls'),),
     
 ]
 
