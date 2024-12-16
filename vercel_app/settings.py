@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'principal',
     'emails',
-    'conteudos'
+    'conteudos',
+    'metasemetricas',
 ]
 
 MIDDLEWARE = [
