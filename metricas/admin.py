@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Metasdelongoprazo, Objetivosmarco, Computarevolucao
+from .models import *
 
 # Registrando o modelo Metasdelongoprazo
 @admin.register(Metasdelongoprazo)
@@ -15,6 +15,14 @@ class ObjetivosmarcoAdmin(admin.ModelAdmin):
     search_fields = ('nome',)                   # Permite pesquisar pelo nome no admin
     list_filter = ('nome_meta',)                 # Filtro por Meta
     ordering = ('nome_meta', 'nome')            # Ordenação por Meta e nome
+
+@admin.register(Microobjetivos)
+class MicroobjetivosAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nome_objetivomarco', 'nome')  # Colunas exibidas na lista
+    search_fields = ('nome',)                   # Permite pesquisar pelo nome no admin
+    list_filter = ('nome_objetivomarco',)                 # Filtro por Meta
+    ordering = ('nome_objetivomarco', 'nome')            # Ordenação por Meta e nome
+
 
 # Registrando o modelo Computarevolucao
 @admin.register(Computarevolucao)
