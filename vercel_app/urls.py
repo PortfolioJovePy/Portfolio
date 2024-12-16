@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('principal.urls'),),
     path('e-mails/', include('emails.urls'),),
     path('publicacoes/', include('conteudos.urls'),),
-    path('metas/', include('metasemetricas.urls'),)
+    
 ]
 
 handler404 = error #redireciona todos os errors para pagina inicial

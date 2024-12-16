@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'principal',
     'emails',
     'conteudos',
-    'metasemetricas',
+    'metricas'
 ]
 
 MIDDLEWARE = [
@@ -99,6 +99,7 @@ WSGI_APPLICATION = 'vercel_app.wsgi.app'
 # environments like Vercel. You can use a database over HTTP, hosted elsewhere.
 
 DATABASES = {'default': dj_database_url.config(default=os.environ.get('POSTGRES_URL'))}
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
 
 
 # Password validation
