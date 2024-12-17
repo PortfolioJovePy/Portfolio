@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from principal.forms import *
+from django.views import View
+
 # Create your views here.
 class minhasmetas(View):
     """
