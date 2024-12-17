@@ -30,14 +30,14 @@ class ComputarevolucaoForm(forms.ModelForm):
             'nota': 'Atribua uma nota de 1 a 100 para o objetivo.',
         }
         
-        def __init__(self, *args, **kwargs):
-            # Aceitar parâmetros adicionais para filtrar objetivos
-            super().__init__(*args, **kwargs)
-            
-            self.fields['objetivo'].queryset = Microobjetivos.objects.all()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Aceitar parâmetros adicionais para filtrar objetivos
+        self.fields['objetivo'].queryset = Microobjetivos.objects.all()
 
-            # Adicionar classes CSS ou outros atributos ao select
-            self.fields['objetivo'].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': 'Selecione um objetivo correspondente'
-            })
+        # Adicionar classes CSS ou outros atributos ao select
+        self.fields['objetivo'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Selecione um objetivo correspondente'
+        })
