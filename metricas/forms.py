@@ -32,7 +32,6 @@ class ComputarevolucaoForm(forms.ModelForm):
         
         def __init__(self, *args, **kwargs):
             # Aceitar parâmetros adicionais para filtrar objetivos
-            objetivos_filtrados = kwargs.pop('objetivos_filtrados', None)
             super().__init__(*args, **kwargs)
             
             self.fields['objetivo'].queryset = Microobjetivos.objects.all()

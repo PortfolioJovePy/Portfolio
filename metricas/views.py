@@ -29,7 +29,6 @@ class minhasmetas(View):
         }, status=401)
     def post(self, request, *args, **kwargs):
         form = ComputarevolucaoForm(request.POST)
-
         if form.is_valid():
             # Salva o objeto se o formulário for válido
             form.save()
