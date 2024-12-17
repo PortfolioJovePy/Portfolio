@@ -95,7 +95,7 @@ class principal(View):
         if 'admin' not in (request.path) or 'upload-template/' not in (request.path): #POST de usuário público
 
             #formulário de contato
-            if 'nome' in request.POST.keys() and 'inicio.html' in self.template:
+            if 'nome' in request.POST.keys() and 'inicio.html' in self.template and 'metas' not in request.path:
                 form = FormularioContato(request.POST)
                 if form.is_valid():
                     if form.cleaned_data['email']:

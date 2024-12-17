@@ -81,7 +81,7 @@ class TempoCarregamentoMiddleware:
         if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path:
             return HttpResponse()
 
-        elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path:
+        elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path and 'metas' not in request.path:
             request.tempo_carregamento_texto = '.4s'    
             request.tempo_carregamento = 400                        
             if '@' in request.POST['email'] and '.' in request.POST['email']:

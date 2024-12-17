@@ -90,11 +90,6 @@
     <nav class="navbar bg-{{request.theme}} text-{{request.font}} fixed-top mb-4"  style="position: relative;height: 30px;margin-bottom:10px;">
         <div class="container-fluid bg-{{request.theme}} text-{{request.font}} ">
           <div class="container-fluid text-start" style="width:70vw;margin-left: 0;">
-            {%if request.idioma == 'portugues'%}
-            <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ingles'%}">USD$</a>
-            {%else%}
-              <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'portugues'%}">BRL$</a>          
-          {%endif%}    
           <a href="{% url 'toggle-theme' %}" class="navbar-brand bg-{{request.theme}} text-{{request.font}}">
             {% if request.theme == 'dark' %}  
             <svg xmlns="http://www.w3.org/2000/svg" height="25" fill="currentColor" class="bi bi-sun-fill imagem-efeito" viewBox="0 0 16 16" style="color: rgb(248, 249, 250);">
@@ -106,6 +101,13 @@
             </svg>                    
             {%endif%}   
           </a>
+
+          {%if request.idioma == 'portugues'%}
+          <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ingles'%}">USD$</a>
+          {%else%}
+            <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'portugues'%}">BRL$</a>          
+        {%endif%}    
+
           </div>
           <div data-bs-theme={{request.theme}}>
           <button class="navbar-toggler bg-{{request.theme}} text-{{request.font}}" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -207,12 +209,7 @@
               {%endif%}           
             </ul>
           </div>
-        </div>
-        {%if request.idioma == 'portugues'%}
-        <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ingles'%}">USD$</a>
-        {%else%}
-          <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'portugues'%}">BRL$</a>          
-        {%endif%}
+        </div>        
         <a class='me-4' href="{% url 'toggle-theme' %}">
           {% if request.theme == 'dark' %}
           <svg xmlns="http://www.w3.org/2000/svg" height="25" fill="currentColor" class="bi bi-sun-fill imagem-efeito" viewBox="0 0 16 16" style="color: rgb(248, 249, 250);">
@@ -224,6 +221,12 @@
             </svg>      
             {%endif%}     
         </a>
+
+        {%if request.idioma == 'portugues'%}
+          <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ingles'%}">USD$</a>
+          {%else%}
+            <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'portugues'%}">BRL$</a>          
+        {%endif%}    
       </nav>
       
   </div>

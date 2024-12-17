@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from principal.forms import *
 from .forms import *
 from .models import *
 from django.views import View
+from django.http import JsonResponse
 
 # Create your views here.
 class minhasmetas(View):
@@ -18,7 +19,20 @@ class minhasmetas(View):
         self.context['form'] = FormularioContato(idioma=request.idioma)
         self.context['newsletter'] = FormularioNewsletter(idioma=request.idioma)                
         #Trecho de páginas específicas
-        if self.template == 'computar.html':                 
-            self.context['form_metas'] =  ComputarevolucaoForm()
-            return render (request, self.template, self.context)
+        if request.user.is_superuser:
+            if self.template == 'computar.html':                 
+                self.context['form_metas'] =  ComputarevolucaoForm()
+                return render (request, self.template, self.context)
+        else:
+            return JsonResponse({
+            'message': 'Fazer login para continuar. Uso restrito apenas para o dono do portfolio'
+        }, status=401)
+    def post(self, request, *args, **kwargs):
+        form = ComputarevolucaoForm(request.POST)
+
+        if form.is_valid():
+            # Salva o objeto se o formulário for válido
+            form.save()
+            # Redireciona para a mesma página
+            return redirect('computarmetas')
 
