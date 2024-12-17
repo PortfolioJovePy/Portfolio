@@ -16,32 +16,25 @@ class ObjetivosmarcoAdmin(admin.ModelAdmin):
     list_filter = ('nome_meta',)                 # Filtro por Meta
     ordering = ('nome_meta', 'nome')            # Ordenação por Meta e nome
 
-    # Adicionando exibição mais detalhada para a relação
-    def nome_meta(self, obj):
-        return obj.nome_meta.nome  # Exibe o nome da meta, não o objeto em si
-    nome_meta.admin_order_field = 'nome_meta'  # Permite ordenar por nome_meta
-    
-    # Adicionando filtros para uma melhor visualização no Admin
     def get_search_results(self, request, queryset, search_term):
-        # Sobrescrevendo a pesquisa para incluir as opções de 'nome_meta' no campo de filtro
-        return queryset.filter(nome__icontains=search_term)
-
-    # Adicionando inline para exibição relacionada
-    inlines = [
-        # Adiciona as opções de inserção relacionadas, se necessário
-    ]
+        # Sobrescrevendo o método para garantir que ele retorna 2 valores
+        queryset, may_have_duplicates = super().get_search_results(
+            request, queryset, search_term)
+        
+        # Adicione ou modifique qualquer lógica de busca que desejar
+        return queryset, may_have_duplicates  # Retornando exatamente dois valores
 
 @admin.register(Microobjetivos)
 class MicroobjetivosAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome_objetivomarco', 'nome')  # Colunas exibidas na lista
-    search_fields = ('nome',)                   # Permite pesquisar pelo nome no admin
-    list_filter = ('nome_objetivomarco',)       # Filtro por ObjetivoMarco
-    ordering = ('nome_objetivomarco', 'nome')    # Ordenação por ObjetivoMarco e nome
+    search_fields = ('nome',)                           # Permite pesquisar pelo nome no admin
+    list_filter = ('nome_objetivomarco',)               # Filtro por ObjetivoMarco
+    ordering = ('nome_objetivomarco', 'nome')           # Ordenação por ObjetivoMarco e nome
 
     # Exibindo o nome do objetivo relacionado
     def nome_objetivomarco(self, obj):
         return obj.nome_objetivomarco.nome  # Exibe o nome do objetivo relacionado
-    nome_objetivomarco.admin_order_field = 'nome_objetivomarco'  # Permite ordenar por nome_objetivomarco
+    nome_objetivomarco.admin_order_field = 'nome_objetivomarco__nome'
 
 # Registrando o modelo Computarevolucao
 @admin.register(Computarevolucao)
