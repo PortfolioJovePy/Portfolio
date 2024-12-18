@@ -4,6 +4,7 @@ from .forms import *
 from .models import *
 from django.views import View
 from django.http import JsonResponse
+from django.db.models import Median
 
 # Create your views here.
 class minhasmetas(View):
@@ -30,8 +31,24 @@ class minhasmetas(View):
     def post(self, request, *args, **kwargs):
         form = ComputarevolucaoForm(request.POST)
         if form.is_valid():
-            # Salva o objeto se o formulário for válido
-            form.save()
-            # Redireciona para a mesma página
+            # Salva o objeto do formulário
+            computarevolucao = form.save()
+
+            # Recupera o Microobjetivo e o Objetivo de Marco
+            microobjetivo = computarevolucao.objetivo
+            objetivo_marco = microobjetivo.nome_objetivomarco
+
+            # Calcula o número de eventos e a mediana
+            eventos = Computarevolucao.objects.filter(objetivo__nome_objetivomarco=objetivo_marco)
+            total_eventos = eventos.count()
+            mediana = eventos.aggregate(Median('nota'))['nota__median']
+
+            # Atualiza o status do Objetivosmarco baseado na mediana
+            if mediana >= 95 and objetivo_marco.status != 'Concluído':
+                objetivo_marco.status = 'Concluído'
+                objetivo_marco.save()
+
+            # Redireciona para a página 'computarmetas'
             return redirect('computarmetas')
+
 

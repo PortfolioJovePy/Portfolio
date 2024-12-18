@@ -16,7 +16,12 @@ class Objetivosmarco(models.Model):
 
 class Microobjetivos(models.Model):
     nome_objetivomarco = models.ForeignKey(Objetivosmarco, on_delete=models.CASCADE)
-    nome = models.CharField(max_length=140)    
+    nome = models.CharField(max_length=140)
+    status = models.CharField(
+        max_length=20,
+        choices=[('Em Progresso', 'Em Progresso'), ('Concluído', 'Concluído')],
+        default='Em Progresso'
+    )
     def __str__(self):
         return self.nome
 
