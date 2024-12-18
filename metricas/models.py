@@ -1,8 +1,12 @@
 from django.db import models
-
 # Create your models here.
 class Metasdelongoprazo(models.Model):    
     nome = models.CharField(max_length=140)  
+    status = models.CharField(
+        max_length=20,
+        choices=[('Em Progresso', 'Em Progresso'), ('Concluído', 'Concluído')],
+        default='Em Progresso'
+    )
     def __str__(self):
         return self.nome
   
@@ -10,18 +14,18 @@ class Metasdelongoprazo(models.Model):
     
 class Objetivosmarco(models.Model):
     nome_meta = models.ForeignKey(Metasdelongoprazo, on_delete=models.CASCADE)
-    nome = models.CharField(max_length=140)    
+    nome = models.CharField(max_length=140)   
+    status = models.CharField(
+        max_length=20,
+        choices=[('Em Progresso', 'Em Progresso'), ('Concluído', 'Concluído')],
+        default='Em Progresso'
+    ) 
     def __str__(self):
         return self.nome
 
 class Microobjetivos(models.Model):
     nome_objetivomarco = models.ForeignKey(Objetivosmarco, on_delete=models.CASCADE)
-    nome = models.CharField(max_length=140)
-    status = models.CharField(
-        max_length=20,
-        choices=[('Em Progresso', 'Em Progresso'), ('Concluído', 'Concluído')],
-        default='Em Progresso'
-    )
+    nome = models.CharField(max_length=140)    
     def __str__(self):
         return self.nome
 

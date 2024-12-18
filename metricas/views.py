@@ -4,8 +4,7 @@ from .forms import *
 from .models import *
 from django.views import View
 from django.http import JsonResponse
-from django.db.models import Median
-
+import pandas as pd
 # Create your views here.
 class minhasmetas(View):
     """
@@ -38,10 +37,13 @@ class minhasmetas(View):
             microobjetivo = computarevolucao.objetivo
             objetivo_marco = microobjetivo.nome_objetivomarco
 
-            # Calcula o número de eventos e a mediana
+            # Recupera todas as notas relacionadas ao objetivo de marco
             eventos = Computarevolucao.objects.filter(objetivo__nome_objetivomarco=objetivo_marco)
-            total_eventos = eventos.count()
-            mediana = eventos.aggregate(Median('nota'))['nota__median']
+            notas = list(eventos.values_list('nota', flat=True))
+
+            # Calcula a mediana utilizando pandas
+            df = pd.DataFrame(notas, columns=['nota'])
+            mediana = df['nota'].median()
 
             # Atualiza o status do Objetivosmarco baseado na mediana
             if mediana >= 95 and objetivo_marco.status != 'Concluído':
@@ -50,5 +52,4 @@ class minhasmetas(View):
 
             # Redireciona para a página 'computarmetas'
             return redirect('computarmetas')
-
 
