@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
-from dotenv import load_dotenv
+#rom dotenv import load_dotenv
 
-load_dotenv()
+#oad_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
