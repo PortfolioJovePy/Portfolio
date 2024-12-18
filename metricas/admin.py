@@ -4,14 +4,14 @@ from .models import *
 # Registrando o modelo Metasdelongoprazo
 @admin.register(Metasdelongoprazo)
 class MetasdelongoprazoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nome')  # Colunas exibidas na lista
+    list_display = ('id', 'nome','status')  # Colunas exibidas na lista
     search_fields = ('nome',)      # Permite pesquisar pelo nome no admin
     ordering = ('nome',)           # Ordena pelo nome por padrão
 
 # Registrando o modelo Objetivosmarco
 @admin.register(Objetivosmarco)
 class ObjetivosmarcoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nome_meta', 'nome')  # Colunas exibidas na lista
+    list_display = ('id', 'nome_meta', 'nome','status')  # Colunas exibidas na lista
     search_fields = ('nome',)                   # Permite pesquisar pelo nome no admin
     list_filter = ('nome_meta',)                 # Filtro por Meta
     ordering = ('nome_meta', 'nome')            # Ordenação por Meta e nome

@@ -4,8 +4,8 @@ class Metasdelongoprazo(models.Model):
     nome = models.CharField(max_length=140)  
     status = models.CharField(
         max_length=20,
-        choices=[('Em Progresso', 'Em Progresso'), ('Concluído', 'Concluído')],
-        default='Em Progresso'
+        choices=[('<20%', '<20%'), ('>=20%', '>=20%'), ('Concluído', 'Concluído')],
+        default='<=20%'
     )
     def __str__(self):
         return self.nome

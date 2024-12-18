@@ -38,7 +38,7 @@ class minhasmetas(View):
             objetivo_marco = microobjetivo.nome_objetivomarco
 
             # Recupera todas as notas relacionadas ao objetivo de marco
-            eventos = Computarevolucao.objects.filter(objetivo__nome_objetivomarco=objetivo_marco)
+            eventos = Computarevolucao.objects.filter(objetivo__nome_objetivomarco=objetivo_marco) 
             notas = list(eventos.values_list('nota', flat=True))
 
             # Calcula a mediana utilizando pandas
@@ -46,9 +46,12 @@ class minhasmetas(View):
             mediana = df['nota'].median()
 
             # Atualiza o status do Objetivosmarco baseado na mediana
-            if mediana >= 95 and objetivo_marco.status != 'Concluído':
-                objetivo_marco.status = 'Concluído'
-                objetivo_marco.save()
+            if mediana >= 95 and objetivo_marco.status != 'Concluído' and len(df['nota']) >= 45: #fazer teste mudando para passar no teste
+                objeto_objetivo_marco = Objetivosmarco.objects.get(nome=objetivo_marco) 
+                objeto_objetivo_marco.status = 'Concluído' #aqui deve mudar o valor do modelo acima, incluindo concluido                
+                objeto_objetivo_marco.save()
+            
+            #fazer consulat equivalente para objetivos marco, buscando saber se 20% dos objetivos maroc foram atingidos
 
             # Redireciona para a página 'computarmetas'
             return redirect('computarmetas')
