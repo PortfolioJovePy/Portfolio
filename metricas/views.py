@@ -5,6 +5,7 @@ from .models import *
 from django.views import View
 from django.http import JsonResponse
 import pandas as pd
+
 # Create your views here.
 class minhasmetas(View):
     """
