@@ -1,10 +1,10 @@
+import pandas as pd
 from django.shortcuts import render, redirect
 from principal.forms import *
 from .forms import *
 from .models import *
 from django.views import View
 from django.http import JsonResponse
-import pandas as pd
 
 # Create your views here.
 class minhasmetas(View):
