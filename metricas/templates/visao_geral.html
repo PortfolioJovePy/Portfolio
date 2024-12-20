@@ -1,0 +1,34 @@
+<!-- templates/conteudo_form.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Metas Hierarquizadas</h1>
+<ul>
+    {% for meta in metas %}
+        <li>
+            <strong>Meta:</strong> {{ meta.nome }} (Status: {{ meta.status }})
+            <ul>
+                {% for objetivo_marco in meta.objetivosmarco_set.all %}
+                    <li>
+                        <strong>Objetivo Marco:</strong> {{ objetivo_marco.nome }} (Status: {{ objetivo_marco.status }})
+                        <ul>
+                            {% for microobjetivo in objetivo_marco.microobjetivos_set.all %}
+                                <li>
+                                    <strong>Microobjetivo:</strong> {{ microobjetivo.nome }}
+                                    <ul>
+                                        {% for evolucao in microobjetivo.computarevolucao_set.all %}
+                                            <li>
+                                                <strong>Evolução:</strong> Nota: {{ evolucao.nota }} (Data: {{ evolucao.data|date:"d/m/Y H:i" }})
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

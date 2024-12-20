@@ -22,8 +22,12 @@ class minhasmetas(View):
         #Trecho de páginas específicas
         if request.user.is_superuser:
             if self.template == 'computar.html':                 
-                self.context['form_metas'] =  ComputarevolucaoForm()
-                return render (request, self.template, self.context)
+                self.context['form_metas'] =  ComputarevolucaoForm()                
+            elif self.template == 'visao_geral.html':
+                metas = Metasdelongoprazo.objects.prefetch_related('objetivosmarco_set__microobjetivos_set__computarevolucao_set').all()
+                self.context['metas'] = metas
+                print(metas)
+            return render (request, self.template, self.context)
         else:
             return JsonResponse({
             'message': 'Fazer login para continuar. Uso restrito apenas para o dono do portfolio'
