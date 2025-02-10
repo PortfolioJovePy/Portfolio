@@ -14,7 +14,7 @@ class CalculoTempoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):             
-        if 'favicon' in request.path or 'static' in request.path or 'robots' in request.path or 'script' in request.path:
+        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path:
             print("Se carregar duas vezes, investigar bug aqui")
             pass
 
@@ -103,7 +103,7 @@ class TempoCarregamentoMiddleware:
             response = self.get_response(request)
             return response
         else:            
-            if request.path == '/':
+            if request.path == '/' and '.js' not in request.path:
                 request.tempo_carregamento_texto = '.8s'    
                 request.tempo_carregamento = 800
                 if request.idioma == 'portugues':
