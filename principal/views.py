@@ -27,13 +27,11 @@ def assistenterodrigo(request):
         try:
             data = json.loads(request.body)
             user_message = data.get("message", "")
-            print(user_message)
             # Resposta padrão
             brad = client.models.generate_content(
                         model="gemini-2.0-flash", contents=user_message
                         )
             response_message = f"""{brad.text}"""
-            print(response_message)
 
             return JsonResponse({"response": response_message})
         except json.JSONDecodeError:
