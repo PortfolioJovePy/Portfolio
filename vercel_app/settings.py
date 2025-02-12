@@ -15,7 +15,7 @@ import dj_database_url
 import os
 from google import genai
 
-client = genai.Client(api_key="AIzaSyBDszV_3ZUZgPhe0fkp4AAxfD-XxT35dh8")
+client = genai.Client(api_key=os.environ.get('APIBARD'))
 #rom dotenv import load_dotenv
 
 #oad_dotenv()
