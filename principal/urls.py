@@ -15,8 +15,7 @@ urlpatterns = [
     path('portugues/', portugues, name='portugues'),
     path('ingles/', ingles, name='ingles'),
     path('CV/', principal.as_view(template='CV.html'), name='CV'),
-    path("sitemap.xml",sitemap,{"sitemaps": sitemaps},name="django.contrib.sitemaps.views.sitemap",
-)
-    
+    path("sitemap.xml",sitemap,{"sitemaps": sitemaps},name="django.contrib.sitemaps.views.sitemap"),
+    path("assistenterodrigo", assistenterodrigo, name="assistenterodrigo"),    
 ]
 

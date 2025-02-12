@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+from google import genai
+
+client = genai.Client(api_key="AIzaSyBDszV_3ZUZgPhe0fkp4AAxfD-XxT35dh8")
 #rom dotenv import load_dotenv
 
 #oad_dotenv()

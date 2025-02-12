@@ -15,6 +15,32 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from vercel_app.settings import client
+
+@csrf_exempt
+def assistenterodrigo(request):
+    print(request.POST)
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user_message = data.get("message", "")
+            print(user_message)
+            # Resposta padrão
+            brad = client.models.generate_content(
+                        model="gemini-2.0-flash", contents=user_message
+                        )
+            response_message = f"""{brad.text}"""
+            print(response_message)
+
+            return JsonResponse({"response": response_message})
+        except json.JSONDecodeError:
+            return JsonResponse({"response": "Erro ao processar a mensagem."}, status=400)
+    
+    return JsonResponse({"response": "Método não permitido."}, status=405)
+
 
 def toggle_theme(request):
     current_theme = request.COOKIES.get('theme', 'dark')

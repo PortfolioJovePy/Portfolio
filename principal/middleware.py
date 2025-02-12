@@ -83,18 +83,19 @@ class TempoCarregamentoMiddleware:
 
         elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path and 'metas' not in request.path:
             request.tempo_carregamento_texto = '.4s'    
-            request.tempo_carregamento = 400                        
-            if '@' in request.POST['email'] and '.' in request.POST['email']:
-                if len(request.POST) == 2:
-                    if request.idioma == 'portugues':
-                        request.texto = f'Carregando...'     
+            request.tempo_carregamento = 400    
+            if 'email' in request.POST:                    
+                if '@' in request.POST['email'] and '.' in request.POST['email']:
+                    if len(request.POST) == 2:
+                        if request.idioma == 'portugues':
+                            request.texto = f'Carregando...'     
+                        else:
+                            request.texto = f'Loading...'     
                     else:
-                        request.texto = f'Loading...'     
-                else:
-                    if request.idioma == 'portugues':                        
-                        request.texto = f'Enviando seu e-mail.'     
-                    else:
-                        request.texto = f'Sending your e-mail.'     
+                        if request.idioma == 'portugues':                        
+                            request.texto = f'Enviando seu e-mail.'     
+                        else:
+                            request.texto = f'Sending your e-mail.'     
             else:
                 if request.idioma == 'portugues':
                     request.texto = f'Ops! Ocorreu um problema.'
