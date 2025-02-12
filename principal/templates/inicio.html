@@ -5,47 +5,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Portfólio de Jovê.py</title>
-  <style>
-    .chat-container {    
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-    .chat-messages {
-        height: 15vh;
-        padding: 3vw;
-        background-color: #f8f9fa;
-    }
-
-    .message.user {
-        background-color: #007bff;
-        color: white;
-        align-self: flex-end;
-    }
-    .message.assistant {
-        background-color: #e9ecef;
-        color: black;
-        align-self: flex-start;
-    }
-    .typing-indicator {
-        font-style: italic;
-        color: #6c757d;
-    }
-    
-</style>
+  
 </head>
 <body>
   <div class='mb-2' style="width:100%;">
   {% include 'particulas.html'%}  
 </div>
-<div class="chat-container" style="width:100%;">
-      <div id="chat-messages" class="chat-messages d-flex flex-column p-2"></div>
-      <form id="chat-form" class="input-group p-2">
-          <input type="text" id="chat-input" class="form-control" placeholder="Converse com a I.A generativa" required>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-      </form>
-</div>
+
+
+<div style="z-index: -1;">
+    {% include 'chatboot.html'%}
+  </div>
+
 
 <div style="z-index: -1;">
   {% include 'resumo_conteudos.html'%}
@@ -112,62 +83,5 @@
 </script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const chatForm = document.getElementById("chat-form");
-      const chatInput = document.getElementById("chat-input");
-      const chatMessages = document.getElementById("chat-messages");
-      const chatWindow = document.getElementById("chat-window");
-
-      chatForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const message = chatInput.value.trim();
-        if (message === "") return;
-
-        appendMessage("Você", message);
-        chatInput.value = "";
-
-        // Exibe a janela de chat (com animação)
-        chatWindow.classList.add("show");
-
-        // Adiciona o indicador de digitando...
-        const typingIndicator = document.createElement("div");
-        typingIndicator.className = "typing-indicator";
-        typingIndicator.innerHTML = "Assistente está digitando...";
-        chatMessages.appendChild(typingIndicator);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        // Enviar a mensagem ao backend via AJAX
-        fetch("/assistenterodrigo", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: message })
-        })
-        .then(response => response.json())
-        .then(data => {
-          chatMessages.removeChild(typingIndicator);
-          appendMessage("Assistente", data.response);
-        })
-        .catch(error => {
-          chatMessages.removeChild(typingIndicator);
-          appendMessage("Erro", "Ocorreu um erro ao processar a resposta.");
-          console.error("Erro na requisição AJAX:", error);
-        });
-      });
-
-      function appendMessage(sender, text) {
-        const messageElement = document.createElement("div");
-        messageElement.className = "message";
-        
-        // Substitui as quebras de linha por <br>
-        const formattedText = text.replace(/\n/g, "<br>");
-        
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${formattedText}`;
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-    });
-  </script>
-  
 </html>
 {% endblock %}
