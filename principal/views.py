@@ -24,6 +24,25 @@ from vercel_app.settings import client
 def assistenterodrigo(request):
     print(request.POST)
     if request.method == "POST":
+        response_message = """Considere o contexto 
+        **Rodrigo Jovê Cesar Morales Ruiz: Tecnologia, Inteligência de Dados e Mercado Imobiliário**  
+
+            Rodrigo Jovê Cesar Morales Ruiz é um profissional versátil que une expertise em análise de dados, programação e inteligência imobiliária. Com formação em Ciências Econômicas pela Universidade Federal da Paraíba (UFPB) e experiência consolidada no setor imobiliário, Rodrigo se destaca pela capacidade de transformar processos complexos em soluções eficientes por meio da automação e do uso inteligente da tecnologia.  
+
+            Atuando no Cartório Eunápio Torres, 6º Ofício de Notas e 2º Registral da Comarca de João Pessoa, ele trabalha diretamente com incorporações imobiliárias, loteamentos urbanos e averbações de imóveis. Sua atuação vai além das funções tradicionais do setor, pois ele aplica técnicas avançadas de análise de dados para otimizar a manipulação de informações, reduzir erros e aumentar a eficiência dos registros. Seu conhecimento aprofundado sobre o mercado imobiliário permite que ele antecipe tendências e proponha soluções estratégicas para os desafios do setor.  
+
+            Rodrigo possui habilidades avançadas em programação, especialmente em Python, linguagem que domina há mais de cinco anos. Ele utiliza essa expertise para desenvolver scripts de automação que agilizam processos burocráticos, criando soluções inovadoras para a gestão documental e a visualização de matrículas imobiliárias. Além disso, desenvolveu uma plataforma de auxílio para registradores, o que demonstra sua capacidade de criar ferramentas tecnológicas adaptadas às necessidades específicas do mercado.  
+
+            Seu interesse por dados também se reflete na experiência com análise financeira. Rodrigo elabora controles financeiros para um grupo familiar e empresarial que envolve sete investidores qualificados e três profissionais. Seu trabalho envolve a aplicação de modelos analíticos para gerenciamento de investimentos, análise de rentabilidade e otimização de recursos financeiros, combinando conhecimentos de economia e programação para oferecer insights estratégicos.  
+
+            No campo acadêmico, seu trabalho de conclusão de curso abordou a decisão entre financiar um imóvel ou alugar e investir simultaneamente, considerando um horizonte de 20 anos. O estudo utilizou simulações computacionais, séries históricas e programação orientada a objetos para avaliar a influência de fatores como taxa de juros, inflação, índices de correção monetária (como TR e IPCA) e custos associados a cada alternativa. Esse projeto evidencia sua capacidade analítica e sua habilidade em modelagem matemática aplicada a decisões financeiras.  
+
+            Além do setor imobiliário e financeiro, Rodrigo tem experiência em desenvolvimento web e automação de processos. Ele já trabalhou com Django para construir aplicações robustas, além de utilizar JavaScript, jQuery e bibliotecas como GSAP para criar animações e melhorar a experiência do usuário. Sua abordagem multidisciplinar o torna apto a atuar em diversas frentes tecnológicas, seja no desenvolvimento de sistemas, extração e tratamento de dados ou inteligência de negócios.  
+
+            Seu compromisso com a excelência e a inovação é evidente em todas as suas iniciativas. Seja na otimização de processos cartorários, no aprimoramento da gestão de investimentos ou no desenvolvimento de plataformas digitais, Rodrigo alia conhecimento técnico e visão estratégica para entregar soluções de alto impacto. Seu perfil combina pensamento analítico, habilidades computacionais avançadas e um profundo entendimento do mercado imobiliário, tornando-o um profissional diferenciado e altamente qualificado.
+
+            Responda com base no contexto descrito anteriormente e com o texto a seguir: 
+"""
         try:
             data = json.loads(request.body)
             user_message = data.get("message", "")
@@ -31,7 +50,7 @@ def assistenterodrigo(request):
             brad = client.models.generate_content(
                         model="gemini-2.0-flash", contents=user_message
                         )
-            response_message = f"""{brad.text}"""
+            response_message += f"""{brad.text}"""
 
             return JsonResponse({"response": response_message})
         except json.JSONDecodeError:
