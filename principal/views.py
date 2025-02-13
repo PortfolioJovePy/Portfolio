@@ -24,7 +24,7 @@ from vercel_app.settings import client
 def assistenterodrigo(request):
     print(request.POST)
     if request.method == "POST":
-        response_message = """Considere o contexto 
+        user_message = """Considere o contexto 
         **Rodrigo Jovê Cesar Morales Ruiz: Tecnologia, Inteligência de Dados e Mercado Imobiliário**  
 
             Rodrigo Jovê Cesar Morales Ruiz é um profissional versátil que une expertise em análise de dados, programação e inteligência imobiliária. Com formação em Ciências Econômicas pela Universidade Federal da Paraíba (UFPB) e experiência consolidada no setor imobiliário, Rodrigo se destaca pela capacidade de transformar processos complexos em soluções eficientes por meio da automação e do uso inteligente da tecnologia.  
@@ -45,12 +45,12 @@ def assistenterodrigo(request):
 """
         try:
             data = json.loads(request.body)
-            user_message = data.get("message", "")
+            user_message += data.get("message", "")
             # Resposta padrão
             brad = client.models.generate_content(
                         model="gemini-2.0-flash", contents=user_message
                         )
-            response_message += f"""{brad.text}"""
+            response_message = f"""{brad.text}"""
 
             return JsonResponse({"response": response_message})
         except json.JSONDecodeError:
