@@ -65,8 +65,8 @@
                 <div class="message assistant"><strong>Assistente:</strong> Pergunte qualquer coisa sobre Rodrigo e a I.A irá te responder</div>
             </div>
             <form id="chat-form" class="input-group mt-2 text-{{request.theme}}" onsubmit="sendMessage(event)">
-                <input type="text" id="chat-input" class="form-control" placeholder="Envie sua mensagem" required>
-                <button type="submit" class="btn btn-{{request.theme}} ">Enviar</button>
+                <input type="text" id="chat-input" class="form-control mb-2" placeholder="Envie sua mensagem" required style="max-width: 70vw;">
+                <button type="submit" class="btn btn-{{request.theme}} mb-2">Enviar</button>
             </form>
         </div>
 
