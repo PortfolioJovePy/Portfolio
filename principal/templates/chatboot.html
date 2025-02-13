@@ -4,7 +4,7 @@
             .chat-container {
                 width: 100%;
                 padding: 4vw;
-                height: 30vh;
+                height: 40vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
@@ -38,7 +38,7 @@
                 word-wrap: break-word;
             }
             .message.assistant {
-                background-color: white;
+                background-color: #F0F0F0;
                 color:black;
                 align-self: flex-start;
                 padding: 8px 15px;
@@ -56,18 +56,17 @@
             }
             #chat-form {
                 display: flex;
-                gap: 10px;
             }
         </style>
     </head>
     <body>
         <div class="chat-container">
             <div id="chat-messages" class="chat-messages">
-                <div class="message assistant"><strong>Assistente:</strong> Olá! Rodrigo está criando uma IA treinada com seus dados pessoais e documentos publicados, para que você possa conhecê-lo melhor por meio dela. Enquanto isso, que tal começarmos uma conversa sobre qualquer outro assunto?</div>
+                <div class="message assistant"><strong>Assistente:</strong> Pergunte qualquer coisa sobre Rodrigo e a I.A irá te responder</div>
             </div>
             <form id="chat-form" class="input-group mt-2 text-{{request.theme}}" onsubmit="sendMessage(event)">
                 <input type="text" id="chat-input" class="form-control" placeholder="Envie sua mensagem" required>
-                <button type="submit" class="btn btn-outline-{{request.theme}}">Enviar</button>
+                <button type="submit" class="btn btn-outline-{{request.font}} ">Enviar</button>
             </form>
         </div>
 
