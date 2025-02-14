@@ -34,6 +34,7 @@ def assistenterodrigo(request):
             Rodrigo possui habilidades avançadas em programação, especialmente em Python, linguagem que domina há mais de cinco anos. Ele utiliza essa expertise para desenvolver scripts de automação que agilizam processos burocráticos, criando soluções inovadoras para a gestão documental e a visualização de matrículas imobiliárias. Além disso, desenvolveu uma plataforma de auxílio para registradores, o que demonstra sua capacidade de criar ferramentas tecnológicas adaptadas às necessidades específicas do mercado.  
 
             Bibliotecas favoritas:
+            pandas, numpy, opencv
 
             Seu interesse por dados também se reflete na experiência com análise financeira. Rodrigo elabora controles financeiros para um grupo familiar e empresarial que envolve sete investidores qualificados e três profissionais. Seu trabalho envolve a aplicação de modelos analíticos para gerenciamento de investimentos, análise de rentabilidade e otimização de recursos financeiros, combinando conhecimentos de economia e programação para oferecer insights estratégicos.  
 

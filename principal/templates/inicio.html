@@ -11,13 +11,13 @@
   <div class='mb-2' style="width:100%;">
   {% include 'particulas.html'%}  
 </div>
-
-
-<div style="z-index: -1;">
-    {% include 'chatboot.html'%}
-  </div>
-
-
+<!-- Formulário alternativo -->
+ <div class="container-fluid p-4">
+<form id="alt-chat-form" class="input-group mt-2 form-control-lg" onsubmit="sendMessageAlt(event)">
+  <input type="text" id="alt-chat-input" class="form-control" placeholder="Converse com minha I.A sobre mim" required >
+  <button type="submit" class="btn btn-{{request.theme}}">Enviar</button>
+</form>
+</div>
 <div style="z-index: -1;">
   {% include 'resumo_conteudos.html'%}
 </div>
@@ -29,6 +29,72 @@
 
 
 </body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+     const chatModal = document.getElementById("chat-modal");
+     const openChatBtn = document.getElementById("open-chat");
+     const closeChatBtn = document.getElementById("close-chat");
+     const chatForm = document.getElementById("chat-form");
+     const chatInput = document.getElementById("chat-input");
+     const chatMessages = document.getElementById("chat-messages");
+     const altChatForm = document.getElementById("alt-chat-form");
+     const altChatInput = document.getElementById("alt-chat-input");
 
+     openChatBtn.addEventListener("click", () => chatModal.style.display = "block");
+     closeChatBtn.addEventListener("click", () => chatModal.style.display = "none");
+     window.addEventListener("click", (e) => { if (e.target === chatModal) chatModal.style.display = "none"; });
+
+     chatForm.addEventListener("submit", sendMessage);
+     altChatForm.addEventListener("submit", sendMessageAlt);
+
+     function sendMessage(event) {
+         event.preventDefault();
+         processMessage(chatInput.value);
+         chatInput.value = "";
+     }
+
+     function sendMessageAlt(event) {
+         event.preventDefault();
+         chatModal.style.display = "block";
+         processMessage(altChatInput.value);
+         altChatInput.value = "";
+     }
+
+     function processMessage(message) {
+         if (message.trim() === "") return;
+         appendMessage("Você", message, "user");
+
+         const typingIndicator = document.createElement("div");
+         typingIndicator.className = "typing-indicator";
+         typingIndicator.innerHTML = "Assistente está digitando...";
+         chatMessages.appendChild(typingIndicator);
+         chatMessages.scrollTop = chatMessages.scrollHeight;
+
+         fetch("/assistenterodrigo", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ message: message })
+         })
+         .then(response => response.json())
+         .then(data => {
+             chatMessages.removeChild(typingIndicator);
+             appendMessage("Assistente", data.response, "assistant");
+         })
+         .catch(error => {
+             chatMessages.removeChild(typingIndicator);
+             appendMessage("Erro", "Ocorreu um erro ao processar a resposta.", "assistant");
+             console.error("Erro na requisição AJAX:", error);
+         });
+     }
+
+     function appendMessage(sender, text, type) {
+         const messageElement = document.createElement("div");
+         messageElement.className = `message ${type}`;
+         messageElement.innerHTML = `<strong>${sender}:</strong> ${text.replace(/\n/g, "<br>")}`;
+         chatMessages.appendChild(messageElement);
+         chatMessages.scrollTop = chatMessages.scrollHeight;
+     }
+ });
+</script>
 </html>
 {% endblock %}
