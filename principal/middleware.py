@@ -14,7 +14,7 @@ class CalculoTempoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):             
-        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path:
+        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path or '.js' in request.path or ':' in request.path:
             print("Se carregar duas vezes, investigar bug aqui")
             pass
 
@@ -78,7 +78,7 @@ class TempoCarregamentoMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):      
-        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path:
+        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path or '.js' in request.path or ':' in request.path:
             return HttpResponse()
 
         elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path and 'metas' not in request.path:
