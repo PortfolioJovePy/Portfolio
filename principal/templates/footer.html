@@ -46,11 +46,11 @@
         {%else%}
         <p>Receive new content by email:</p>
         {%endif%}        
- <div class="input-group mb-3">
-    <form class="text-{{request.font}} d-flex w-100" method="post" novalidate> 
+ <div class="input-group mb-3" style="max-width: 45vw;">
+    <form class="text-{{ request.font }} d-flex w-100" method="post" novalidate> 
         {% csrf_token %}
-        <div class="form-control" {{ newsletter.email }}
-        <button class="btn btn-outline-{{request.font}}" type="submit" id="button-addon2">Assinar</button>
+        {{ newsletter.email }}
+        <button class="btn btn-outline-{{ request.font }} mt-4" type="submit">Assinar</button>
     </form>          
 </div>
     </div>
