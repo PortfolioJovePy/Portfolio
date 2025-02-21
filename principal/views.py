@@ -33,8 +33,51 @@ def assistenterodrigo(request):
 
             Rodrigo possui habilidades avançadas em programação, especialmente em Python, linguagem que domina há mais de cinco anos. Ele utiliza essa expertise para desenvolver scripts de automação que agilizam processos burocráticos, criando soluções inovadoras para a gestão documental e a visualização de matrículas imobiliárias. Além disso, desenvolveu uma plataforma de auxílio para registradores, o que demonstra sua capacidade de criar ferramentas tecnológicas adaptadas às necessidades específicas do mercado.  
 
-            Bibliotecas favoritas:
-            pandas, numpy, opencv
+            30 biblioteva mais usadas por rodrigo:
+            
+
+1. Manipulação de Dados e Cálculos
+	1.	Pandas – Estruturas de dados e análise.
+	2.	NumPy – Cálculos numéricos e matrizes.
+	3.	SciPy – Ferramentas matemáticas e científicas.
+	4.	Regular Expressions (re) – Expressões regulares para extração de padrões.
+	5.	Random – Uso de aleatoriedade.
+	6.	SymPy – Cálculo simbólico e álgebra computacional.
+	7.	QuantLib – Modelagem financeira e precificação.
+    8. Spacy - processamento de linguagem natural
+
+2. Visualização de Dados
+	8.	Plotly Express – Gráficos interativos simples.
+	9.	Plotly Graph Objects – Gráficos altamente customizáveis.
+	10.	Matplotlib – Gráficos estáticos e customizados.
+	11.	Seaborn – Visualização estatística avançada.
+
+3. Frameworks e scraping
+	12.	Django – Framework web completo.
+	13.	Tesseract – tecnologia OCR
+	14.	Requests – Requisições HTTP.
+	15.	BeautifulSoup – Web scraping.
+	16.	Selenium – Automação de navegação web.
+	17.	Bootstrap – Design para aplicações web
+
+4. Automação e Manipulação de Arquivos
+	18.	os – Interação com o sistema operacional.
+	19.	opencv – Manipulação de imagens
+	20.	zipfile – Extração e compactação de arquivos ZIP.
+	21.	json – Manipulação de JSON.
+	22.	pyautogui – manipulação de hardware
+	23.	pdfminer – manipulação de arquivos pdf.
+
+5. Machine Learning, Estatística e Simulações
+	24.	Scikit-learn – Modelos de aprendizado de máquina.
+	25.	Statsmodels – Modelos estatísticos e econométricos.
+	26.	TensorFlow – Deep learning.
+	27.	Monte Carlo (random + numpy) – Simulações probabilísticas.
+
+6. Formatação, Documentação e Geração de Dados
+	28.	LaTeX (Overleaf) – Documentação científica.
+	30.	python-docx – Geração de documentos word.
+	
 
             Seu interesse por dados também se reflete na experiência com análise financeira. Rodrigo elabora controles financeiros para um grupo familiar e empresarial que envolve sete investidores qualificados e três profissionais. Seu trabalho envolve a aplicação de modelos analíticos para gerenciamento de investimentos, análise de rentabilidade e otimização de recursos financeiros, combinando conhecimentos de economia e programação para oferecer insights estratégicos.  
 
