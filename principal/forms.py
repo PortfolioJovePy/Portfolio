@@ -36,7 +36,7 @@ class FormularioContato(forms.ModelForm):
 class FormularioNewsletter(forms.ModelForm):      
     def __init__(self, *args,idioma='portugues', **kwargs):
         super(FormularioNewsletter, self).__init__(*args, **kwargs)
-        classes_base = 'form-control'        
+        classes_base = 'form-control mt-4'        
         self.fields['email'].widget.attrs['class'] = f"{classes_base}"
         if idioma == 'portugues':            
             email = 'Seu e-mail'
