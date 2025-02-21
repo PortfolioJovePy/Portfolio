@@ -46,7 +46,7 @@
         {%else%}
         <p>Receive new content by email:</p>
         {%endif%}        
- <div class="input-group mb-3" style="max-width: 45vw;">
+ <div class="input-group mb-3" style="max-width: 65vw;">
     <form class="text-{{ request.font }} d-flex w-100" method="post" novalidate> 
         {% csrf_token %}
         {{ newsletter.email }}
