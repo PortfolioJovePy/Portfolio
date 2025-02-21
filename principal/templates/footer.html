@@ -47,14 +47,12 @@
         <p>Receive new content by email:</p>
         {%endif%}        
         <div class="input-group mb-3" style="max-width:45vw;">
-          <form class="text-{{request.font}}" method="post" novalidate> 
-            {% csrf_token %}
-            <div class="input-group mb-3 text-{{request.font}}" >
-              {{newsletter}}
-              <button class="btn btn-outline-{{request.font}}" type="submit" id="button-addon2">Assinar</button>
-            </div>  
-            </form>          
-        </div>
+  <form class="text-{{request.font}}" method="post" novalidate> 
+    {% csrf_token %}
+    {{newsletter}}
+    <button class="btn btn-outline-{{request.font}}" type="submit" id="button-addon2">Assinar</button>
+  </form>  
+</div>
       </div>
     </div>
     <hr class="bg-{{request.font}}">
