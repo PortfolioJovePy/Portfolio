@@ -49,7 +49,7 @@
         <div class="input-group mb-3" style="max-width:45vw;">
   <form class="text-{{request.font}}" method="post" novalidate> 
     {% csrf_token %}
-    {{newsletter}}
+    {{newsletter.email}}
     <button class="btn btn-outline-{{request.font}}" type="submit" id="button-addon2">Assinar</button>
   </form>  
 </div>
