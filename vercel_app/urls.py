@@ -25,6 +25,7 @@ urlpatterns = [
     path('e-mails/', include('emails.urls'),),
     path('publicacoes/', include('conteudos.urls'),),
     path('metas/',include('metricas.urls'),),
+    path('webhook/',include('webhook.urls'),),
     
 ]
 

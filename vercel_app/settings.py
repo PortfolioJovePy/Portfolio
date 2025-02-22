@@ -14,6 +14,16 @@ from pathlib import Path
 import dj_database_url
 import os
 from google import genai
+from dotenv import load_dotenv
+
+GRAPH_API_TOKEN = "EABiMrIOsZAJ8BOwq4uVVciwrdYrD4kZCUTf13IfdgEJWttvagZAZAPzY3veGdhXZCOpucqvPieRXZCYlEYPjPSmt4eiMmsPCWy32utBeipL6sO9tDVhu4TydynIEZB6CZASv4x7fSNn4N0afUcCodotZAYhV2fRA9UCOFrzW1Vamr52WexuXBzDIXGBBfN8oN34zdglrmUwtUah7DLtMAtNGWNMQQg7sW8gX7JqMscqYOfgJJeeOmEvoZD"
+WEBHOOK_VERIFY_TOKEN = "portfoliojovepy"
+BUSINESS_PHONE_NUMBER_ID = "116311301348821"
+
+
+
+# Carrega o .env
+load_dotenv()
 
 client = genai.Client(api_key=os.environ.get('APIBARD'))
 #rom dotenv import load_dotenv
@@ -54,7 +64,8 @@ INSTALLED_APPS = [
     'principal',
     'emails',
     'conteudos',
-    'metricas'
+    'metricas',
+    'webhook'
 ]
 
 MIDDLEWARE = [
