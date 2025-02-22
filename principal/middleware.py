@@ -68,7 +68,7 @@ class CalculoTempoMiddleware:
                     )
                     visitante.save()
                 except Exception as e:
-                    print(e)
+                    print('Falha ao localizar região do IP')
                 
             
             return response
