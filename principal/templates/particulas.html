@@ -39,17 +39,24 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      let resizeTimeout;
+  
       window.addEventListener('resize', function() {
-        // Aguarde um tempo para evitar execução repetida durante o redimensionamento
-        clearTimeout(window.resizeTimeout);
-        window.resizeTimeout = setTimeout(function() {
-          // Recrie as partículas ou ajuste a configuração conforme o tamanho da tela
-          pJS.fn.vendors.destroy();
-          pJS.fn.particlesCreate();
-        }, 300); // Ajuste o tempo (em ms) conforme necessário
+        if (resizeTimeout) {
+          cancelAnimationFrame(resizeTimeout);
+        }
+  
+        resizeTimeout = requestAnimationFrame(() => {
+          if (window.pJS && pJS.fn && pJS.fn.vendors.destroy) {
+            pJS.fn.vendors.destroy();
+            pJS.fn.particlesCreate();
+          }
+        });
       });
     });
   </script>
+
+
 
 
 </body>
