@@ -164,8 +164,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.me.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '{}@icloud.com'.format(os.environ.get('EMAILUSER'))  # Seu endereço de e-mail do iCloud
-EMAIL_MASK = 'contato@{}'.format(os.environ.get('DOMINIO'))
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')  # Seu endereço de e-mail do iCloud
+EMAIL_MASK = os.environ.get('EMAIL_MASK')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Sua senha específica de app para o Django
 
 

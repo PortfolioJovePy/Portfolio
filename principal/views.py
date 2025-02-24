@@ -200,7 +200,7 @@ class principal(View):
             #formulário de contato
             if 'nome' in request.POST.keys() and 'inicio.html' in self.template and 'metas' not in request.path:
                 form = FormularioContato(request.POST)
-                if form.is_valid():
+                if form.is_valid():                    
                     if form.cleaned_data['email']:
                         send_mail(
                                     subject='Confirmação de envio para jove.py',
@@ -210,6 +210,7 @@ class principal(View):
                                     fail_silently=False,
                                     )
                     form.save() 
+                    print("salvou")
                     if request.idioma == 'portugues':
                         self.context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books.'    
                         self.context['titulo'] = 'Seu e-mail foi enviado!'

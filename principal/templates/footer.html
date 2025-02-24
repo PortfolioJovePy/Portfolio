@@ -47,8 +47,9 @@
         <p>Receive new content by email:</p>
         {%endif%}        
  <div class="input-group mb-3" style="max-width: 65vw;">
-    <form class="text-{{ request.font }} d-flex w-100" method="post" novalidate> 
+    <form name='newsletter' class="text-{{ request.font }} d-flex w-100" method="post" novalidate> 
         {% csrf_token %}
+        <input type="hidden" name="newsletter" value="formulario_de_newsletter">
         {{ newsletter.email }}
         <button class="btn btn-outline-{{ request.font }} mt-4" type="submit">Assinar</button>
     </form>          

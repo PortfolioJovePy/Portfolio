@@ -4,35 +4,32 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import HttpResponse
 
-class TempoCarregamentoMiddleware:    
+class TempoCarregamentoMiddleware:     
+    """
+    Destinado à dinâmica das animações. 
+    Palavras e tempos de carregamentos
+    """
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):              
-        if request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path and 'metas' not in request.path:
+        if request.method == 'POST' and 'admin' not in request.path: #deixar assim mas depois verificar necessidade
             request.tempo_carregamento_texto = '.4s'    
             request.tempo_carregamento = 400    
-            if 'email' in request.POST:                    
-                if '@' in request.POST['email'] and '.' in request.POST['email']:
-                    if len(request.POST) == 2:
-                        if request.idioma == 'portugues':
-                            request.texto = f'Carregando...'     
-                        else:
-                            request.texto = f'Loading...'     
-                    else:
-                        if request.idioma == 'portugues':                        
-                            request.texto = f'Enviando seu e-mail.'     
-                        else:
-                            request.texto = f'Sending your e-mail.'     
-            else:
+            if 'email' in request.POST and 'newsletter' in request.POST:                                                        
                 if request.idioma == 'portugues':
-                    request.texto = f'Ops! Ocorreu um problema.'
+                    request.texto = f'Carregando...'     
                 else:
-                    request.texto = f'Ops! there was a problem.'
+                    request.texto = f'Loading...'     
+            elif 'contato_email'in request.POST:
+                if request.idioma == 'portugues':                        
+                    request.texto = f'Enviando seu e-mail.'     
+                else:
+                    request.texto = f'Sending your e-mail.'     
             response = self.get_response(request)
             return response
         else:            
-            if request.path == '/' and '.js' not in request.path:
+            if request.path == '/':
                 request.tempo_carregamento_texto = '.8s'    
                 request.tempo_carregamento = 800
                 if request.idioma == 'portugues':

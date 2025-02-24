@@ -22,6 +22,7 @@
         <div class="row text-center text-{{request.theme}} text-{{request.theme}}">                        
               <form class="text-{{request.theme}}" method="post" novalidate>
                   {% csrf_token %}
+                  <input type="hidden" name="contato_email" value="formulario_de_newsletter">
                   {{ form.as_p }}
                   {%if request.idioma == 'portugues'%}
                   <button type="submit" class="btn btn-outline-{{request.theme}}" style="width:70vw;">Enviar</button>
