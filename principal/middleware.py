@@ -2,76 +2,7 @@ from django.shortcuts import render
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.urls import reverse
-from .models import Visitantes
-from bs4 import BeautifulSoup
-import requests
-import re
 from django.http import HttpResponse
-
-
-class CalculoTempoMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):             
-        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path or '.js' in request.path or ':' in request.path or 'Stats' in request.path:
-            print("Se carregar duas vezes, investigar bug aqui")
-            pass
-
-        else:
-            if 'entrada' not in request.session:
-                # Se não houver entrada na sessão, cria uma nova entrada com o tempo atual
-                request.session['entrada'] = str(timezone.now())
-            
-            response = self.get_response(request)
-            hoje = timezone.now().date()
-            visitante_do_dia = Visitantes.objects.filter(data=hoje).first()
-            entrada_str = request.session['entrada']
-            entrada = datetime.strptime(entrada_str, "%Y-%m-%d %H:%M:%S.%f%z")                            
-            saida = timezone.now()
-            tempo_sessao = saida - entrada
-            
-            if visitante_do_dia:                                            
-                if entrada != visitante_do_dia.entrada:
-                    visitante_do_dia.entrada = entrada                                                            
-                    visitante_do_dia.tempo_sessao += tempo_sessao #adiciona o tempo                                        
-                else:
-                    if visitante_do_dia.tempo_sessao > tempo_sessao: #se no calculo a sessao for menor q o total, adiciona-se
-                        visitante_do_dia.tempo_sessao += tempo_sessao
-                    else:                    
-                        visitante_do_dia.tempo_sessao = tempo_sessao #assume um erro de calculo e coloca o tempo superior no local da sessao                        
-                visitante_do_dia.save()
-                request.session['entrada'] = str(timezone.now()) #evita caso uma nova requisicao seja feita
-            else:
-                # Se não existe, cria um novo objeto Visitantes para o dia atual
-                try:
-                    ip = request.META['REMOTE_ADDR']
-                    url =f'https://www.geolocation.com/pt?ip={ip}#ipresult'
-                    r = requests.get(url)
-                    soup = BeautifulSoup(r.content, 'html.parser')
-                    
-                    infos_ip = soup.find('table').find_all('td')                        
-                    
-                    pais= re.sub(r'\s+', ' ', infos_ip[1].text.replace('\n',' '))
-                    regiao= re.sub(r'\s+', ' ', infos_ip[2].text.replace('\n',' '))
-                    cidade= re.sub(r'\s+', ' ', infos_ip[3].text.replace('\n',' '))
-
-                    visitante = Visitantes.objects.create(
-                        ip=ip,
-                        data=hoje,
-                        entrada =  timezone.now(),
-                        saida = saida,
-                        tempo_sessao=tempo_sessao,
-                        pais=pais,
-                        regiao=regiao,
-                        cidade=cidade,
-                    )
-                    visitante.save()
-                except Exception as e:
-                    print('Falha ao localizar região do IP')
-                
-            
-            return response
 
 class TempoCarregamentoMiddleware:    
     def __init__(self, get_response):

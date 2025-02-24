@@ -4,7 +4,6 @@ from django.http import FileResponse
 from django.views import View
 from django.shortcuts import render, redirect
 from datetime import datetime
-import requests
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from .forms import *
