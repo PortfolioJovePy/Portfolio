@@ -8,11 +8,8 @@ class TempoCarregamentoMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):      
-        if 'favicon' in request.path or 'staticfiles' in request.path  or 'particles' in request.path or 'static' in request.path or '.png' in request.path or 'robots' in request.path or 'script' in request.path or '.js' in request.path or ':' in request.path or 'Stats' in request.path:
-            return HttpResponse()
-
-        elif request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path and 'metas' not in request.path:
+    def __call__(self, request):              
+        if request.method == 'POST' and 'admin' not in request.path and 'e-mails' not in request.path and 'metas' not in request.path:
             request.tempo_carregamento_texto = '.4s'    
             request.tempo_carregamento = 400    
             if 'email' in request.POST:                    
