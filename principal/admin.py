@@ -12,5 +12,5 @@ class NewsletterAdmin(admin.ModelAdmin):
     search_fields = ('email',)  # Campos de pesquisa
 
 
-admin.site.register(Contato, ContatoAdmin)
+admin.site.register(ContatoDuvidaEmail, ContatoAdmin)
 admin.site.register(Newsletter,NewsletterAdmin)

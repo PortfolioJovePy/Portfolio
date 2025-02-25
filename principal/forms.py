@@ -20,7 +20,7 @@ class FormularioContato(forms.ModelForm):
         self.fields['mensagem'].widget.attrs['placeholder'] = mensagem
         self.fields['email'].widget.attrs['placeholder'] = email
     class Meta:
-        model = Contato
+        model = ContatoDuvidaEmail
         fields = ['nome', 'email', 'mensagem']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control mb-2','placeholder': 'Apresente-se'}),

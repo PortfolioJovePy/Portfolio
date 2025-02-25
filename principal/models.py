@@ -1,6 +1,6 @@
 from django.db import models
 
-class Contato(models.Model):
+class ContatoDuvidaEmail(models.Model): #email de contato
     nome = models.CharField(max_length=100)
     email = models.EmailField()
     mensagem = models.TextField()
