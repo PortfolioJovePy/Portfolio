@@ -36,28 +36,6 @@
     <script>
     document.getElementById('particles-js').style.backgroundColor = 'transparent'; 
   </script>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let resizeTimeout;
-  
-      window.addEventListener('resize', function() {
-        if (resizeTimeout) {
-          cancelAnimationFrame(resizeTimeout);
-        }
-  
-        resizeTimeout = requestAnimationFrame(() => {
-          if (window.pJS && pJS.fn && pJS.fn.vendors.destroy) {
-            pJS.fn.vendors.destroy();
-            pJS.fn.particlesCreate();
-          }
-        });
-      });
-    });
-  </script>
-
-
-
 
 </body>
 </html>
