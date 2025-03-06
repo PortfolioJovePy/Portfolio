@@ -18,6 +18,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from vercel_app.settings import client
+from conteudos.views import criar_contato
+from emails.models import Contatos
+from django.core.exceptions import ObjectDoesNotExist
 
 @csrf_exempt
 def assistenterodrigo(request):
@@ -210,7 +213,7 @@ class principal(View):
                                     fail_silently=False,
                                     )
                     form.save() 
-                    print("salvou")
+                    criar_contato(form.nome,form.email,'Não consta',0,0)
                     if request.idioma == 'portugues':
                         self.context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books.'    
                         self.context['titulo'] = 'Seu e-mail foi enviado!'
@@ -236,6 +239,7 @@ class principal(View):
                 form = FormularioNewsletter(request.POST,idioma=request.idioma)    
                 if form.is_valid():
                     form.save()
+                    criar_contato('Não consta',form.email,'Não consta',0,0)
                     if request.idioma == 'portugues':
                         self.context['texto'] = 'Você acaba de se inscrever na minha newsletter. Toda vez que eu publicar um novo conteúdo você será informado.'            
                         self.context['titulo'] = 'Parabéns!!'
