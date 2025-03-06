@@ -213,7 +213,7 @@ class principal(View):
                                     fail_silently=False,
                                     )
                     form.save() 
-                    criar_contato(form.nome,form.email,'Não consta',0,0)
+                    criar_contato(form.cleaned_data['nome'],form.cleaned_data['email'],'Não consta',0,0)
                     if request.idioma == 'portugues':
                         self.context['texto'] = f'Que bom você me enviou uma mensagem. O responderei o mais breve possível, mas enquanto isso que tal dar uma olhada nos meus conteúdos e e-books.'    
                         self.context['titulo'] = 'Seu e-mail foi enviado!'
@@ -239,7 +239,7 @@ class principal(View):
                 form = FormularioNewsletter(request.POST,idioma=request.idioma)    
                 if form.is_valid():
                     form.save()
-                    criar_contato('Não consta',form.email,'Não consta',0,0)
+                    criar_contato('Não consta',form.cleaned_data['email'],'Não consta',0,0)
                     if request.idioma == 'portugues':
                         self.context['texto'] = 'Você acaba de se inscrever na minha newsletter. Toda vez que eu publicar um novo conteúdo você será informado.'            
                         self.context['titulo'] = 'Parabéns!!'

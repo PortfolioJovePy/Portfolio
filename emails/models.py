@@ -4,7 +4,7 @@ from django.core.validators import FileExtensionValidator
 class Contatos(models.Model):
     nome = models.CharField(max_length=255, verbose_name="Nome")
     email = models.EmailField(unique=True, verbose_name="E-mail")
-    nascimento = models.DateField(verbose_name='Data de Nas cimento')
+    nascimento = models.CharField(verbose_name='Data de Nascimento')
     contatos_estabelecidos = models.IntegerField(verbose_name='Contatos estabelecidos')    
     negocios_realizados = models.IntegerField(verbose_name='Negócios realizados')    
     

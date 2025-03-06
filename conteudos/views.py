@@ -11,16 +11,19 @@ from principal.forms import *
 from emails.models import Contatos
 
 def criar_contato(nome, email, nascimento, contatos_estabelecidos, negocios_realizados):
-    if not Contatos.objects.filter(email=email).exists():
-        contato = Contatos.objects.create(
-            nome=nome,
-            email=email,
-            nascimento=nascimento,
-            contatos_estabelecidos=contatos_estabelecidos,
-            negocios_realizados=negocios_realizados
-        )
-        return contato
-    return None  # Retorna None caso o e-mail já exista
+    try:
+        if not Contatos.objects.filter(email=email).exists():
+            contato = Contatos.objects.create(
+                nome=nome,
+                email=email,
+                nascimento=nascimento,
+                contatos_estabelecidos=contatos_estabelecidos,
+                negocios_realizados=negocios_realizados
+            )
+            return contato    
+        return None  # Retorna None caso o e-mail já exista
+    except Exception as e:
+        print(e)
 
 
 class painel_conteudos(View):
@@ -55,7 +58,7 @@ class painel_conteudos(View):
             form = FormularioLancamentoEbook1(request.POST)
             if form.is_valid():
                 form.save()
-                criar_contato('Não consta',form.email,'Não consta',0,0)
+                criar_contato('Não consta',form.cleaned_data['email'],'Não consta',0,0)
                 self.context['titulo'] = 'Parabéns!!'
                 self.context['texto'] = 'Agora você faz parte da lista de espera do meu próximo e-book. Lembrando que você foi inscrito automaticamente na minha newsletter e pode cancelar a qualquer momento, basta entrar em contato comigo.'
                 try:
