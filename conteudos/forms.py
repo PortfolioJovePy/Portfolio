@@ -32,7 +32,7 @@ class FormularioLancamentoEbook1(forms.ModelForm):
     class Meta:
         model = LancamentoEbook1
         fields = ['email']
-        widgets = {"email": forms.EmailInput(attrs={"class":"form-control"}),}
+        widgets = {"email": forms.EmailInput(attrs={"class":"form-control",}),}
         
         labels = {
             'email': '',

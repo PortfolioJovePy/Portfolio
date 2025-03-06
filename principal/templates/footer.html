@@ -40,20 +40,26 @@
         </ul>
       </div>
       <div class="col-md">
-        <h5>Newsletter</h5>
-        {%if request.idioma == 'portugues'%}
-        <p>Receba novos conteúdos por e-mail:</p>
-        {%else%}
-        <p>Receive new content by email:</p>
-        {%endif%}        
- <div class="input-group mb-3" style="max-width: 65vw;">
-    <form name='newsletter' class="text-{{ request.font }} d-flex w-100" method="post" novalidate> 
-        {% csrf_token %}
-        <input type="hidden" name="newsletter" value="formulario_de_newsletter">
-        {{ newsletter.email }}
-        <button class="btn btn-outline-{{ request.font }} mt-4" type="submit">Assinar</button>
-    </form>          
-</div>
+        <h5 class="mb-1">Newsletter</h5> <!-- Reduzi o espaçamento inferior -->
+        
+        {% if request.idioma == 'portugues' %}
+            <p class="mb-0" >Receba novos conteúdos por e-mail:</p> <!-- Reduzi o espaçamento inferior -->
+        {% else %}
+            <p class="mb-0" >Receive new content by email:</p>
+        {% endif %}
+    
+        <form name="newsletter" class="text-{{ request.font }} d-flex flex-column w-100" method="post" novalidate>
+            <input type="hidden" name="newsletter" value="formulario_de_newsletter">
+            
+            <div class="mb-2">
+                {{ newsletter.email }}
+            </div>
+    
+            <button class="btn btn-outline-{{ request.font }} w-100" type="submit">Assinar</button>
+        </form>
+    </div>
+    
+    
     </div>
     <hr class="bg-{{request.font}}">
     <div class="text-center text-{{request.font}}">
