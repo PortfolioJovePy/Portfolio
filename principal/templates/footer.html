@@ -52,10 +52,14 @@
             <input type="hidden" name="newsletter" value="formulario_de_newsletter">
             
             <div class="mb-2">
+              {% csrf_token %}
                 {{ newsletter.email }}
             </div>
-    
+            {% if request.idioma == 'portugues' %}
             <button class="btn btn-outline-{{ request.font }} w-100" type="submit">Assinar</button>
+            {%else%}
+            <button class="btn btn-outline-{{ request.font }} w-100" type="submit">Subscribe</button>
+            {%endif%}
         </form>
     </div>
     
