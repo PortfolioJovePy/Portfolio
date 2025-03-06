@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Contatos</title>
+    <!-- Incluindo o Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .increment-btn, .decrement-btn {
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .save-btn {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>CRM - Contatos</h1>
+        
+        <!-- Campo de busca -->
+        <div class="search-bar">
+            <input class="form-control" id="searchInput" type="text" placeholder="Buscar por nome, e-mail ou dados">
+        </div>
+
+        <!-- Tabela com os dados dos contatos -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="contactsTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Data de Nascimento</th>
+                        <th>Contatos Estabelecidos</th>
+                        <th>Negócios Realizados</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contato in contatos %}
+                    <tr data-contato-id="{{ contato.id }}">
+                        <td>{{ contato.nome }}</td>
+                        <td>{{ contato.email }}</td>
+                        <td>{{ contato.nascimento }}</td>
+                        <td>
+                            <button class="btn btn-secondary increment-btn" onclick="updateField(this, 'increment', 1)">+</button>
+                            <span class="contatos-estabelecidos">{{ contato.contatos_estabelecidos }}</span>
+                            <button class="btn btn-secondary decrement-btn" onclick="updateField(this, 'decrement', 1)">-</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary increment-btn" onclick="updateField(this, 'increment', 2)">+</button>
+                            <span class="negocios-realizados">{{ contato.negocios_realizados }}</span>
+                            <button class="btn btn-secondary decrement-btn" onclick="updateField(this, 'decrement', 2)">-</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-success save-btn" onclick="saveContato(this)">Salvar</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Função para atualizar os valores de Contatos Estabelecidos e Negócios Realizados
+        function updateField(button, action, fieldType) {
+            const span = (fieldType === 1) ? button.parentElement.querySelector('.contatos-estabelecidos') : button.parentElement.querySelector('.negocios-realizados');
+            let currentValue = parseInt(span.textContent);
+            
+            if (action === 'increment') {
+                span.textContent = currentValue + 1;
+            } else if (action === 'decrement' && currentValue > 0) {
+                span.textContent = currentValue - 1;
+            }
+        }
+
+        // Função para salvar as alterações no backend
+        function saveContato(button) {
+            // Coletar os dados da linha
+            const row = button.closest('tr');
+            const id = row.getAttribute('data-contato-id');
+            const nome = row.cells[0].textContent.trim();
+            const email = row.cells[1].textContent.trim();
+            const nascimento = row.cells[2].textContent.trim();
+            const contatosEstabelecidos = row.querySelector('.contatos-estabelecidos').textContent.trim();
+            const negociosRealizados = row.querySelector('.negocios-realizados').textContent.trim();
+
+            // Preparar os dados para enviar via AJAX
+            const data = {
+                'id': id,
+                'nome': nome,
+                'email': email,
+                'nascimento': nascimento,
+                'contatos_estabelecidos': contatosEstabelecidos,
+                'negocios_realizados': negociosRealizados
+            };
+
+            // Enviar os dados para o servidor usando AJAX
+            fetch("{% url 'salvar_contato' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Dados salvos com sucesso!");
+                } else {
+                    alert("Erro ao salvar dados.");
+                }
+            })
+            .catch(error => {
+                alert("Erro na comunicação com o servidor.");
+            });
+        }
+
+        // Função para filtrar os dados da tabela
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#contactsTable tbody tr');
+            
+            rows.forEach(row => {
+                const columns = row.getElementsByTagName('td');
+                let match = false;
+                
+                // Verifica se algum dos campos corresponde ao termo de busca
+                for (let i = 0; i < columns.length; i++) {
+                    if (columns[i].textContent.toLowerCase().includes(searchValue)) {
+                        match = true;
+                        break;
+                    }
+                }
+                
+                if (match) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <!-- Incluindo o JavaScript do Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}

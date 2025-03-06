@@ -10,7 +10,47 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from principal.forms import *
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from .models import Contatos
+from django.views.decorators.csrf import csrf_exempt  # Adicionando para permitir POST
+import json
 
+
+@csrf_exempt
+def salvar_contato(request):
+    if request.method == 'POST':
+        # Pega os dados enviados pelo AJAX
+        data = json.loads(request.body)
+        contato_id = data.get('id')
+        nome = data.get('nome')
+        email = data.get('email')
+        nascimento = data.get('nascimento')
+        contatos_estabelecidos = data.get('contatos_estabelecidos')
+        negocios_realizados = data.get('negocios_realizados')
+
+        try:
+            # Atualizar o contato no banco de dados
+            contato = Contatos.objects.get(id=contato_id)
+            contato.nome = nome
+            contato.email = email
+            contato.nascimento = nascimento
+            contato.contatos_estabelecidos = contatos_estabelecidos
+            contato.negocios_realizados = negocios_realizados
+            contato.save()
+
+            return JsonResponse({'success': True})
+        except Contatos.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Contato não encontrado'})
+
+    return JsonResponse({'success': False, 'error': 'Método inválido'})
+
+
+def crm_view(request):
+    # Buscar todos os contatos no banco de dados
+    contatos = Contatos.objects.all()
+    # Passar os contatos para o template
+    return render(request, 'CRM.html', {'contatos': contatos})
 
 class gerenciador(LoginRequiredMixin,View):
     template = 'gerenciador.html'        
@@ -108,7 +148,8 @@ class gerenciador(LoginRequiredMixin,View):
         
         elif path_atual == '/e-mails/upload-template/': 
             form = UploadTemplateForm(request.POST, request.FILES, prefix="upload_template")                        
-        
+        elif path_atual == '/e-mails/': 
+            print('teste')
         if form.is_valid():
             form.save()                 
             self.context = self.get_context(request, form=None)  
