@@ -39,7 +39,7 @@
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-{{request.font}}">
                     {% for contato in contatos %}
                     <tr data-contato-id="{{ contato.id }}">
                         <td class="editable" ondblclick="enableEdit(this)">{{ contato.nome }}</td>
