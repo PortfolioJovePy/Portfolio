@@ -7,8 +7,10 @@ urlpatterns = [
     path("contatos/", gerenciador.as_view(template='contatos.html'),name='contatos'),
     path("agendamento/", gerenciador.as_view(template='agendamento.html'),name='agendamento'),
     path("upload-template/", gerenciador.as_view(template='upload_template.html'),name='upload_template'),
-    path('crm/',crm_view, name='crm'),
+    path('crm/',gerenciador.as_view(template='CRM.html'), name='crm'),
     path('salvar_contato/', salvar_contato, name='salvar_contato'),
+    path('deletar_contato/', deletar_contato, name='deletar_contato'),
+
 
 
 ]

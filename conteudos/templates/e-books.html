@@ -1,77 +1,70 @@
+
+
 <!-- templates/conteudo_form.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container-fluid text-{{request.font}} mt-3 p-4">       
-    <h2 class="fs-2 no-underline fw-bolder mb-3 ">E-books</h2>   
-    
-    <div class="input-group mb-3">
-      {%if request.idioma == 'portugues' %}                    
-      <input type="text" class="form-control" id="filtro" placeholder="O que você está procurando?" aria-describedby="basic-addon1">
-      {%else%}              
-    <input type="text" class="form-control" id="filtro" placeholder="What are you looking for?" aria-describedby="basic-addon1">
-      {%endif%}
-    </div>        
-    <div id="conteudos">
-      <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
-        Não existe E-book com esse texto. Verifique em meu linkedin ou role abaixo até encontrar o que desejava.
-      </p>
-        <div class="documento card mb-3 imagem-efeito" data-titulo="Teclado, Mouse & Python: Automatize qualquer tarefa feita no computador. Um manual prático de automação para todos." >
-          <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{% static 'teclado_mouse_python.jpg' %}" class="img-fluid rounded-start" style="object-fit: cover;height: max-content;min-height:100%; max-height:100vw;">
-                </div>
-                <div class="col-md-8">
+<div class="container-fluid text-{{request.font}} mt-3 p-4">   
+  
+  <h2 class="fs-2 no-underline fw-bolder mb-3 ">E-books</h2>   
+  
+  
+  <div class="input-group mb-3">
+    {%if request.idioma == 'portugues' %}                    
+    <input type="text" class="form-control" id="filtro" placeholder="O que você está procurando?" aria-describedby="basic-addon1">
+    {%else%}              
+  <input type="text" class="form-control" id="filtro" placeholder="What are you looking for?" aria-describedby="basic-addon1">
+    {%endif%}
+  </div>        
+  <div id="conteudos">
+    <p id="nenhum-resultado" class='text-{{request.font}}' style="display: none;">
+      Não existe publicação com esse texto.
+    </p>
+      {% for conteudo in conteudos %}
+      <div class="documento card mb-3 imagem-efeito" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{{ conteudo.descricao }}{% else %}{{ conteudo.titulo_ingles }}{{ conteudo.descricao_ingles }}{% endif %}">
+        <div class="row g-0">  
+            <div class="col-md-4">
+                <img src="{% static 'teclado_mouse_python.jpg' %}" class="img-fluid rounded-start" style="object-fit: cover;height: max-content;min-height:100%; max-height:100vw;">
+            </div>                  
+            <div class="col d-flex flex-column">
+                <div class="card-body text-start flex-grow-1">
                     {% if request.idioma == 'portugues' %}
-                    <div class="card-body text-start">
-                      <h5 class="card-title fw-bold">Teclado, Mouse & Python: Automatize qualquer tarefa feita no computador. Um manual prático de automação para todos.</h5>
-                      <p class="card-text">Teclado, Mouse & Python" é um guia indispensável para qualquer pessoa que deseja aumentar sua produtividade e reduzir erros no uso do computador. Este livro oferece uma abordagem prática e acessível para a automação de tarefas cotidianas, desde simples operações de digitação até processos complexos, utilizando a linguagem de programação Python.</p>   
-                      <p class="card-text">Com instruções claras e exemplos detalhados, você aprenderá a utilizar o poder do Python para automatizar qualquer coisa, desde a organização de arquivos até a manipulação de dados e interações com aplicativos. Este manual abrangente é adequado para iniciantes e profissionais, fornecendo uma base sólida para explorar todo o potencial de automação oferecido pela combinação do teclado, mouse e Python.
-                      </p>   
-                      <p class="card-text">Ao dominar as técnicas apresentadas neste livro, você estará preparado para simplificar sua vida digital, liberando tempo para atividades mais importantes e reduzindo o risco de erros tediosos. Não importa se você é um estudante, profissional ou entusiasta de tecnologia, "Teclado, Mouse & Python" irá capacitá-lo a automatizar tarefas de forma eficiente e eficaz, transformando sua experiência computacional.</p>                                            
-                      <p class="card-text fw-bolder">Inscreva-se para receber a proposta de lançamento do livro. Você será automaticamente inscrito na minha newsletter e poderá cancelar a inscrição a qualquer momento.</p>                                                                  
-                    </div>
-                    <div class="card-footer bg-transparent border-0 text-end">
-                      <form class="text-{{request.font}}" method="post" id="lancamento_livro" name='lancamento_livro' novalidate> 
-                        <div class="row mb-3 grid gap-3">                          
-                          {% csrf_token %}
-                        {{ form}}          
-                          <div class="col mt-2">
-                            <button class="btn btn-outline-dark" type="submit" id="button-addon2">inscrever-se</button>                              
-                          </div>                   
-                        </div>  
-                        </div>
-                        </form> 
-                    
+                        <h5 class="card-title fw-bold">{{ conteudo.titulo }}</h5>
+                        <p class="card-text">{{ conteudo.descricao }}</p>                        
                     {% else %}
-                    <div class="card-body text-start">
-                      <h5 class="card-title">Keyboard, Mouse & Python: Automate Any Computer Task. A Practical Automation Guide for Everyone.</h5>
-                      <p class="card-text">"Keyboard, Mouse & Python" is an indispensable guide for anyone looking to increase their productivity and reduce errors in computer usage. This book offers a practical and accessible approach to automating everyday tasks, from simple typing operations to complex processes, using the Python programming language.</p>
-                      <p class="card-text">With clear instructions and detailed examples, you will learn to harness the power of Python to automate anything from file organization to data manipulation and interactions with applications. This comprehensive manual is suitable for beginners and professionals alike, providing a solid foundation for exploring the full potential of automation offered by the combination of keyboard, mouse, and Python.</p>
-                      <p class="card-text">By mastering the techniques presented in this book, you will be prepared to simplify your digital life, freeing up time for more important activities and reducing the risk of tedious errors. Whether you are a student, professional, or technology enthusiast, "Keyboard, Mouse & Python" will empower you to automate tasks efficiently and effectively, transforming your computing experience.</p>
-                      <p class="card-text fw-bolder">Sign up to receive the book launch proposal. You will be automatically subscribed to my newsletter and can unsubscribe at any time. The book will only be available in Brazilian Portuguese.</p>
-                      </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-0 text-end">
-                      <form class="text-{{request.font}}" method="post" id="lancamento_livro" name='lancamento_livro' novalidate> 
-                        <div class="row mb-3 grid gap-3">                          
-                          {% csrf_token %}
-                        {{ form}}          
-                          <div class="col mt-2">
-                            <button class="btn btn-outline-dark" type="submit" id="button-addon2">subscribe</button>                              
-                          </div>                   
-                        </div>  
-                        </div>
-                        </form> 
-                    </div>
+                        <h5 class="card-title fw-bold">{{ conteudo.titulo_ingles }}</h5>
+                        <p class="card-text">{{ conteudo.descricao_ingles }}</p>                        
                     {% endif %}
-                    
-
+                </div>
+                <div class="card-footer bg-transparent border-0 text-end">
+                  {% if request.idioma == 'portugues' %}
+                  <p class="card-text fs-3">Valor: {{ conteudo.valor }}</p>
+                  {%else%}
+                    {%if conteudo.valor == 'GRÁTIS'%}
+                    <p class="card-text fs-3">Value: Free</p>
+                    {%else%}
+                    <p class="card-text fs-3">Value: {{conteudo.valor}}</p>
+                    {%endif%}
+                  {%endif%}
+                    <form class="text-{{request.font}}" method="post" id="lancamento_livro" name='lancamento_livro' novalidate> 
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="mt-2">
+                            <button class="btn btn-outline-dark" type="submit" id="button-addon2">{% if request.idioma == 'portugues' %}inscrever-se{% else %}subscribe{% endif %}</button>
+                        </div>
+                    </form> 
                 </div>
             </div>
         </div>
     </div>
+    
+      {% empty %}
+      <li>Nenhuma publicação disponível.</li>
+      {% endfor %}
+  </div>
 </div>
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {

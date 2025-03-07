@@ -23,3 +23,13 @@ class Leituras(models.Model):
     titulo_ingles = models.CharField(max_length=100)
     resumo_ingles = models.CharField(max_length=500)
     link = models.CharField(max_length=10000)
+
+
+class Ebooks(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=500)
+    titulo_ingles = models.CharField(max_length=100)
+    descricao_ingles = models.CharField(max_length=500)
+    link_imagem = models.CharField(max_length=10000)
+    valor = models.CharField(max_length=500)
+    

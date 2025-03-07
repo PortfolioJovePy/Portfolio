@@ -42,3 +42,16 @@ class FormularioLancamentoEbook1(forms.ModelForm):
                 'unique': "Este e-mail já está cadastrado  para receber a proposta de lançamento deste e-book."
             }
         }
+
+class EbooksForm(forms.ModelForm):
+    class Meta:
+        model = Ebooks
+        fields = ['titulo', 'descricao', 'titulo_ingles', 'descricao_ingles', 'link_imagem', 'valor']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
+            'titulo_ingles': forms.TextInput(attrs={'class': 'form-control'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'descricao_ingles': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'link_imagem': forms.URLInput(attrs={'class': 'form-control'}),
+            'valor': forms.TextInput(attrs={'class': 'form-control'}),
+        }

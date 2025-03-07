@@ -36,6 +36,8 @@ class painel_conteudos(View):
         if self.template == 'painel_conteudos.html' and request.user.is_authenticated:
             if 'conteudos' in request.path:
                 self.context['form'] = ConteudoForm()
+            elif 'e-books' in request.path:
+                self.context['form'] = EbooksForm()
             else:
                 self.context['form'] = LeiturasForm()
         
@@ -45,6 +47,7 @@ class painel_conteudos(View):
         
         elif self.template == 'e-books.html':
             self.context['form'] = FormularioLancamentoEbook1()        
+            self.context['conteudos'] = reversed(list(Ebooks.objects.all().order_by('id')))
 
         elif self.template == 'leituras_recomendadas.html':                    
             self.context['conteudos'] = reversed(list(Leituras.objects.all().order_by('id')))

@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'principal',
     'emails',
     'conteudos',
+    'vendas'
 ]
 
 MIDDLEWARE = [

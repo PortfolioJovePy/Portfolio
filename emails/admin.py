@@ -3,7 +3,7 @@ from .models import Contatos, UploadTemplate, AgendarEmail
 
 @admin.register(Contatos)
 class ContatosAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'nascimento', 'contatos_estabelecidos', 'negocios_realizados')
+    list_display = ('nome', 'email', 'nascimento', 'contatos_estabelecidos', 'negocios_realizados','faturamento','lucro')
     search_fields = ('nome', 'email')
 
 @admin.register(UploadTemplate)

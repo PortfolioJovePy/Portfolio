@@ -15,6 +15,8 @@ from django.http import JsonResponse
 from .models import Contatos
 from django.views.decorators.csrf import csrf_exempt  # Adicionando para permitir POST
 import json
+from django.db import transaction
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @csrf_exempt
@@ -28,6 +30,8 @@ def salvar_contato(request):
         nascimento = data.get('nascimento')
         contatos_estabelecidos = data.get('contatos_estabelecidos')
         negocios_realizados = data.get('negocios_realizados')
+        faturamento = data.get('faturamento')
+        lucro = data.get('lucro')
 
         try:
             # Atualizar o contato no banco de dados
@@ -37,6 +41,8 @@ def salvar_contato(request):
             contato.nascimento = nascimento
             contato.contatos_estabelecidos = contatos_estabelecidos
             contato.negocios_realizados = negocios_realizados
+            contato.faturamento = faturamento
+            contato.lucro = lucro
             contato.save()
 
             return JsonResponse({'success': True})
@@ -44,6 +50,41 @@ def salvar_contato(request):
             return JsonResponse({'success': False, 'error': 'Contato não encontrado'})
 
     return JsonResponse({'success': False, 'error': 'Método inválido'})
+
+@csrf_exempt
+def deletar_contato(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'error': 'Método inválido'})
+
+    try:
+        data = json.loads(request.body)
+        contato_id = data.get('id')
+
+        if not contato_id:
+            return JsonResponse({'success': False, 'error': 'ID do contato não fornecido'})
+
+        with transaction.atomic():  # Garante que ambas as operações sejam concluídas juntas
+            # Buscar contato
+            contato = Contatos.objects.get(id=contato_id)
+            email = contato.email  # Capturar email antes de deletar
+            contato.delete()
+
+            # Excluir também da Newsletter, se existir
+            deleted_newsletter = False
+            if Newsletter.objects.filter(email=email).exists():
+                Newsletter.objects.filter(email=email).delete()
+                deleted_newsletter = True
+
+        return JsonResponse({
+            'success': True,
+            'message': 'Contato excluído com sucesso.',
+            'newsletter_deleted': deleted_newsletter
+        })
+
+    except ObjectDoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Contato não encontrado'})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': f'Erro inesperado: {str(e)}'})
 
 
 def crm_view(request):
@@ -61,8 +102,8 @@ class gerenciador(LoginRequiredMixin,View):
             form = form if form is not None else ContatosForm(prefix="contatos")
             titulo = 'Informações de contato'
             submit = 'Adicionar contato'
-            self.template = 'gerenciador.html'
-        
+            self.template = 'gerenciador.html'                         
+
         elif self.template == 'agendamento.html':
             form = form if form is not None else AgendarEmailForm(prefix="agendar_email")
             titulo = 'Agendamento de e-mail'
@@ -128,8 +169,15 @@ class gerenciador(LoginRequiredMixin,View):
                                 break
                     obj.send_date = nova_data
                     obj.save()
+        elif self.template == 'CRM.html':
+            contatos = Contatos.objects.all()
 
-        self.context = {'form': form, 'titulo': titulo, 'submit': submit}
+
+        if self.template != 'CRM.html':            
+            self.context = {'form': form, 'titulo': titulo, 'submit': submit}
+        else:
+            self.context = {'contatos':contatos}
+
         return self.context
     
 

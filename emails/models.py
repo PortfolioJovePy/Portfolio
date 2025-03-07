@@ -6,7 +6,9 @@ class Contatos(models.Model):
     email = models.EmailField(unique=True, verbose_name="E-mail")
     nascimento = models.CharField(verbose_name='Data de Nascimento')
     contatos_estabelecidos = models.IntegerField(verbose_name='Contatos estabelecidos')    
-    negocios_realizados = models.IntegerField(verbose_name='Negócios realizados')    
+    negocios_realizados = models.IntegerField(verbose_name='Negócios realizados')   
+    faturamento = models.IntegerField(verbose_name='Valor faturado')   
+    lucro = models.IntegerField(verbose_name='Valor do lucro')   
     
     def __str__(self):
         return self.email
