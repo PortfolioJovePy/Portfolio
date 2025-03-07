@@ -171,12 +171,13 @@ class gerenciador(LoginRequiredMixin,View):
                     obj.save()
         elif self.template == 'CRM.html':
             contatos = Contatos.objects.all()
+            titulo = 'CRM'
 
 
         if self.template != 'CRM.html':            
             self.context = {'form': form, 'titulo': titulo, 'submit': submit}
         else:
-            self.context = {'contatos':contatos}
+            self.context = {'contatos':contatos,'titulo':titulo}
 
         return self.context
     
