@@ -82,7 +82,14 @@ class painel_conteudos(View):
             else:
                 form = LeiturasForm(request.POST)
             if form.is_valid():            
-                form.save()            
+                form.save()       
+                """
+                condicionar ao tipo do conteudo 
+                se leitura recomendada, conteudo ou ebook
+                para montar mensagem
+                send_email para todos os assinantes da newsletter
+                computar +1 em contato realizado
+                """     
                 return redirect('painel_conteudos') 
             else:
                 self.context['form'] = form #retorna o formulário com erro
