@@ -29,34 +29,34 @@
             <table class="table table-striped table-bordered" id="contactsTable">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Data de Nascimento</th>
-                        <th>Contatos Estabelecidos</th>
-                        <th>Negócios Realizados</th>
-                        <th>Faturamento (R$)</th>
-                        <th>Lucro (R$)</th>
-                        <th>Ações</th>
+                        <th class="text-{{request.font}}">Nome</th>
+                        <th class="text-{{request.font}}">E-mail</th>
+                        <th class="text-{{request.font}}">Data de Nascimento</th>
+                        <th class="text-{{request.font}}">Contatos Estabelecidos</th>
+                        <th class="text-{{request.font}}">Negócios Realizados</th>
+                        <th class="text-{{request.font}}">Faturamento (R$)</th>
+                        <th class="text-{{request.font}}">Lucro (R$)</th>
+                        <th class="text-{{request.font}}">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="text-{{request.font}}">
                     {% for contato in contatos %}
                     <tr data-contato-id="{{ contato.id }}">
-                        <td class="editable" ondblclick="enableEdit(this)">{{ contato.nome }}</td>
-                        <td>{{ contato.email }}</td>
-                        <td class="editable" ondblclick="enableEdit(this)">{{ contato.nascimento }}</td>
+                        <td class="editable text-{{request.font}}" ondblclick="enableEdit(this)">{{ contato.nome }}</td>
+                        <td class="text-{{request.font}}">{{ contato.email }}</td>
+                        <td class="editable text-{{request.font}}" ondblclick="enableEdit(this)">{{ contato.nascimento }}</td>
                         <td>
                             <button class="btn btn-secondary increment-btn" onclick="updateField(this, 'increment', 1)">+</button>
-                            <span class="contatos-estabelecidos">{{ contato.contatos_estabelecidos }}</span>
+                            <span class="contatos-estabelecidos text-{{request.font}}">{{ contato.contatos_estabelecidos }}</span>
                             <button class="btn btn-secondary decrement-btn" onclick="updateField(this, 'decrement', 1)">-</button>
                         </td>
                         <td>
                             <button class="btn btn-secondary increment-btn" onclick="updateField(this, 'increment', 2)">+</button>
-                            <span class="negocios-realizados">{{ contato.negocios_realizados }}</span>
+                            <span class="negocios-realizados text-{{request.font}}">{{ contato.negocios_realizados }}</span>
                             <button class="btn btn-secondary decrement-btn" onclick="updateField(this, 'decrement', 2)">-</button>
                         </td>
-                        <td class="editable" ondblclick="enableEdit(this)">{{ contato.faturamento }}</td>
-                        <td class="editable" ondblclick="enableEdit(this)">{{ contato.lucro }}</td>
+                        <td class="editable text-{{request.font}}" ondblclick="enableEdit(this)">{{ contato.faturamento }}</td>
+                        <td class="editable text-{{request.font}}" ondblclick="enableEdit(this)">{{ contato.lucro }}</td>
                         <td>
                             <button class="btn btn-success save-btn" onclick="saveContato(this)">Salvar</button>
                             <button class="btn btn-danger delete-btn" onclick="deleteContato(this)">Excluir</button>
