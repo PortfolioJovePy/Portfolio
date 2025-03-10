@@ -38,10 +38,13 @@ class painel_conteudos(View):
         if self.template == 'painel_conteudos.html' and request.user.is_authenticated:
             if 'conteudos' in request.path:
                 self.context['form'] = ConteudoForm()
+                self.context['titulo'] = 'publicações'
             elif 'e-books' in request.path:
                 self.context['form'] = EbooksForm()
+                self.context['titulo'] = 'e-books'
             else:
                 self.context['form'] = LeiturasForm()
+                self.context['titulo'] = 'leituras recomendadas'
         
         
         elif self.template == 'conteudos.html':                    

@@ -18,6 +18,17 @@ import json
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
+@csrf_exempt  # Certifique-se de usar CSRF token para segurança
+def salvar_elemento(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        # Salve os dados no banco de dados, se necessário
+        # elemento = Elemento(tipo=data['type'], conteudo=data['content'])
+        # elemento.save()
+
+        # Retorna uma resposta com status 200
+        return JsonResponse({"status": "success", "message": "Elemento salvo!"}, status=200)
+    return JsonResponse({"status": "error", "message": "Método inválido."}, status=400)
 
 @csrf_exempt
 def salvar_contato(request):
@@ -104,6 +115,12 @@ class gerenciador(LoginRequiredMixin,View):
             submit = 'Adicionar contato'
             self.template = 'gerenciador.html'                         
 
+        elif self.template == 'criador_template_emails.html':
+            form = ''
+            titulo = 'criador de template'
+            submit = ''
+            
+        
         elif self.template == 'agendamento.html':
             form = form if form is not None else AgendarEmailForm(prefix="agendar_email")
             titulo = 'Agendamento de e-mail'

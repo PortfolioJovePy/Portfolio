@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Elementos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        button, input {
+            margin: 5px;
+            padding: 10px;
+        }
+        .draggable {
+            position: absolute;
+            cursor: grab;
+        }
+        .frame {
+            width: 80vw;
+            height: 80vh;
+            border: 2px dashed #ccc;
+            position: relative;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="templateName" placeholder="Nome do template">
+        <input type="text" id="backgroundColor" placeholder="Cor de fundo (RGB)">
+        <input type="text" id="titleColor" placeholder="Cor dos títulos (RGB)">
+        <input type="text" id="paragraphColor" placeholder="Cor dos parágrafos (RGB)">
+        <button onclick="saveSettings()">Salvar Configuração</button>
+        <button onclick="addElement('h1')">Adicionar H1</button>
+        <button onclick="addElement('p')">Adicionar Parágrafo</button>
+        <button onclick="addElement('a')">Adicionar Link</button>
+        <button onclick="addElement('img')">Adicionar Imagem</button>
+        <button onclick="saveAndReload()">Salvar Alterações</button>
+        <button onclick="clearAllElements()">Limpar Todos</button>
+    </div>
+    
+    <div id="frame" class="frame"></div>
+
+    <script>
+        let elementIdCounter = 0;
+
+        function saveSettings() {
+            const templateName = document.getElementById("templateName").value;
+            const backgroundColor = document.getElementById("backgroundColor").value;
+            const titleColor = document.getElementById("titleColor").value;
+            const paragraphColor = document.getElementById("paragraphColor").value;
+
+            localStorage.setItem("templateName", templateName);
+            localStorage.setItem("backgroundColor", backgroundColor);
+            localStorage.setItem("titleColor", titleColor);
+            localStorage.setItem("paragraphColor", paragraphColor);
+
+            applySettings();
+        }
+
+        function applySettings() {
+            const savedTemplateName = localStorage.getItem("templateName") || "";
+            const savedBackgroundColor = localStorage.getItem("backgroundColor") || "white";
+            const savedTitleColor = localStorage.getItem("titleColor") || "black";
+            const savedParagraphColor = localStorage.getItem("paragraphColor") || "black";
+
+            document.getElementById("templateName").value = savedTemplateName;
+            document.getElementById("backgroundColor").value = savedBackgroundColor;
+            document.getElementById("titleColor").value = savedTitleColor;
+            document.getElementById("paragraphColor").value = savedParagraphColor;
+            document.getElementById("frame").style.backgroundColor = savedBackgroundColor;
+        }
+
+        function addElement(type) {
+            const frame = document.getElementById("frame");
+            const element = document.createElement(type);
+
+            const elementId = `${type}_${elementIdCounter++}`;
+            let elementData = {
+                id: elementId,
+                type: type,
+                content: '',
+                href: '',
+                left: '50px',
+                top: '50px'
+            };
+
+            if (type === 'h1') {
+                element.textContent = "Título Exemplo";
+                elementData.content = "Título Exemplo";
+                element.style.color = localStorage.getItem("titleColor") || "black";
+                element.setAttribute("contenteditable", "true");
+            } else if (type === 'p') {
+                element.textContent = "Este é um parágrafo de exemplo.";
+                elementData.content = "Este é um parágrafo de exemplo.";
+                element.style.color = localStorage.getItem("paragraphColor") || "black";
+                element.setAttribute("contenteditable", "true");
+            } else if (type === 'a') {
+                let userText = prompt("Digite o texto do link:");
+                let userHref = prompt("Digite a URL do link:", "https://");
+
+                if (!userText || !userHref) return;
+
+                element.textContent = userText;
+                element.href = userHref;
+                element.target = "_blank";
+                elementData.content = userText;
+                elementData.href = userHref;
+            } else if (type === 'img') {
+                let userSrc = prompt("Digite a URL da imagem:");
+                if (!userSrc) return;
+
+                element.src = userSrc;
+                element.alt = "Imagem adicionada";
+                element.style.width = "150px";
+                elementData.content = userSrc;
+            }
+
+            element.classList.add("draggable");
+
+            if (type !== 'img' && type !== 'a') {
+                element.setAttribute("contenteditable", "true");
+            }
+
+            element.style.left = elementData.left;
+            element.style.top = elementData.top;
+            element.id = elementId;
+            frame.appendChild(element);
+            makeDraggable(element, elementData, frame);
+
+            saveElementToSessionStorage(elementData);
+        }
+
+        function saveElementToSessionStorage(elementData) {
+            let elements = JSON.parse(sessionStorage.getItem("elements")) || [];
+            elements = elements.filter(e => e.id !== elementData.id);
+            elements.push(elementData);
+            sessionStorage.setItem("elements", JSON.stringify(elements));
+        }
+
+        function loadElementsFromSessionStorage() {
+            const elements = JSON.parse(sessionStorage.getItem("elements")) || [];
+            elements.forEach(data => {
+                const element = document.createElement(data.type);
+
+                if (data.type === 'h1' || data.type === 'p') {
+                    element.textContent = data.content;
+                    element.style.color = data.type === 'h1' ? localStorage.getItem("titleColor") || "black" : localStorage.getItem("paragraphColor") || "black";
+                } else if (data.type === 'a') {
+                    element.textContent = data.content;
+                    element.href = data.href;
+                    element.target = "_blank";
+                } else if (data.type === 'img') {
+                    element.src = data.content;
+                    element.alt = "Imagem adicionada";
+                    element.style.width = "150px";
+                }
+
+                element.classList.add("draggable");
+
+                if (data.type !== 'img' && data.type !== 'a') {
+                    element.setAttribute("contenteditable", "true");
+                }
+
+                element.style.left = data.left;
+                element.style.top = data.top;
+                element.id = data.id;
+                document.getElementById("frame").appendChild(element);
+                makeDraggable(element, data, document.getElementById("frame"));
+            });
+        }
+
+        window.onload = function () {
+            applySettings();
+            loadElementsFromSessionStorage();
+        };
+
+        function makeDraggable(element, elementData, frame) {
+            let offsetX, offsetY, isDragging = false;
+
+            element.addEventListener("mousedown", (e) => {
+                isDragging = true;
+                offsetX = e.clientX - element.getBoundingClientRect().left;
+                offsetY = e.clientY - element.getBoundingClientRect().top;
+                element.style.cursor = "grabbing";
+            });
+
+            document.addEventListener("mousemove", (e) => {
+                if (!isDragging) return;
+
+                let newLeft = e.clientX - offsetX - frame.getBoundingClientRect().left;
+                let newTop = e.clientY - offsetY - frame.getBoundingClientRect().top;
+
+                newLeft = Math.max(0, Math.min(frame.offsetWidth - element.offsetWidth, newLeft));
+                newTop = Math.max(0, Math.min(frame.offsetHeight - element.offsetHeight, newTop));
+
+                element.style.left = `${newLeft}px`;
+                element.style.top = `${newTop}px`;
+            });
+
+            document.addEventListener("mouseup", () => {
+                if (!isDragging) return;
+                isDragging = false;
+                element.style.cursor = "grab";
+                elementData.left = element.style.left;
+                elementData.top = element.style.top;
+                saveElementToSessionStorage(elementData);
+            });
+        }
+
+        function saveAndReload() {
+            location.reload();
+        }
+
+        function clearAllElements() {
+            sessionStorage.removeItem("elements");
+            location.reload();
+        }
+    </script>
+</body>
+</html>

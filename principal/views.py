@@ -22,6 +22,9 @@ from conteudos.views import criar_contato
 from emails.models import Contatos
 from django.core.exceptions import ObjectDoesNotExist
 
+
+
+
 @csrf_exempt
 def assistenterodrigo(request):
     print(request.POST)
