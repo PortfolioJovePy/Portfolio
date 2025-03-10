@@ -103,7 +103,7 @@ def assistenterodrigo(request):
             REGRA 3 Sempre foque nos aspectos técnicos de minhas habilidades, como formação acadêmica, experiencia e habilidades técnicas   
             REGRA 4 Se a MENSAGEM for uma saudação, do tipo "olá", "oi", "bom dia", "boa tarde", "boa noite", responda socialmente
             REGRA 5 Responda apenas a pergunta feita. Nunca resuma o contexto exposto.
-            REGRA 6 Responda em ate 100 caracteres
+            REGRA 6 Responda em ate 140 caracteres
             AGORA, RESPEITANDO AS REGRAS ACIMA DESCRITAS, RESPONDA UNICAMENTE A MENSAGEM A SEGUIR:                          
 """
         try:
