@@ -18,17 +18,6 @@ import json
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
-@csrf_exempt  # Certifique-se de usar CSRF token para segurança
-def salvar_elemento(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        # Salve os dados no banco de dados, se necessário
-        # elemento = Elemento(tipo=data['type'], conteudo=data['content'])
-        # elemento.save()
-
-        # Retorna uma resposta com status 200
-        return JsonResponse({"status": "success", "message": "Elemento salvo!"}, status=200)
-    return JsonResponse({"status": "error", "message": "Método inválido."}, status=400)
 
 @csrf_exempt
 def salvar_contato(request):
@@ -98,11 +87,6 @@ def deletar_contato(request):
         return JsonResponse({'success': False, 'error': f'Erro inesperado: {str(e)}'})
 
 
-def crm_view(request):
-    # Buscar todos os contatos no banco de dados
-    contatos = Contatos.objects.all()
-    # Passar os contatos para o template
-    return render(request, 'CRM.html', {'contatos': contatos})
 
 class gerenciador(LoginRequiredMixin,View):
     template = 'gerenciador.html'        

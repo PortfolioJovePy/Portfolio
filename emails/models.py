@@ -25,6 +25,14 @@ class UploadTemplate(models.Model):
     def __str__(self):
         return self.nome
     
+
+class HtmlTemplate(models.Model):
+    nome = models.CharField(max_length=255, unique=True)
+    template = models.TextField(max_length=1000000000)
+    
+    def __str__(self):
+        return self.nome
+    
 class AgendarEmail(models.Model):
     email = models.ForeignKey(Contatos, on_delete=models.CASCADE, verbose_name="E-mail")
     assunto = models.CharField(max_length=255, verbose_name="Assunto")    
@@ -43,3 +51,4 @@ class AgendarEmail(models.Model):
     def __str__(self):
         status = "Enviada" if self.enviado else "Não Enviada"
         return f"Mensagem para {self.email} em {self.send_date} às {self.send_time} - {status}"
+

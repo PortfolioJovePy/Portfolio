@@ -51,13 +51,14 @@
         <input type="text" id="templateName" class="form-control" placeholder="Nome do template">
         <input type="text" id="backgroundColor" class="form-control" placeholder="Cor de fundo (RGB)">
         <input type="text" id="titleColor" class="form-control" placeholder="Cor dos títulos (RGB)">
-        <input type="text" id="paragraphColor" class="form-control" placeholder="Cor dos parágrafos (RGB)">
-        <button class="btn btn-primary" onclick="saveSettings()">Salvar Configuração</button>
+        <input type="text" id="subtitleColor" class="form-control" placeholder="Cor dos subtítulos (RGB)">
+        <input type="text" id="paragraphColor" class="form-control" placeholder="Cor dos parágrafos (RGB)">        
         <button class="btn btn-secondary" onclick="addElement('h1')">Adicionar Título</button>
+        <button class="btn btn-secondary" onclick="addElement('h2')">Adicionar Subtitulo</button>
         <button class="btn btn-secondary" onclick="addElement('p')">Adicionar Parágrafo</button>
         <button class="btn btn-secondary" onclick="addElement('a')">Adicionar Link</button>
         <button class="btn btn-secondary" onclick="addElement('img')">Adicionar Imagem</button>
-        <button class="btn btn-danger" onclick="saveAndReload()">Salvar Alterações</button>
+        <button class="btn btn-danger" onclick="saveSettings()">Salvar</button>
         <button class="btn btn-warning" onclick="clearAllElements()">Limpar Todos</button>
         <button class="btn btn-info" onclick="downloadFrameContent()">Baixar Conteúdo</button>
     </div>
@@ -68,127 +69,156 @@
         let elementIdCounter = 0;
 
         function saveSettings() {
-            const templateName = document.getElementById("templateName").value;
-            const backgroundColor = document.getElementById("backgroundColor").value;
-            const titleColor = document.getElementById("titleColor").value;
-            const paragraphColor = document.getElementById("paragraphColor").value;
+    const templateName = document.getElementById("templateName").value;
+    const backgroundColor = document.getElementById("backgroundColor").value;
+    const titleColor = document.getElementById("titleColor").value;
+    const subtitleColor = document.getElementById("subtitleColor").value;  // Adicionando cor do subtítulo
+    const paragraphColor = document.getElementById("paragraphColor").value;
 
-            localStorage.setItem("templateName", templateName);
-            localStorage.setItem("backgroundColor", backgroundColor);
-            localStorage.setItem("titleColor", titleColor);
-            localStorage.setItem("paragraphColor", paragraphColor);
+    localStorage.setItem("templateName", templateName);
+    localStorage.setItem("backgroundColor", backgroundColor);
+    localStorage.setItem("titleColor", titleColor);
+    localStorage.setItem("subtitleColor", subtitleColor);  // Salvando cor do subtítulo
+    localStorage.setItem("paragraphColor", paragraphColor);
 
-            applySettings();
-        }
+    saveAndReload();    
+}
 
-        function applySettings() {
-            const savedTemplateName = localStorage.getItem("templateName") || "";
-            const savedBackgroundColor = localStorage.getItem("backgroundColor") || "white";
-            const savedTitleColor = localStorage.getItem("titleColor") || "black";
-            const savedParagraphColor = localStorage.getItem("paragraphColor") || "black";
 
-            document.getElementById("templateName").value = savedTemplateName;
-            document.getElementById("backgroundColor").value = savedBackgroundColor;
-            document.getElementById("titleColor").value = savedTitleColor;
-            document.getElementById("paragraphColor").value = savedParagraphColor;
-            document.getElementById("frame").style.backgroundColor = savedBackgroundColor;
-        }
+function applySettings() {
+    const savedTemplateName = localStorage.getItem("templateName") || "";
+    const savedBackgroundColor = localStorage.getItem("backgroundColor") || "white";
+    const savedTitleColor = localStorage.getItem("titleColor") || "black";
+    const savedSubtitleColor = localStorage.getItem("subtitleColor") || "black"; // Alterado para subtitleColor
+    const savedParagraphColor = localStorage.getItem("paragraphColor") || "black";
+
+    document.getElementById("templateName").value = savedTemplateName;
+    document.getElementById("backgroundColor").value = savedBackgroundColor;
+    document.getElementById("titleColor").value = savedTitleColor;
+    document.getElementById("subtitleColor").value = savedSubtitleColor;  // Corrigido para refletir a cor do subtítulo
+    document.getElementById("paragraphColor").value = savedParagraphColor;
+    document.getElementById("frame").style.backgroundColor = savedBackgroundColor;
+}
 
         function addElement(type) {
-            const frame = document.getElementById("frame");
-            const element = document.createElement(type);
+    const frame = document.getElementById("frame");
+    const element = document.createElement(type);
 
-            const elementId = `${type}_${elementIdCounter++}`;
-            let elementData = {
-                id: elementId,
-                type: type,
-                content: '',
-                href: '',
-                left: '50px',
-                top: '50px',
-                borderRadius: '0'  // Adicionando a propriedade de borda arredondada
-            };
+    const elementId = `${type}_${elementIdCounter++}`;
+    let elementData = {
+        id: elementId,
+        type: type,
+        content: '',
+        href: '',
+        left: '50px',
+        top: '50px',
+        borderRadius: '0'  // Adicionando a propriedade de borda arredondada
+    };
 
-            if (type === 'h1') {
-                element.textContent = "Título Exemplo";
-                elementData.content = "Título Exemplo";
-                element.classList.add("fs-1");
-                element.classList.add("fw-bolder");
-                element.style.color = localStorage.getItem("titleColor") || "black";
-                element.setAttribute("contenteditable", "true");
-            } else if (type === 'p') {
-                element.textContent = "Este é um parágrafo de exemplo.";
-                elementData.content = "Este é um parágrafo de exemplo.";
-                element.classList.add("fs-5");
-                element.style.color = localStorage.getItem("paragraphColor") || "black";
-                element.setAttribute("contenteditable", "true");
-            } else if (type === 'a') {
-                let userText = prompt("Digite o texto do link:");
-                let userHref = prompt("Digite a URL do link:", "https://");
+    if (type === 'h1') {
+        element.textContent = "Título Exemplo";
+        elementData.content = "Título Exemplo";
+        element.classList.add("fs-1");
+        element.classList.add("fw-bolder");
+        element.style.color = localStorage.getItem("titleColor") || "black";
+        element.setAttribute("contenteditable", "true");
+    } else if (type === 'h2') {
+        element.textContent = "Subtítulo Exemplo";  // Corrigido para exibir o subtítulo corretamente
+        elementData.content = "Subtítulo Exemplo"; // Corrigido para refletir o conteúdo do subtítulo
+        element.classList.add("fs-3");  // Classe para subtítulo
+        element.style.color = localStorage.getItem("subtitleColor") || "black";  // Cor do subtítulo
+        element.setAttribute("contenteditable", "true");
+    } else if (type === 'p') {
+        element.textContent = "Este é um parágrafo de exemplo.";
+        elementData.content = "Este é um parágrafo de exemplo.";
+        element.classList.add("fs-5");
+        element.style.color = localStorage.getItem("paragraphColor") || "black";
+        element.setAttribute("contenteditable", "true");
+    } else if (type === 'a') {
+        let userText = prompt("Digite o texto do link:");
+        let userHref = prompt("Digite a URL do link:", "https://");
 
-                if (!userText || !userHref) return;
+        if (!userText || !userHref) return;
 
-                element.textContent = userText;
-                element.href = userHref;
-                element.target = "_blank";
-                elementData.content = userText;
-                elementData.href = userHref;
-            } else if (type === 'img') {
-                let userSrc = prompt("Digite a URL da imagem:");
-                if (!userSrc) return;
+        element.textContent = userText;
+        element.href = userHref;
+        element.target = "_blank";
+        elementData.content = userText;
+        elementData.href = userHref;
+    } else if (type === 'img') {
+        let userSrc = prompt("Digite a URL da imagem:");
+        if (!userSrc) return;
 
-                element.src = userSrc;
-                element.alt = "Imagem adicionada";
-                element.style.width = "150px";
-                elementData.content = userSrc;
-            }
+        element.src = userSrc;
+        element.alt = "Imagem adicionada";
+        element.style.width = "150px";
+        elementData.content = userSrc;
+    }
 
-            element.classList.add("draggable");
-            element.style.left = elementData.left;
-            element.style.top = elementData.top;
-            element.id = elementId;
-            element.style.borderRadius = elementData.borderRadius; // Aplicando o border-radius
-            frame.appendChild(element);
-            makeDraggable(element, elementData, frame);
+    element.classList.add("draggable");
+    element.style.left = elementData.left;
+    element.style.top = elementData.top;
+    element.id = elementId;
+    element.style.borderRadius = elementData.borderRadius; // Aplicando o border-radius
+    frame.appendChild(element);
+    makeDraggable(element, elementData, frame);
 
-            saveElementToSessionStorage(elementData);
+    // Adicionando ouvinte para salvar o conteúdo ao ser alterado
+    element.addEventListener("input", () => {
+        elementData.content = element.textContent;  // Atualiza o conteúdo do elemento
+        saveElementToSessionStorage(elementData);
+    });
+
+    saveElementToSessionStorage(elementData);
+}
+
+
+function saveElementToSessionStorage(elementData) {
+    let elements = JSON.parse(sessionStorage.getItem("elements")) || [];
+    elements = elements.filter(e => e.id !== elementData.id);
+    elements.push(elementData);
+    sessionStorage.setItem("elements", JSON.stringify(elements));
+}
+
+
+function loadElementsFromSessionStorage() {
+    const elements = JSON.parse(sessionStorage.getItem("elements")) || [];
+    elements.forEach(data => {
+        const element = document.createElement(data.type);
+
+        if (data.type === 'h1') {
+            element.textContent = data.content;
+            element.classList.add("fs-1");
+            element.classList.add("fw-bolder");
+            element.style.color = localStorage.getItem("titleColor") || "black";
+        } else if (data.type === 'h2') {
+            element.textContent = data.content;
+            element.classList.add("fs-3");  // Agora a classe fs-3 para o subtítulo
+            element.style.color = localStorage.getItem("subtitleColor") || "black";
+        } else if (data.type === 'p') {
+            element.textContent = data.content;
+            element.classList.add("fs-5");
+            element.style.color = localStorage.getItem("paragraphColor") || "black";
+        } else if (data.type === 'a') {
+            element.textContent = data.content;
+            element.href = data.href;
+            element.target = "_blank";
+        } else if (data.type === 'img') {
+            element.src = data.content;
+            element.alt = "Imagem adicionada";
+            element.style.width = "150px";
+            element.style.borderRadius = data.borderRadius;  // Carregando a borda da imagem
         }
 
-        function saveElementToSessionStorage(elementData) {
-            let elements = JSON.parse(sessionStorage.getItem("elements")) || [];
-            elements = elements.filter(e => e.id !== elementData.id);
-            elements.push(elementData);
-            sessionStorage.setItem("elements", JSON.stringify(elements));
-        }
+        element.classList.add("draggable");
+        element.style.left = data.left;
+        element.style.top = data.top;
+        element.id = data.id;
+        document.getElementById("frame").appendChild(element);
+        makeDraggable(element, data, document.getElementById("frame"));
+    });
+}
 
-        function loadElementsFromSessionStorage() {
-            const elements = JSON.parse(sessionStorage.getItem("elements")) || [];
-            elements.forEach(data => {
-                const element = document.createElement(data.type);
-
-                if (data.type === 'h1' || data.type === 'p') {
-                    element.textContent = data.content;
-                    element.classList.add(data.type === 'h1' ? "fs-2" : "fs-5");
-                    element.style.color = data.type === 'h1' ? localStorage.getItem("titleColor") || "black" : localStorage.getItem("paragraphColor") || "black";
-                } else if (data.type === 'a') {
-                    element.textContent = data.content;
-                    element.href = data.href;
-                    element.target = "_blank";
-                } else if (data.type === 'img') {
-                    element.src = data.content;
-                    element.alt = "Imagem adicionada";
-                    element.style.width = "150px";
-                    element.style.borderRadius = data.borderRadius;  // Carregando a borda da imagem
-                }
-
-                element.classList.add("draggable");
-                element.style.left = data.left;
-                element.style.top = data.top;
-                element.id = data.id;
-                document.getElementById("frame").appendChild(element);
-                makeDraggable(element, data, document.getElementById("frame"));
-            });
-        }
 
         window.onload = function () {
             applySettings();
@@ -310,6 +340,7 @@
             link.click();
             document.body.removeChild(link);
         }
+        
     </script>
 </body>
 </html>
