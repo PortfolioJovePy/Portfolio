@@ -36,9 +36,9 @@ class TempoCarregamentoMiddleware:
                     request.texto = f'{request.saudacao}, seja bem-vindo.'                    
                 else:
                     request.texto = f'{request.saudacao}, welcome.'                    
-            else:                
+            else:                                                
                 request.tempo_carregamento_texto = '.4s'    
-                request.tempo_carregamento = 400    
+                request.tempo_carregamento = 400                    
                 if request.idioma == 'portugues':                    
                     request.texto = 'Carregando...'        
                 else:

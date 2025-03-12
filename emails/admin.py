@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contatos, UploadTemplate, AgendarEmail
+from .models import *
 
 @admin.register(Contatos)
 class ContatosAdmin(admin.ModelAdmin):
@@ -10,6 +10,13 @@ class ContatosAdmin(admin.ModelAdmin):
 class UploadTemplateAdmin(admin.ModelAdmin):
     list_display = ('nome', 'data_upload')
     search_fields = ('nome',)
+
+
+@admin.register(HtmlTemplate)
+class HtmlTemplateAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'template')
+    search_fields = ('nome',)
+
 
 @admin.register(AgendarEmail)
 class AgendarEmailAdmin(admin.ModelAdmin):

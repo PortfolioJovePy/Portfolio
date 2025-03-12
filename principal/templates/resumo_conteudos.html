@@ -9,7 +9,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {%for conteudo in conteudos%}
     <div class="col">
-      <div class="card animacaocard h-100 bg-{{request.theme}} border border-1 border-{{request.theme}}-subtle border-opacity-10 imagem-efeito">
+      <div class="card animacaocard shadow-lg h-100 bg-{{request.theme}} border border-1 border-{{request.theme}}-subtle border-opacity-10 imagem-efeito">
         <img src="{{ conteudo.link_imagem }}" class="card-img-top " style="height: 250px;object-fit: cover;">        
         <div class="card-body">
         {% if request.idioma == 'portugues' %}

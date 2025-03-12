@@ -18,6 +18,29 @@ import json
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
+@csrf_exempt  # Desative isso em produção e use CSRF tokens corretamente
+def salvar_template(request):
+    
+    """Cria ou atualiza um template no banco de dados."""
+    if request.method == "POST":
+        nome = request.POST.get("nome")
+        template = request.POST.get("template")
+
+        if not nome or not template:
+            return JsonResponse({"error": "Os campos nome e template são obrigatórios!"}, status=400)
+
+        # Verifica se já existe um template com o mesmo nome
+        obj, created = HtmlTemplate.objects.update_or_create(
+            nome=nome,  # Critério de busca
+            defaults={"template": template}  # Se existir, atualiza apenas o template
+        )
+
+        mensagem = "Template criado com sucesso!" if created else "Template atualizado com sucesso!"    
+        
+        return JsonResponse({"message": mensagem, "id": obj.id})
+
+    return JsonResponse({"error": "Método não permitido"}, status=405)
+
 
 @csrf_exempt
 def salvar_contato(request):
@@ -179,7 +202,6 @@ class gerenciador(LoginRequiredMixin,View):
             self.context = {'form': form, 'titulo': titulo, 'submit': submit}
         else:
             self.context = {'contatos':contatos,'titulo':titulo}
-
         return self.context
     
 

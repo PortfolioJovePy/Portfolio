@@ -22,7 +22,7 @@
             Não existe publicação com esse texto.
           </p>
             {% for conteudo in conteudos %}
-            <div class="documento card mb-3 imagem-efeito" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{{ conteudo.resumo }}{% else %}{{ conteudo.titulo_ingles }}{{ conteudo.resumo_ingles }}{% endif %}" >
+            <div class="documento card mb-3 imagem-efeito shadow-lg" data-titulo="{% if request.idioma == 'portugues' %}{{ conteudo.titulo }}{{ conteudo.resumo }}{% else %}{{ conteudo.titulo_ingles }}{{ conteudo.resumo_ingles }}{% endif %}" >
               <div class="row g-0">                    
                     <div class="col">
                         {% if request.idioma == 'portugues' %}
