@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-{{request.theme}} text-{{request.font}}">
+    <div class="container-fluid bg-{{request.theme}} text-{{request.font}}">          
+      <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'inicio'%}">Jovê.py</a>          
+      <button class="navbar-toggler bg-{{request.theme}} text-{{request.font}}" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon bg-{{request.theme}} text-{{request.font}}"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse bg-{{request.theme}} text-{{request.font}}" id="navbarNav">
+        <ul class="navbar-nav bg-{{request.theme}} text-{{request.font}}">
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}} ">
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} active imagem-efeito" aria-current="page" href="{% url 'inicio' %}">
+              {%if request.idioma == 'portugues'%}Início{%else%}Home{%endif%}
+            </a>
+          </li>
+
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">                    
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" aria-current="page" href="{% url 'sobre' %}">
+              {%if request.idioma == 'portugues'%}Sobre{%else%}About{%endif%}
+            </a>
+          </li>
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="https://api.whatsapp.com/send?phone=+5583998775808&text=Olá!!" target="_blank">
+              {%if request.idioma == 'portugues'%}Contato{%else%}Contact{%endif%}</a>
+          </li>
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'publicações' %}">
+              {%if request.idioma == 'portugues'%}Publicações{%else%}Publications{%endif%}</a>
+          </li>
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'leituras_recomendadas' %}">
+              {%if request.idioma == 'portugues'%}Leituras recomendadas{%else%}Recommended Readings{%endif%}</a>
+          </li>
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ebooks' %}">E-books</a>
+          </li>     
+          {%if request.user.is_superuser%}
+          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
+            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'painel-do-administrador' %}">Admin</a>
+          </li>                        
+          {%endif%}           
+        </ul>
+      </div>
+    </div>        
+    <a class='me-4' href="{% url 'toggle-theme' %}">
+      {% if request.theme == 'dark' %}
+      <svg xmlns="http://www.w3.org/2000/svg" height="25" fill="currentColor" class="bi bi-sun-fill imagem-efeito" viewBox="0 0 16 16" style="color: rgb(248, 249, 250);">
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                  </svg>        
+        {% else %}              
+        <svg xmlns="http://www.w3.org/2000/svg" height="25" fill="currentColor" class="bi bi-moon-fill imagem-efeito" viewBox="0 0 16 16" style="color:rgb(33, 37, 41)">
+          <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+        </svg>      
+        {%endif%}     
+    </a>
+
+    {%if request.idioma == 'portugues'%}
+      <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ingles'%}">USD$</a>
+      {%else%}
+        <a class="navbar-brand bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'portugues'%}">BRL$</a>          
+    {%endif%}    
+  </nav>
