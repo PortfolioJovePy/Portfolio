@@ -17,6 +17,52 @@ from django.views.decorators.csrf import csrf_exempt  # Adicionando para permiti
 import json
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
+from bs4 import BeautifulSoup
+
+
+def editar_template(request, template_id):
+    template = get_object_or_404(HtmlTemplate, pk=template_id)
+    if request.method == 'POST':
+        # ... (seu código de salvamento existente) ...
+        pass
+    else:
+        soup = BeautifulSoup(template.template, 'html.parser')
+        body_style = soup.find('body').get('style') if soup.find('body') else ''
+        background_color = ''
+        if body_style:
+            for style in body_style.split(';'):
+                if 'background-color' in style:
+                    background_color = style.split(':')[1].strip()
+
+        title_color = ''
+        subtitle_color = ''
+        paragraph_color = ''
+
+        elements = soup.find_all(['h1', 'h2', 'p'])
+        for element in elements:
+            if element.name == 'h1' and not title_color:
+                title_color = element.get('style').split('color:')[1].split(';')[0].strip() if element.get('style') and 'color:' in element.get('style') else ''
+            elif element.name == 'h2' and not subtitle_color:
+                subtitle_color = element.get('style').split('color:')[1].split(';')[0].strip() if element.get('style') and 'color:' in element.get('style') else ''
+            elif element.name == 'p' and not paragraph_color:
+                paragraph_color = element.get('style').split('color:')[1].split(';')[0].strip() if element.get('style') and 'color:' in element.get('style') else ''
+
+        return render(request, 'criador_template_emails.html', {
+            'template': template,
+            'background_color': background_color,
+            'title_color': title_color,
+            'subtitle_color': subtitle_color,
+            'paragraph_color': paragraph_color,
+        })
+
+def deletar_template(request, template_id):
+    template = get_object_or_404(HtmlTemplate, pk=template_id)
+    template.delete()
+    return redirect('listar_templates')  # 
+
+def visualizar_template(request, template_id):
+    template = get_object_or_404(HtmlTemplate, id=template_id)
+    return render(request, 'visualizar_template.html', {'template': template})
 
 @csrf_exempt  # Desative isso em produção e use CSRF tokens corretamente
 def salvar_template(request):
@@ -34,9 +80,7 @@ def salvar_template(request):
             nome=nome,  # Critério de busca
             defaults={"template": template}  # Se existir, atualiza apenas o template
         )
-
         mensagem = "Template criado com sucesso!" if created else "Template atualizado com sucesso!"    
-        
         return JsonResponse({"message": mensagem, "id": obj.id})
 
     return JsonResponse({"error": "Método não permitido"}, status=405)
@@ -126,6 +170,12 @@ class gerenciador(LoginRequiredMixin,View):
             form = ''
             titulo = 'criador de template'
             submit = ''
+        elif self.template == 'templates_email.html':
+            form = ''
+            titulo = 'templates criados'
+            submit = ''
+            templates = HtmlTemplate.objects.all()
+
             
         
         elif self.template == 'agendamento.html':
@@ -202,6 +252,8 @@ class gerenciador(LoginRequiredMixin,View):
             self.context = {'form': form, 'titulo': titulo, 'submit': submit}
         else:
             self.context = {'contatos':contatos,'titulo':titulo}
+        if self.template == 'templates_email.html':
+            self.context['templates'] = templates
         return self.context
     
 

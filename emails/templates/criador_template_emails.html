@@ -1,107 +1,106 @@
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Elementos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        button, input {
-            margin: 5px;
-            padding: 10px;
-        }
-        .draggable {
-            position: absolute;
-            cursor: grab;
-        }
-        .frame {
-            width: 80vw;
-            height: 80vh;
-            border: 2px dashed #ccc;
-            position: relative;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-            resize: both;
-            overflow: auto;
-        }
-        .resize-handle {
-            width: 15px;
-            height: 15px;
-            background-color: gray;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            cursor: se-resize;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card shadow-lg">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Configuração do Template</h4>
-            </div>
-            <div class="card-body">
-                <form>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fs-5">Nome do Template</label>
-                            <input type="text" id="templateName" class="form-control" placeholder="Nome do template">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fs-5">Cor de Fundo (RGB)</label>
-                            <input type="text" id="backgroundColor" class="form-control" placeholder="Cor de fundo (RGB)">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fs-5">Cor dos Títulos</label>
-                            <input type="text" id="titleColor" class="form-control" placeholder="Cor dos títulos (RGB)">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fs-5">Cor dos Subtítulos</label>
-                            <input type="text" id="subtitleColor" class="form-control" placeholder="Cor dos subtítulos (RGB)">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fs-5">Cor dos Parágrafos</label>
-                            <input type="text" id="paragraphColor" class="form-control" placeholder="Cor dos parágrafos (RGB)">
-                        </div>
-                    </div>
-
-                    <div class="mt-4 row">                        
-                        <div class="col">
-                        <div class="form-label fs-5">Adicionar Elementos</div>
-                        
-                        <div class="btn-group">
-                            <button class="btn btn-secondary" onclick="addElement('h1', event)">Título</button>
-                            <button class="btn btn-secondary" onclick="addElement('h2', event)">Subtítulo</button>
-                            <button class="btn btn-secondary" onclick="addElement('p', event)">Parágrafo</button>
-                            <button class="btn btn-secondary" onclick="addElement('a', event)">Link</button>
-                            <button class="btn btn-secondary" onclick="addElement('img', event)">Imagem</button>                            
-                        </div>   
-                    </div>                     
-                    <div class="col">
-                        <div class="form-label fs-5">Ações</div>
-                        <div class="btn-group">
-                            <button class="btn btn-danger" onclick="saveSettings(event)">Salvar Alterações</button>
-                            <button class="btn btn-warning" onclick="clearAllElements(event)">Limpar Tudo</button>
-                            <button id="sendMessage" class="btn btn-success">Gravar Template</button>                            
-                            <p id="responseMessage" class="text-dark"></p>
-                        </div>
-                    </div>
-                                        
+{% extends 'base_webmarketing.html' %}
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Editar Template</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 20px;
+            }
+            button, input {
+                margin: 5px;
+                padding: 10px;
+            }
+            .draggable {
+                position: absolute;
+                cursor: grab;
+            }
+            .frame {
+                width: 80vw;
+                height: 80vh;
+                border: 2px dashed #ccc;
+                position: relative;
+                margin-top: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: white;
+                resize: both;
+                overflow: auto;
+            }
+            .resize-handle {
+                width: 15px;
+                height: 15px;
+                background-color: gray;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                cursor: se-resize;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <a href="{% url 'listar_templates' %}" class="btn btn-secondary mb-3">Voltar para lista</a>
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Configuração do Template</h4>
                 </div>
-                </form>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fs-5">Nome do Template</label>
+                                <input type="text" id="templateName" class="form-control" placeholder="Nome do template" value="{{ template.nome }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fs-5">Cor de Fundo (RGB)</label>
+                                <input type="text" id="backgroundColor" class="form-control" placeholder="Cor de fundo (RGB)" value="{{ background_color }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fs-5">Cor dos Títulos</label>
+                                <input type="text" id="titleColor" class="form-control" placeholder="Cor dos títulos (RGB)" value="{{ title_color }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fs-5">Cor dos Subtítulos</label>
+                                <input type="text" id="subtitleColor" class="form-control" placeholder="Cor dos subtítulos (RGB)" value="{{ subtitle_color }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fs-5">Cor dos Parágrafos</label>
+                                <input type="text" id="paragraphColor" class="form-control" placeholder="Cor dos parágrafos (RGB)" value="{{ paragraph_color }}">
+                            </div>
+                        </div>
+                        <div class="mt-4 row">
+                            <div class="col">
+                                <div class="form-label fs-5">Adicionar Elementos</div>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary" onclick="addElement('h1', event)">Título</button>
+                                    <button class="btn btn-secondary" onclick="addElement('h2', event)">Subtítulo</button>
+                                    <button class="btn btn-secondary" onclick="addElement('p', event)">Parágrafo</button>
+                                    <button class="btn btn-secondary" onclick="addElement('a', event)">Link</button>
+                                    <button class="btn btn-secondary" onclick="addElement('img', event)">Imagem</button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-label fs-5">Ações</div>
+                                <div class="btn-group">
+                                    <button class="btn btn-danger" onclick="saveSettings(event)">Salvar Alterações</button>
+                                    <button class="btn btn-warning" onclick="clearAllElements(event)">Limpar Tudo</button>
+                                    <button id="sendMessage" class="btn btn-success">Gravar Template</button>
+                                    <p id="responseMessage" class="text-dark"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div id="frame" class="frame"></div>
+        <div id="frame" class="frame"></div>
 
     <script>
         let elementIdCounter = 0;
@@ -341,51 +340,72 @@ function loadElementsFromSessionStorage() {
         }                
     </script>            
         <script>
-            const frameContent = document.getElementById('frame').innerHTML;
-            const templateName = localStorage.getItem("templateName") || "template";
-
-            const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                text-align: center;
-                margin: 20px;
-                background-color: ${localStorage.getItem("backgroundColor") || "white"};
-            }
-            .draggable {
-                position: absolute;
-                cursor: grab;
-            }
-            .frame {
-                width: 80vw;
-                height: 80vh;
-                border: 2px dashed #ccc;
-                position: relative;
-                margin-top: 20px;
-                margin-left: auto;
-                margin-right: auto;
-                background-color: white;
-            }
-        </style>
-    </head>
-    <body>
-                ${frameContent}
-    </body>
-    </html>
-            `
-
             $(document).ready(function() {
                 $("#sendMessage").click(function() {
+                    const frame = document.getElementById('frame');
+                    let frameContent = '';
+        
+                    // Iterar sobre os elementos dentro do frame
+                    for (let i = 0; i < frame.children.length; i++) {
+                        const element = frame.children[i];
+                        let elementHTML = element.outerHTML;
+        
+                        // Extrair e incluir estilos e atributos relevantes
+                        if (element.tagName.toLowerCase() === 'h1' || element.tagName.toLowerCase() === 'h2' || element.tagName.toLowerCase() === 'p') {
+                            // Incluir estilos de cor, posição e conteúdo editável
+                            elementHTML = `<${element.tagName.toLowerCase()} style="color: ${element.style.color}; position: absolute; left: ${element.style.left}; top: ${element.style.top};">${element.innerHTML}</${element.tagName.toLowerCase()}>`;
+                        } else if (element.tagName.toLowerCase() === 'a') {
+                            // Incluir href, target, estilos e conteúdo
+                            elementHTML = `<a href="${element.href}" target="${element.target}" style="position: absolute; left: ${element.style.left}; top: ${element.style.top};">${element.innerHTML}</a>`;
+                        } else if (element.tagName.toLowerCase() === 'img') {
+                            // Incluir src, alt, width, border-radius e posição
+                            elementHTML = `<img src="${element.src}" alt="${element.alt}" style="width: ${element.style.width}; border-radius: ${element.style.borderRadius}; position: absolute; left: ${element.style.left}; top: ${element.style.top};">`;
+                        }
+        
+                        frameContent += elementHTML;
+                    }
+        
+                    const templateName = localStorage.getItem("templateName") || "template";
+        
+                    const htmlContent = `
+                        <!DOCTYPE html>
+                        <html lang="pt-BR">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    text-align: center;
+                                    margin: 20px;
+                                    background-color: ${localStorage.getItem("backgroundColor") || "white"};
+                                }
+                                .draggable {
+                                    position: absolute;
+                                    cursor: grab;
+                                }
+                                .frame {
+                                    width: 80vw;
+                                    height: 80vh;
+                                    border: 2px dashed #ccc;
+                                    position: relative;
+                                    margin-top: 20px;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    background-color: white;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            ${frameContent}
+                        </body>
+                        </html>
+                    `;
+        
                     $.ajax({
                         url: "{% url 'salvar_template' %}",
                         type: "POST",
-                        data: { nome:templateName,
-                                template: htmlContent },
+                        data: { nome: templateName, template: htmlContent },
                         headers: { "X-CSRFToken": "{{ csrf_token }}" },
                         success: function(response) {
                             $("#responseMessage").text(response.message);
@@ -397,6 +417,64 @@ function loadElementsFromSessionStorage() {
                 });
             });
         </script>
+        <script>
+            function loadElementsFromBackend(htmlString) {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlString;
+    const elements = tempDiv.querySelectorAll('.draggable');
 
+    let elementDataArray = [];
+
+    elements.forEach(element => {
+        let elementData = {
+            id: element.id,
+            type: element.tagName.toLowerCase(),
+            content: element.innerHTML,
+            href: element.href,
+            left: element.style.left,
+            top: element.style.top,
+            borderRadius: element.style.borderRadius,
+            color: element.style.color,
+        };
+        elementDataArray.push(elementData);
+    });
+    sessionStorage.setItem('elements', JSON.stringify(elementDataArray));
+    loadElementsFromSessionStorage();
+}
+
+window.onload = function() {
+    applySettings();
+    loadElementsFromSessionStorage();
+    {% if template.template %}
+const htmlString = {{ template.template|safe }};
+loadElementsFromBackend(htmlString);
+{% endif %}
+};
+
+function loadElementsFromBackend(htmlString) {
+const tempDiv = document.createElement('div');
+tempDiv.innerHTML = htmlString;
+const elements = tempDiv.querySelectorAll('.draggable');
+let elementDataArray = [];
+
+elements.forEach(element => {
+    let elementData = {
+        id: element.id,
+        type: element.tagName.toLowerCase(),
+        content: element.innerHTML,
+        href: element.href,
+        left: element.style.left,
+        top: element.style.top,
+        borderRadius: element.style.borderRadius,
+        color: element.style.color,
+    };
+    elementDataArray.push(elementData);
+});
+sessionStorage.setItem('elements', JSON.stringify(elementDataArray));
+loadElementsFromSessionStorage();
+}
+        </script>
 </body>
 </html>
+
+{% endblock %}

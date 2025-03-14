@@ -22,8 +22,8 @@ from principal.views import error
 urlpatterns = [
     path('admin/', admin.site.urls,name='admin_django'),
     path('', include('principal.urls'),),
-    path('e-mails/', include('emails.urls'),),
-    path('publicacoes/', include('conteudos.urls'),)    ,
+    path('web-marketing/', include('emails.urls'),),
+    path('expertise/', include('conteudos.urls'),)    ,
     
 ]
 

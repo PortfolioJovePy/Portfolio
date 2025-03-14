@@ -35,9 +35,7 @@
                         <h5 class="card-title fw-bold">{{ conteudo.titulo_ingles }}</h5>
                         <p class="card-text">{{ conteudo.descricao_ingles }}</p>                        
                     {% endif %}
-                </div>
-                <div class="card-footer bg-transparent border-0 text-end">
-                  {% if request.idioma == 'portugues' %}
+                    {% if request.idioma == 'portugues' %}
                   <p class="card-text fs-3">Valor: {{ conteudo.valor }}</p>
                   {%else%}
                     {%if conteudo.valor == 'GRÁTIS'%}
@@ -45,14 +43,15 @@
                     {%else%}
                     <p class="card-text fs-3">Value: {{conteudo.valor}}</p>
                     {%endif%}
-                  {%endif%}
-                    <form class="text-{{request.font}}" method="post" id="lancamento_livro" name='lancamento_livro' novalidate> 
-                        {% csrf_token %}
-                        {{ form }}
-                        <div class="mt-2">
-                            <button class="btn btn-outline-dark" type="submit" id="button-addon2">{% if request.idioma == 'portugues' %}inscrever-se{% else %}subscribe{% endif %}</button>
-                        </div>
-                    </form> 
+                  {%endif%}                                                        
+                </div>
+                
+                <div class="card-footer bg-transparent border-0 text-end">    
+                    <form class="input-group mt-2 form-control-lg text-{{request.font}}" method="post" id="lancamento_livro" name='lancamento_livro' novalidate> 
+                        {% csrf_token %}                        
+                        <input type="text" id="alt-chat-input" class="form-control" placeholder="Insira seu e-mail" required {{ form.email }}
+                        <button class="btn btn-outline-dark" type="submit" id="button-addon2">{% if request.idioma == 'portugues' %}inscrever-se{% else %}subscribe{% endif %}</button>                        
+                    </form>                                   
                 </div>
             </div>
         </div>
