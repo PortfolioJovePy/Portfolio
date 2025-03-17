@@ -115,7 +115,7 @@
 let loadCount = 0; // Contador para rastrear quantas vezes a função foi executada
 
 window.addEventListener('load', function () {
-    if (loadCount>0) return; // Impede execução após duas execuções
+    if (loadCount<1) return; // Impede execução após duas execuções
     loadCount++; // Incrementa o contador
     // Aplica a classe de animação antes de mostrar o conteúdo
     document.getElementById('pre-content').classList.add('tracking-in-expand');
