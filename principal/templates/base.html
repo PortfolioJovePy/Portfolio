@@ -112,29 +112,26 @@
 </div>                                            
 
 <script>
-let loadCount = 0; // Contador para rastrear quantas vezes a função foi executada
-
-window.addEventListener('load', function () {
-    if (loadCount<1) return; // Impede execução após duas execuções
-    loadCount++; // Incrementa o contador
-    // Aplica a classe de animação antes de mostrar o conteúdo
-    document.getElementById('pre-content').classList.add('tracking-in-expand');
-
-    // Mostra o pre-content após um curto atraso
-    setTimeout(function () {
-        document.getElementById('pre-content').style.display = 'flex';
-
-        // Após a exibição do pre-content, define outro temporizador para mostrar o conteúdo principal
-        setTimeout(function () {
-            document.getElementById('pre-content').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            
-            // Inicializa as partículas após o tempo de espera
-            initParticles();
-        }, {{request.tempo_carregamento}}); 
-    }, {{request.tempo_carregamento}}); 
-});
-</script>
+  document.addEventListener('DOMContentLoaded', function () {
+      let tempoCarregamento = parseInt("{{ request.tempo_carregamento }}") || 800; // Define um fallback seguro
+      
+      let preContent = document.getElementById('pre-content');
+      let mainContent = document.getElementById('main-content');
+  
+      if (preContent && mainContent) {
+          preContent.classList.add('tracking-in-expand'); // Adiciona animação
+  
+          setTimeout(() => {
+              preContent.style.opacity = '0'; // Suaviza o desaparecimento
+              setTimeout(() => {
+                  preContent.style.display = 'none';
+                  mainContent.style.display = 'block';
+                  mainContent.style.opacity = '1'; // Exibe o conteúdo suavemente
+              }, 500); // Tempo da transição
+          }, tempoCarregamento);
+      }
+  });
+  </script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
