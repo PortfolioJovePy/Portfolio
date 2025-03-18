@@ -68,9 +68,10 @@
 
 
   .imagem-efeito {    
+    display: inline-block; /* Garante que o texto se mova independentemente */
     transition: transform 0.3s ease; /* Suaviza o movimento */
+    position: relative; /* Faz com que o texto se mova sem afetar o fundo */
   }
-
   .imagem-efeito:hover {
     transform: translate(10px, -10px); /* Move a imagem 10px para a direita e 10px para cima */
   }

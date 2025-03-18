@@ -34,9 +34,23 @@
             <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'ebooks' %}">E-books</a>
           </li>     
           {%if request.user.is_superuser%}
-          <li class="nav-item bg-{{request.theme}} text-{{request.font}}">
-            <a class="nav-link bg-{{request.theme}} text-{{request.font}} imagem-efeito" href="{% url 'painel-do-administrador' %}">Admin</a>
-          </li>                        
+          <li class="nav-item dropdown">
+            <button class="btn dropdown-toggle bg-{{ request.theme }} text-{{ request.font }} imagem-efeito text-start w-100" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false" style="margin-top: 2px;">
+              Admin
+            </button>
+            <ul class="dropdown-menu bg-{{ request.theme }} border-0">
+              <li><a class="dropdown-item text-{{ request.font }} bg-{{ request.theme }} imagem-efeito" 
+                     href="{% url 'painel-do-administrador' %}">
+                  Painel geral do administrador
+              </a></li>
+              <li><a class="dropdown-item text-{{ request.font }} bg-{{ request.theme }} imagem-efeito" 
+                     href="{% url 'painel_email' %}">
+                  Web-marketing
+              </a></li>
+            </ul>
+          </li>
           {%endif%}           
         </ul>
       </div>
