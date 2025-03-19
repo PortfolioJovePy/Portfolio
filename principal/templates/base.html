@@ -113,10 +113,17 @@
     
 </div>                                            
 
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+      // Variável de controle para garantir que a animação seja executada apenas uma vez
+      if (window.animacaoExecutada) return;
+
       let tempoCarregamento = parseInt("{{ request.tempo_carregamento }}") || 800; // Define um fallback seguro
-      
+
+      // Marca a animação como executada
+      window.animacaoExecutada = true;
+
       // Aguarda 1 segundo após o carregamento para começar a animação
       setTimeout(function() {
           let preContent = document.getElementById('pre-content');
@@ -137,6 +144,7 @@
       }, 1000); // Adiciona 1 segundo de atraso
   });
 </script>
+
 
 
 
