@@ -6,11 +6,11 @@
     padding: 4vw;
     height: 70vh; /* Definir altura fixa para evitar expansão */
     display: flex;
-    margin-top: 15vh;/* Ajustado para 10vh de espaço na margem inferior */
+    margin-top:15vh;/* Ajustado para 10vh de espaço na margem inferior */
     flex-direction: column;
     justify-content: flex-start; /* Alinhar mensagens no início */
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: white;
     justify-content: space-between;
     overflow: hidden; /* Impedir crescimento além do limite */
 }
@@ -137,8 +137,24 @@
         <div class="chat-container">
             <div id="chat-messages" class="chat-messages">
                 <div class="message assistant"><strong>Assistente:</strong> Pergunte qualquer coisa sobre Rodrigo e a I.A irá te responder</div>
+                <div class="message assistant"><strong>Assistente:</strong> Tente perugntas como: <br>
+                                                <br>
+                                                <div class="text-end w-100">"Onde ele estudou?"</div> 
+                                                <br>
+                                                <div class="text-end w-100"> "Qual o seu diferencial?"</div>
+                                                <br>
+                                                <div class="text-end w-100"> "Qual a sua experiência?"</div>
+                                                <br>
+                                                <div class="text-end w-100"> "Como ele pode me ajudar?"</div>
+                                                <br>
+                                                <div class="text-end w-100"> "Quais desafios ele superou?"</div>
+                                                <br>                                                
+                                                </div>
+                <div class="message assistant"><strong>Assistente:</strong> As perguntas acima são apenas exemplos, sinta-se livre para perguntar qualquer coisa. Divirta-se.</div>
+                                                
             </div>
             <div class="container-fluid">
+                <hr>
             <form id="chat-form" class="input-group mt-2" onsubmit="sendMessage(event)" >
                 <input type="text" id="chat-input" class="form-control" placeholder="Envie sua mensagem" required style="white-space: nowrap;flex-grow:1;max-width: 40vw;">
                 <button type="submit" class="btn btn-{{request.theme}}">Enviar</button>

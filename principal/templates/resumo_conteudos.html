@@ -7,31 +7,31 @@
         {%endif%}
         </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    {%for conteudo in conteudos%}
-    <div class="col">
-      <div class="card animacaocard shadow-lg h-100 bg-{{request.theme}} border border-1 border-{{request.theme}}-subtle border-opacity-10 imagem-efeito">
-        <img src="{{ conteudo.link_imagem }}" class="card-img-top " style="height: 250px;object-fit: cover;">        
-        <div class="card-body">
-        {% if request.idioma == 'portugues' %}
-          <h5 class="card-title text-{{request.font}}">{{ conteudo.titulo }}</h5>
-          <p class="card-text text-{{request.font}}">{{ conteudo.descricao }}</p>
-        </div>
-        <div class="card-footer bg-transparent border-0 text-end">
-            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ler publicação</a>
-            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Ver código</a>
-        </div>
-        {% else %}
-        <h5 class="card-title text-{{request.font}}">{{ conteudo.titulo_ingles }}</h5>
-          <p class="card-text text-{{request.font}}">{{ conteudo.descricao_ingles }}</p>
-        </div>
-        <div class="card-footer bg-transparent border-0 text-end">
-            <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">Read publication</a>
-            <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2">View code</a>
-        </div>
-        {%endif%}
+  {% for conteudo in conteudos %}
+  <div class="col">
+      <div class="card animacaocard shadow-lg h-100 bg-{{request.theme}} border border-1 border-{{request.theme}}-subtle border-opacity-10 imagem-efeito d-flex flex-column">
+          <img src="{{ conteudo.link_imagem }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+          <div class="card-body flex-grow-1">
+              {% if request.idioma == 'portugues' %}
+                  <h5 class="card-title text-{{request.font}}">{{ conteudo.titulo }}</h5>
+                  <p class="card-text text-{{request.font}}">{{ conteudo.descricao }}</p>
+              {% else %}
+                  <h5 class="card-title text-{{request.font}}">{{ conteudo.titulo_ingles }}</h5>
+                  <p class="card-text text-{{request.font}}">{{ conteudo.descricao_ingles }}</p>
+              {% endif %}
+          </div>
+          <div class="card-footer bg-transparent border-0 text-end">
+              <a href="{{ conteudo.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2"> 
+                  {% if request.idioma == 'portugues' %} Ler publicação {% else %} Read publication {% endif %}
+              </a>
+              <a href="{{ conteudo.link_notbook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-{{request.font}} mt-2"> 
+                  {% if request.idioma == 'portugues' %} Ver código {% else %} View code {% endif %}
+              </a>
+          </div>
       </div>
-    </div>    
-    {%endfor%}
+  </div>
+{% endfor %}
+
   </div>
   
 </div>

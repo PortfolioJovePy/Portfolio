@@ -192,6 +192,9 @@ class principal(View):
             pdf_path = os.path.join(settings.MEDIA_ROOT, 'CV.pdf')  # Caminho completo do PDF
             return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
 
+        elif self.template =='favicon.ico':
+            favicon_path  = os.path.join(settings.STATIC_ROOT, 'favicon.ico')  # Caminho completo do PDF
+            return FileResponse(open(favicon_path, 'rb'), content_type='image/x-icon')
         
         return render (request, self.template, self.context)
 
