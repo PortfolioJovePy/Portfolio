@@ -117,23 +117,27 @@
   document.addEventListener('DOMContentLoaded', function () {
       let tempoCarregamento = parseInt("{{ request.tempo_carregamento }}") || 800; // Define um fallback seguro
       
-      let preContent = document.getElementById('pre-content');
-      let mainContent = document.getElementById('main-content');
+      // Aguarda 1 segundo após o carregamento para começar a animação
+      setTimeout(function() {
+          let preContent = document.getElementById('pre-content');
+          let mainContent = document.getElementById('main-content');
   
-      if (preContent && mainContent) {
-          preContent.classList.add('tracking-in-expand'); // Adiciona animação
+          if (preContent && mainContent) {
+              preContent.classList.add('tracking-in-expand'); // Adiciona animação
   
-          setTimeout(() => {
-              preContent.style.opacity = '0'; // Suaviza o desaparecimento
               setTimeout(() => {
-                  preContent.style.display = 'none';
-                  mainContent.style.display = 'block';
-                  mainContent.style.opacity = '1'; // Exibe o conteúdo suavemente
-              }, 500); // Tempo da transição
-          }, tempoCarregamento);
-      }
+                  preContent.style.opacity = '0'; // Suaviza o desaparecimento
+                  setTimeout(() => {
+                      preContent.style.display = 'none';
+                      mainContent.style.display = 'block';
+                      mainContent.style.opacity = '1'; // Exibe o conteúdo suavemente
+                  }, 500); // Tempo da transição
+              }, tempoCarregamento); // Usa o tempo de carregamento definido
+          }
+      }, 1000); // Adiciona 1 segundo de atraso
   });
-  </script>
+</script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
