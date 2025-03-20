@@ -179,7 +179,7 @@ def assistenterodrigo(request):
                                 REGRA 5 Responda apenas a pergunta feita. Nunca resuma o contexto exposto.
                                 REGRA 6 Responda em ate 140 caracteres
                                 AGORA, RESPEITANDO AS REGRAS ACIMA DESCRITAS, RESPONDA UNICAMENTE A MENSAGEM A SEGUIR:                          
-"""
+                                """
         try:
             data = json.loads(request.body)
             user_message += data.get("message", "")
